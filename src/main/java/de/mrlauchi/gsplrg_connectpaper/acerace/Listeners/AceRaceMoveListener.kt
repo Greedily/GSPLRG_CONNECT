@@ -8,6 +8,7 @@ import org.bukkit.entity.Firework
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.util.Vector
 
 class AceRaceMoveListener : Listener {
     @EventHandler
@@ -73,22 +74,6 @@ class AceRaceMoveListener : Listener {
                     }
                     AceRaceEssentials.setSection(player, i)
 
-                    /*if(i == 3) {
-                        if (config.getInt("acerace.playermaprotations.${player.name}") == 2) { //finish.
-                            player.gameMode = GameMode.SPECTATOR
-                            val playertime = config.getString("acerace.playertimes.${player.name}")
-                            Bukkit.broadcastMessage("§b${player.name} finished in $playertime!")
-                            config.set("acerace.playersfinished.${player.name}", 1)
-                        }else{
-                            config.set("acerace.playermaprotations.${player.name}", config.getInt("acerace.playerrotations.${player.name}") + 1)
-                            Bukkit.broadcastMessage("${player.name} finished a ROTATION!")
-                            config.set("acerace.score.${player.name}",0)
-                        }
-
-                        Main.instance!!.saveConfig()
-
-                    }
-                 */
 
                 }
             }

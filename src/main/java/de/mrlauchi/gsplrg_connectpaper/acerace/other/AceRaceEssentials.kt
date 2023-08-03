@@ -113,4 +113,14 @@ object AceRaceEssentials {
 
         Main.instance!!.saveConfig()
     }
+
+    fun getSpeed(){
+
+    }
+
+
+    fun speedLogic() {
+
+    }
+
 }
