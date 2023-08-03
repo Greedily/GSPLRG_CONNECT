@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper
 
 import de.mrlauchi.gsplrg_connectpaper.acerace.Commands.AceRaceCommand
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceDeathListener
+import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceJumpListener
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceMoveListener
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.deathmatch.commands.DeathmatchCommand
@@ -99,6 +100,7 @@ class Main : JavaPlugin() {
         pluginManager.registerEvents(AceRaceMoveListener(), this)
         pluginManager.registerEvents(AceRaceDeathListener(), this)
         pluginManager.registerEvents(AceRaceRespawnListener(), this)
+        pluginManager.registerEvents(AceRaceJumpListener(), this)
     }
 
     override fun onDisable() {

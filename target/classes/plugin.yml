@@ -1,7 +1,7 @@
 name: GSPLRG_CONNECT
 version: '1.0-SNAPSHOT'
-main: de.mrlauchi.gsplrg_connect.Main
-api-version: 1.20
+main: de.mrlauchi.gsplrg_connectpaper.Main
+api-version: "1.20"
 
 commands:
   tgttos:

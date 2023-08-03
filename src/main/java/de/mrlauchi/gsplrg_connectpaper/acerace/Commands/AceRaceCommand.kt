@@ -2,6 +2,8 @@ package de.mrlauchi.gsplrg_connectpaper.acerace.Commands
 
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceCountDown
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
+import org.bukkit.Bukkit
+import org.bukkit.GameMode
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -30,6 +32,17 @@ class AceRaceCommand : CommandExecutor, TabCompleter {
                     AceRaceEssentials.setGameModeEnabled(false)
                     AceRaceEssentials.setCountDownEnabled(false)
                     AceRaceEssentials.stopTimer()
+                    for (target in Bukkit.getOnlinePlayers()) {
+                        target.inventory.clear()
+                        target.gameMode = GameMode.SPECTATOR
+                    }
+                }
+                if (args[0] == "setelytra"){
+                    if (args.size > 1) {
+                        if (args[1] == "add") {
+
+                        }
+                    }
                 }
             }
         }

@@ -77,7 +77,7 @@ class HungergamesDeathListener:Listener {
                     PasteSchem.paste(Location(world, x, y, z),"hungergamesmap1")//-108.520, 49.0, -1780.435
                     //Bukkit.broadcastMessage("FILLED.")
                     Bukkit.broadcastMessage("Game Ended.")
-
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"worldborder set 1000000")
 
                     for (target in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
                         target.inventory.clear()

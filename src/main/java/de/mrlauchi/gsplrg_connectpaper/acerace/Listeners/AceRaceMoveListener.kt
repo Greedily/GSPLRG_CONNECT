@@ -65,7 +65,7 @@ class AceRaceMoveListener : Listener {
                                 config.set("acerace.playersfinished.${player.name}", 1)
                             }else{
                                 config.set("acerace.playermaprotations.${player.name}", config.getInt("acerace.playermaprotations.${player.name}") + 1)
-                                Bukkit.broadcastMessage("${player.name} finished a ROTATION!")
+                                Bukkit.broadcastMessage("${player.name} finished a LAP!")
                                 config.set("acerace.score.${player.name}",0)
                             }
                             Main.instance!!.saveConfig()
@@ -90,15 +90,6 @@ class AceRaceMoveListener : Listener {
                     }
                  */
 
-                }
-            }
-
-            val loc = player.location
-            loc.y -= 1
-            if (player.velocity.y > 0) {
-                if (loc.block.blockData.material == Material.RED_CONCRETE) {
-                    Bukkit.broadcastMessage("${player.name} JUMPED")
-                    player.velocity = player.location.direction.multiply(3)
                 }
             }
 
