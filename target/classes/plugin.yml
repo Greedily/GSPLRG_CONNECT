@@ -1,6 +1,6 @@
 name: GSPLRG_CONNECT
 version: '1.0-SNAPSHOT'
-main: de.mrlauchi.gsplrg_connectpaper.Main
+main: de.mrlauchi.gsplrg_connect.Main
 api-version: 1.20
 
 commands:
