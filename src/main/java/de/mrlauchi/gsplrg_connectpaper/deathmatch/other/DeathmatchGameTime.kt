@@ -11,7 +11,7 @@ object DeathmatchGameTime {
     fun startGameTime() {
         val config = Main.instance!!.config
 
-        var minutetime = 10
+        var minutetime = 5
         var secondtime = 0
 
         var points = mutableMapOf<Int, String>()
