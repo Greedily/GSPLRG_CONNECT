@@ -1,0 +1,67 @@
+package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
+
+import de.mrlauchi.gsplrg_connectpaper.Main
+import org.bukkit.Bukkit
+import org.bukkit.GameMode
+import org.bukkit.Location
+import org.bukkit.entity.Player
+import org.bukkit.scheduler.BukkitRunnable
+
+object DeathmatchEssentials {
+    val config = Main.instance!!.config
+    fun setGamemodeEnabled(value : Boolean){
+        if (value == true){
+            config.set("deathmatch.gamemodeactive",1)
+        }else{
+            config.set("deathmatch.gamemodeactive",0)
+        }
+        Main.instance!!.saveConfig()
+    }
+
+    fun setCountDownEnabled(value : Boolean){
+        if (value == true){
+            config.set("deathmatch.countdownactive",1)
+        }else{
+            config.set("deathmatch.countdownactive",0)
+        }
+        Main.instance!!.saveConfig()
+    }
+
+    fun setCoords(player: Player, team : String){
+
+        config.set("deathmatch.spawn.$team.x", player.location.x)
+        config.set("deathmatch.spawn.$team.y", player.location.y)
+        config.set("deathmatch.spawn.$team.z", player.location.z)
+
+        config.set("deathmatch.spawn.$team.world", player.location.world!!.name)
+
+        Main.instance!!.saveConfig()
+        player.sendMessage("SetSpawn Success")
+        return
+    }
+
+    fun getCoords(team: String): Location {
+        val x = config.getDouble("deathmatch.spawn.$team.x")
+        val y = config.getDouble("deathmatch.spawn.$team.y")
+        val z = config.getDouble("deathmatch.spawn.$team.z")
+
+        val worldName = config.getString("deathmatch.spawn.$team.world")
+        val world = Bukkit.getWorld(worldName!!)
+        return Location(world, x, y, z)
+    }
+
+    fun waitTimeUntillPlayergetdmged(int : Int, target: Player){
+        var time = int
+        val bukkitRunnable = object: BukkitRunnable(){
+            override fun run() {
+                if (time <= 0 && config.getInt("deathmatch.gamemodeactive") == 1) {
+                    target.gameMode = GameMode.SURVIVAL
+                    target.isInvulnerable = false
+                    target.sendMessage("can take dmg")
+                    this.cancel()
+                }
+                time -= 1
+            }
+        }.runTaskTimer(Main.instance!!, 0, 20)
+    }
+}

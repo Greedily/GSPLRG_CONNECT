@@ -1,0 +1,20 @@
+name: GSPLRG_CONNECT
+version: '1.0-SNAPSHOT'
+main: de.mrlauchi.gsplrg_connectpaper.Main
+api-version: 1.20
+
+commands:
+  tgttos:
+    description: everything having to do with tgttos
+  parkour:
+    description: everything having to do with parkour
+  goldrush:
+    description: everything having to do with goldrush
+  skywars:
+    description: everything having to do with skywars
+  hungergames:
+    description: everything having to do with hungergames
+  deathmatch:
+    description: everything having to do with deathmatch.
+  acerace:
+    description: everything having to do with acerace.
