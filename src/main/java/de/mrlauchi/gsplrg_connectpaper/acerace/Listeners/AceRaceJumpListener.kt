@@ -20,6 +20,7 @@ class AceRaceJumpListener : Listener {
            // player.velocity = player.location.direction.multiply(3)
             //player.velocity = Vector(player.location.direction.x, player.location.direction.y * 3, player.location.direction.z) // 25 is a lot FUNE TEST why would it not work
             //player.velocity = player.location.direction.multiply(10).setY(1);
+            event.isCancelled = true
             player.velocity = Vector(player.location.direction.x * 1, 1.5, player.location.direction.z * 1)
             Bukkit.broadcastMessage("i updated2.")
         }

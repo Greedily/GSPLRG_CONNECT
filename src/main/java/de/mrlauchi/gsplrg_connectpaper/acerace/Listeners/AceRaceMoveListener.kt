@@ -78,6 +78,31 @@ class AceRaceMoveListener : Listener {
                 }
             }
 
+            val loc = player.location
+            loc.y -= 1
+            if (event.getTo().getY() > event.getFrom().getY()) { // yellow jump bad
+                if (loc.block.blockData.material == Material.YELLOW_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(0.2, 1.0, 0.0)
+                }
+                if (loc.block.blockData.material == Material.RED_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(player.location.direction.x * 1.2, 3.0, player.location.direction.z * 1.2)
+                }
+                if (loc.block.blockData.material == Material.GREEN_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(player.location.direction.x * 1, 1.5, player.location.direction.z * 1)
+                }
+                if (loc.block.blockData.material == Material.BLUE_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(player.location.direction.x * 1, 1.5, player.location.direction.z * 1)
+                }
+                if (loc.block.blockData.material == Material.GRAY_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(player.location.direction.x * 1.2, 1.25, player.location.direction.z * 1.2)
+
+                }
+                if (loc.block.blockData.material == Material.LIME_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(player.location.direction.x * 1.2, 3.0, player.location.direction.z * 1.2)
+                }
+
+            }
+
         }
 
     }

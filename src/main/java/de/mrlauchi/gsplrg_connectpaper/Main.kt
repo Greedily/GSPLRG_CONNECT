@@ -100,7 +100,7 @@ class Main : JavaPlugin() {
         pluginManager.registerEvents(AceRaceMoveListener(), this)
         pluginManager.registerEvents(AceRaceDeathListener(), this)
         pluginManager.registerEvents(AceRaceRespawnListener(), this)
-        pluginManager.registerEvents(AceRaceJumpListener(), this)
+        //pluginManager.registerEvents(AceRaceJumpListener(), this)
     }
 
     override fun onDisable() {
