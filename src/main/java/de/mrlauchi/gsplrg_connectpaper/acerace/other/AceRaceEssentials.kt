@@ -150,7 +150,7 @@ object AceRaceEssentials {
         Main.instance!!.saveConfig()
     }
 
-    fun getElytraRemoveCoordinate(section: Int): Location {
+    fun getElytraRemoveCoordinate(section: Int): Location {//e
         val config = Main.instance!!.config
 
         val x = config.getDouble("acerace.elytra.$section.x")

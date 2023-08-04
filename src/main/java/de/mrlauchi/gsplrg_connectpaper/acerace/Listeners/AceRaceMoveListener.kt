@@ -87,7 +87,7 @@ class AceRaceMoveListener : Listener {
                 }
                 if (player.location.distance(AceRaceEssentials.getElytraRemoveCoordinate(i)) <= radius) {
                     //remove elytra
-                    player.inventory.chestplate = ItemStack(Material.AIR)
+                    player.inventory.chestplate = ItemStack(Material.AIR)//e
                 }
             }
 

@@ -44,7 +44,7 @@ class AceRaceCommand : CommandExecutor, TabCompleter {
                 }
                 if (args[0] == "setelytraremovesection"){
                     if (args.size >= 2) {
-                        AceRaceEssentials.setElytraRemoveCoordinate(args[1].toInt(), sender)
+                        AceRaceEssentials.setElytraRemoveCoordinate(args[1].toInt(), sender)//e
                     }
                 }
             }
