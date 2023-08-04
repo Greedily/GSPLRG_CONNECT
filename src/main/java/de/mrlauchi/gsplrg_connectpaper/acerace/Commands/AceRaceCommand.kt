@@ -68,9 +68,9 @@ class AceRaceCommand : CommandExecutor, TabCompleter {
         tabComplete.add("start")
         tabComplete.add("stop")
         tabComplete.add("setsection")
-        tabComplete.add("setstart")
-        tabComplete.add("setelytragivesection")
-        tabComplete.add("setelytraremovesection")
+        tabComplete.add("setspawn")
+        tabComplete.add("setelytragive")
+        tabComplete.add("setelytraremove")
         tabComplete.add("setspeedgive")
         tabComplete.add("setspeedremove")
 
