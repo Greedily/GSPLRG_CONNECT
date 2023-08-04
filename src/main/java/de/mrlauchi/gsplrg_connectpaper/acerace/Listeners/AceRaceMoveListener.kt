@@ -95,7 +95,7 @@ class AceRaceMoveListener : Listener {
                 }
                 if (player.location.distance(AceRaceEssentials.getSpeedRemove(i)) <= radius) {
                     player.removePotionEffect(PotionEffectType.SPEED)
-                }
+                }//e
 
             }
 
