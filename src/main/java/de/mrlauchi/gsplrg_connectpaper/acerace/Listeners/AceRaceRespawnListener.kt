@@ -11,7 +11,6 @@ class AceRaceRespawnListener : Listener {
     fun onRespawn(event: PlayerRespawnEvent) {
         if(AceRaceEssentials.getActive() == 1) {
             val player = event.player
-            player.sendMessage("you died! sending you to the last cakepoint.")
             event.respawnLocation = AceRaceEssentials.getCoordinate(AceRaceEssentials.getSection(player))
 
         }

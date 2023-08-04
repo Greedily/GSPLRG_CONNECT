@@ -35,16 +35,27 @@ class AceRaceCommand : CommandExecutor, TabCompleter {
                     for (target in Bukkit.getOnlinePlayers()) {
                         target.inventory.clear()
                         target.gameMode = GameMode.SPECTATOR
+                        target.isInvisible = false
                     }
                 }
-                if (args[0] == "setelytragivesection"){
+                if (args[0] == "setelytragive"){
                     if (args.size >= 2) {
                         AceRaceEssentials.setElytraGiveCoordinate(args[1].toInt(), sender)
                     }
                 }
-                if (args[0] == "setelytraremovesection"){
+                if (args[0] == "setelytraremove"){
                     if (args.size >= 2) {
                         AceRaceEssentials.setElytraRemoveCoordinate(args[1].toInt(), sender)//e
+                    }
+                }
+                if (args[0] == "setspeedgive"){
+                    if (args.size >= 2) {
+                        AceRaceEssentials.setSpeedGive(args[1].toInt(), sender)
+                    }
+                }
+                if (args[0] == "setspeedremove"){
+                    if (args.size >= 2) {
+                        AceRaceEssentials.setSpeedRemove(args[1].toInt(), sender)//e
                     }
                 }
             }

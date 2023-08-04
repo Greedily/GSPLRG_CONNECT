@@ -9,6 +9,9 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.potion.Potion
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
 
 class AceRaceMoveListener : Listener {
@@ -77,18 +80,23 @@ class AceRaceMoveListener : Listener {
 
 
                 }
+                //ELYTRA
                 if (player.location.distance(AceRaceEssentials.getElytraGiveCoordinate(i)) <= radius) {
                     //give elytra
-                    val elytra = ItemStack(Material.ELYTRA)
-                    val itemmeta = elytra.itemMeta
-                    itemmeta.isUnbreakable = true
-                    elytra.setItemMeta(itemmeta)
-                    player.inventory.chestplate = elytra
+                    player.inventory.chestplate = ItemStack(Material.ELYTRA)
                 }
                 if (player.location.distance(AceRaceEssentials.getElytraRemoveCoordinate(i)) <= radius) {
                     //remove elytra
                     player.inventory.chestplate = ItemStack(Material.AIR)//e
                 }
+                //SPEED
+                if (player.location.distance(AceRaceEssentials.getSpeedGive(i)) <= radius) {
+                    player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 7, 3))
+                }
+                if (player.location.distance(AceRaceEssentials.getSpeedRemove(i)) <= radius) {
+                    player.removePotionEffect(PotionEffectType.SPEED)
+                }
+
             }
 
             val loc = player.location
@@ -100,7 +108,7 @@ class AceRaceMoveListener : Listener {
                 if (loc.block.blockData.material == Material.RED_CONCRETE && AceRaceEssentials.getActive() == 1) {
                     player.velocity = Vector(player.location.direction.x * 1.2, 3.0, player.location.direction.z * 1.2)
                 }
-                if (loc.block.blockData.material == Material.GREEN_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                if (loc.block.blockData.material == Material.BEDROCK && AceRaceEssentials.getActive() == 1) {
                     player.velocity = Vector(player.location.direction.x * 1, 1.5, player.location.direction.z * 1)
                 }
                 if (loc.block.blockData.material == Material.BLUE_CONCRETE && AceRaceEssentials.getActive() == 1) {

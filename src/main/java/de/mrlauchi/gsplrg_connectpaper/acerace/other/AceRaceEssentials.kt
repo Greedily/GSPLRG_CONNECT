@@ -141,11 +141,11 @@ object AceRaceEssentials {
     fun setElytraRemoveCoordinate(section: Int, player: Player) {
         val config = Main.instance!!.config
 
-        config.set("acerace.elytra.$section.x", player.location.x)
-        config.set("acerace.elytra.$section.y", player.location.y)
-        config.set("acerace.elytra.$section.z", player.location.z)
+        config.set("acerace.elytra.remove.$section.x", player.location.x)
+        config.set("acerace.elytra.remove.$section.y", player.location.y)
+        config.set("acerace.elytra.remove.$section.z", player.location.z)
 
-        config.set("acerace.elytra.$section.world", player.location.world!!.name)
+        config.set("acerace.elytra.remove.$section.world", player.location.world!!.name)
         player.sendMessage("SetCoordinate Successful!")
         Main.instance!!.saveConfig()
     }
@@ -153,9 +153,54 @@ object AceRaceEssentials {
     fun getElytraRemoveCoordinate(section: Int): Location {//e
         val config = Main.instance!!.config
 
-        val x = config.getDouble("acerace.elytra.$section.x")
-        val y = config.getDouble("acerace.elytra.$section.y")
-        val z = config.getDouble("acerace.elytra.$section.z")
+        val x = config.getDouble("acerace.elytra.remove.$section.x")
+        val y = config.getDouble("acerace.elytra.remove.$section.y")
+        val z = config.getDouble("acerace.elytra.remove.$section.z")
+
+        val world = Bukkit.getWorld("world")
+
+        return Location(world, x, y, z)
+    }
+    fun setSpeedGive(section: Int, player: Player) {
+        val config = Main.instance!!.config
+
+        config.set("acerace.speed.remove.$section.x", player.location.x)
+        config.set("acerace.speed.remove.$section.y", player.location.y)
+        config.set("acerace.speed.remove.$section.z", player.location.z)
+
+        player.sendMessage("SetCoordinate Successful!")
+        Main.instance!!.saveConfig()
+    }
+
+    fun getSpeedGive(section: Int): Location {//e
+        val config = Main.instance!!.config
+
+        val x = config.getDouble("acerace.speed.remove.$section.x")
+        val y = config.getDouble("acerace.speed.remove.$section.y")
+        val z = config.getDouble("acerace.speed.remove.$section.z")
+
+        val world = Bukkit.getWorld("world")
+
+        return Location(world, x, y, z)
+    }
+
+    fun setSpeedRemove(section: Int, player: Player) {
+        val config = Main.instance!!.config
+
+        config.set("acerace.speed.remove.$section.x", player.location.x)
+        config.set("acerace.speed.remove.$section.y", player.location.y)
+        config.set("acerace.speed.remove.$section.z", player.location.z)
+
+        player.sendMessage("SetCoordinate Successful!")
+        Main.instance!!.saveConfig()
+    }
+
+    fun getSpeedRemove(section: Int): Location {//e
+        val config = Main.instance!!.config
+
+        val x = config.getDouble("acerace.speed.remove.$section.x")
+        val y = config.getDouble("acerace.speed.remove.$section.y")
+        val z = config.getDouble("acerace.speed.remove.$section.z")
 
         val world = Bukkit.getWorld("world")
 
