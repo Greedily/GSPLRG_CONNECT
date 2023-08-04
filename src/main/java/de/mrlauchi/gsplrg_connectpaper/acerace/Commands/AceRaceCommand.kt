@@ -37,11 +37,14 @@ class AceRaceCommand : CommandExecutor, TabCompleter {
                         target.gameMode = GameMode.SPECTATOR
                     }
                 }
-                if (args[0] == "setelytra"){
-                    if (args.size > 1) {
-                        if (args[1] == "add") {
-
-                        }
+                if (args[0] == "setelytragivesection"){
+                    if (args.size >= 2) {
+                        AceRaceEssentials.setElytraGiveCoordinate(args[1].toInt(), sender)
+                    }
+                }
+                if (args[0] == "setelytraremovesection"){
+                    if (args.size >= 2) {
+                        AceRaceEssentials.setElytraRemoveCoordinate(args[1].toInt(), sender)
                     }
                 }
             }
@@ -55,6 +58,8 @@ class AceRaceCommand : CommandExecutor, TabCompleter {
         tabComplete.add("stop")
         tabComplete.add("setsection")
         tabComplete.add("setstart")
+        tabComplete.add("setelytragivesection")
+        tabComplete.add("setelytraremovesection")
 
         return tabComplete
     }

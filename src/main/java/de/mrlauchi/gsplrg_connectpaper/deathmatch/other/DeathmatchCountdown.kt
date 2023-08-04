@@ -23,7 +23,7 @@ object DeathmatchCountdown {
             config.set("deathmatch.score.${target.name}",0)
             val crossbow = ItemStack(Material.CROSSBOW)
             val itemmeta = crossbow.itemMeta
-            itemmeta?.isUnbreakable = false
+            itemmeta?.isUnbreakable = true
             itemmeta?.setDisplayName("One Shot Crossbow")
             //itemmeta?.addEnchant(Enchantment.ARROW_DAMAGE, 10, true)
             //itemmeta?.addEnchant(Enchantment.ARROW_INFINITE, 2, true)

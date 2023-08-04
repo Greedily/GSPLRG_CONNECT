@@ -8,6 +8,7 @@ import org.bukkit.entity.Firework
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
 
 class AceRaceMoveListener : Listener {
@@ -75,6 +76,18 @@ class AceRaceMoveListener : Listener {
                     AceRaceEssentials.setSection(player, i)
 
 
+                }
+                if (player.location.distance(AceRaceEssentials.getElytraGiveCoordinate(i)) <= radius) {
+                    //give elytra
+                    val elytra = ItemStack(Material.ELYTRA)
+                    val itemmeta = elytra.itemMeta
+                    itemmeta.isUnbreakable = true
+                    elytra.setItemMeta(itemmeta)
+                    player.inventory.chestplate = elytra
+                }
+                if (player.location.distance(AceRaceEssentials.getElytraRemoveCoordinate(i)) <= radius) {
+                    //remove elytra
+                    player.inventory.chestplate = ItemStack(Material.AIR)
                 }
             }
 

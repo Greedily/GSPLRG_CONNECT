@@ -114,6 +114,55 @@ object AceRaceEssentials {
         Main.instance!!.saveConfig()
     }
 
+    fun setElytraGiveCoordinate(section: Int, player: Player) {
+        val config = Main.instance!!.config
+
+        config.set("acerace.elytra.$section.x", player.location.x)
+        config.set("acerace.elytra.$section.y", player.location.y)
+        config.set("acerace.elytra.$section.z", player.location.z)
+
+        config.set("acerace.elytra.$section.world", player.location.world!!.name)
+        player.sendMessage("SetCoordinate Successful!")
+        Main.instance!!.saveConfig()
+    }
+
+    fun getElytraGiveCoordinate(section: Int): Location {
+        val config = Main.instance!!.config
+
+        val x = config.getDouble("acerace.elytra.$section.x")
+        val y = config.getDouble("acerace.elytra.$section.y")
+        val z = config.getDouble("acerace.elytra.$section.z")
+
+        val world = Bukkit.getWorld("world")
+
+        return Location(world, x, y, z)
+    }
+
+    fun setElytraRemoveCoordinate(section: Int, player: Player) {
+        val config = Main.instance!!.config
+
+        config.set("acerace.elytra.$section.x", player.location.x)
+        config.set("acerace.elytra.$section.y", player.location.y)
+        config.set("acerace.elytra.$section.z", player.location.z)
+
+        config.set("acerace.elytra.$section.world", player.location.world!!.name)
+        player.sendMessage("SetCoordinate Successful!")
+        Main.instance!!.saveConfig()
+    }
+
+    fun getElytraRemoveCoordinate(section: Int): Location {
+        val config = Main.instance!!.config
+
+        val x = config.getDouble("acerace.elytra.$section.x")
+        val y = config.getDouble("acerace.elytra.$section.y")
+        val z = config.getDouble("acerace.elytra.$section.z")
+
+        val world = Bukkit.getWorld("world")
+
+        return Location(world, x, y, z)
+    }
+
+
     fun getSpeed(){
 
     }
