@@ -207,14 +207,4 @@ object AceRaceEssentials {
         return Location(world, x, y, z)
     }
 
-
-    fun getSpeed(){
-
-    }
-
-
-    fun speedLogic() {
-
-    }
-
 }
