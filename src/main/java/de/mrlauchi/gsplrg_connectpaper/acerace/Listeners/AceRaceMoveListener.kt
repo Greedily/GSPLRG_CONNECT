@@ -91,10 +91,10 @@ class AceRaceMoveListener : Listener {
                 }
                 //SPEED
                 if (player.location.distance(AceRaceEssentials.getSpeedGive(i)) <= radius) {
-                    player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 7, 3))
+                    player.addPotionEffect(PotionEffect(PotionEffectType.SPEED,100,3))
                 }
                 if (player.location.distance(AceRaceEssentials.getSpeedRemove(i)) <= radius) {
-                    player.removePotionEffect(PotionEffectType.SPEED)
+                    player.clearActivePotionEffects()
                 }//e
 
             }
@@ -103,23 +103,28 @@ class AceRaceMoveListener : Listener {
             loc.y -= 1
             if (event.getTo().getY() > event.getFrom().getY()) { // yellow jump bad
                 if (loc.block.blockData.material == Material.YELLOW_CONCRETE && AceRaceEssentials.getActive() == 1) {
-                    player.velocity = Vector(0.2, 1.0, 0.0)
+                    player.velocity = Vector(0.2, 1.3, 0.0)
                 }
                 if (loc.block.blockData.material == Material.RED_CONCRETE && AceRaceEssentials.getActive() == 1) {
-                    player.velocity = Vector(player.location.direction.x * 1.2, 3.0, player.location.direction.z * 1.2)
+                    player.velocity = Vector(player.location.direction.x * 1.2, 2.0, player.location.direction.z * 1.2)
                 }
                 if (loc.block.blockData.material == Material.BEDROCK && AceRaceEssentials.getActive() == 1) {
                     player.velocity = Vector(player.location.direction.x * 1, 1.5, player.location.direction.z * 1)
                 }
-                if (loc.block.blockData.material == Material.BLUE_CONCRETE && AceRaceEssentials.getActive() == 1) {
+               /* if (loc.block.blockData.material == Material.BLUE_CONCRETE && AceRaceEssentials.getActive() == 1) {
                     player.velocity = Vector(player.location.direction.x * 1, 1.5, player.location.direction.z * 1)
                 }
+
+                */
                 if (loc.block.blockData.material == Material.GRAY_CONCRETE && AceRaceEssentials.getActive() == 1) {
-                    player.velocity = Vector(player.location.direction.x * 1.2, 1.25, player.location.direction.z * 1.2)
+                    player.velocity = Vector(player.location.direction.x * 1.2, 1.3, player.location.direction.z * 1.2)
 
                 }
                 if (loc.block.blockData.material == Material.LIME_CONCRETE && AceRaceEssentials.getActive() == 1) {
-                    player.velocity = Vector(player.location.direction.x * 1.2, 3.0, player.location.direction.z * 1.2)
+                    player.velocity = Vector(player.location.direction.x * 1.2, 2.0, player.location.direction.z * 1.2)
+                }
+                if (loc.block.blockData.material == Material.LIGHT_BLUE_CONCRETE && AceRaceEssentials.getActive() == 1) {
+                    player.velocity = Vector(player.location.direction.x * 0.9, 1.3, player.location.direction.z * 0.9)
                 }
 
             }

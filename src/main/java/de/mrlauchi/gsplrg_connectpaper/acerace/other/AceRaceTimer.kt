@@ -9,7 +9,7 @@ object AceRaceTimer {
     fun start() {
         var currentsecondtime: Int = 0
         var currentminutetime: Int = 0
-
+        Bukkit.broadcastMessage("timer started.")
         val bukkitRunnable = object: BukkitRunnable(){
             override fun run() {
                 //idea.:

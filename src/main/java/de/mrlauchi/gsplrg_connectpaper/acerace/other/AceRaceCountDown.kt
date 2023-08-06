@@ -28,6 +28,7 @@ object AceRaceCountDown {
 
             config.set("acerace.playermaprotations.${target.name}", 0)
             config.set("acerace.score.${target.name}", 0)
+            config.set("acerace.playersfinished.${target.name}", 0)
         }
 
 

@@ -13,6 +13,7 @@ object HungergamesCountdown {
         for (target in Bukkit.getOnlinePlayers()) { // teleport players based on their team
             target.teleport(HungergamesEssentials.getCoords(target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name))
             target.inventory.clear()
+            target.gameMode = GameMode.ADVENTURE
         }
 
 

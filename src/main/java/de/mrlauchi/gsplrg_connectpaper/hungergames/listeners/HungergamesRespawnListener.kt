@@ -12,9 +12,9 @@ class HungergamesRespawnListener : Listener {
     fun onRespawn(event: PlayerRespawnEvent){
         val config = Main.instance!!.config
         if (config.getInt("hungergames.gamemodeactive") == 1){
-            val x = config.getDouble("hungergames.playerspawns.${event.player}.x")
-            val y = config.getDouble("hungergames.playerspawns.${event.player}.y")
-            val z = config.getDouble("hungergames.playerspawns.${event.player}.z")
+            val x = config.getDouble("hungergames.mapspawn.x")
+            val y = config.getDouble("hungergames.mapspawn.y")
+            val z = config.getDouble("hungergames.mapspawn.z")
 
             event.respawnLocation = Location(Bukkit.getWorld("world"),x,y,z)
         }
