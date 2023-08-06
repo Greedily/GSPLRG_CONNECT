@@ -44,11 +44,12 @@ object DeathmatchGameTime {
                             target.gameMode = GameMode.SPECTATOR
                             target.inventory.clear()
                         }
+                        Bukkit.broadcastMessage(points.toString())
                         points = points.toSortedMap(Comparator.reverseOrder())
                         val firstplacement = points[0]
                         val secondplacement = points[1]
                         val thirdplacement = points[2]
-                        //Bukkit.broadcastMessage(points.toString())
+                        Bukkit.broadcastMessage(points.toString())
                         Bukkit.broadcastMessage("1st.$firstplacement  2nd.$secondplacement  3rd.$thirdplacement")
                         this.cancel()
                     }
