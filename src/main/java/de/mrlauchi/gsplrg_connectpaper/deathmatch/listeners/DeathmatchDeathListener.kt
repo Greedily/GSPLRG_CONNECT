@@ -17,8 +17,8 @@ class DeathmatchDeathListener : Listener {
             val score = "deathmatch.score.${killer.name}"
             config.set(score, config.getInt(score) + 1)
             Main.instance!!.saveConfig()
-            //killer.sendMessage("You killed a player! +" + config.getInt("deathmatch.score.$killer").toString())
-            Bukkit.broadcastMessage("${killer.name} killed a player! +" + config.getInt("deathmatch.score.$killer").toString())
+            //killer.sendMessage("You killed a player! +" + config.getInt("deathmatch.score.$killer").toString()) // i dont remember what that was for alr look at dc nothing there
+            Bukkit.broadcastMessage("${killer.name} killed a player!")
         }
     }
 }
