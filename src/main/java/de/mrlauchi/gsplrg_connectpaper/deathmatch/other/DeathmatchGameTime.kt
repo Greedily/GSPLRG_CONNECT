@@ -11,7 +11,7 @@ object DeathmatchGameTime {
     fun startGameTime() {
         val config = Main.instance!!.config
 
-        var minutetime = 5
+        var minutetime = 1
         var secondtime = 0
 
         var points = mutableMapOf<Int, String>()
@@ -38,9 +38,9 @@ object DeathmatchGameTime {
                         target.inventory.clear()
                         target.sendTitle("GAME ENDS!", "")
 
-                        for (target in Bukkit.getOnlinePlayers()) {
+                        for (countTarget in Bukkit.getOnlinePlayers()) {
                             //points.plus(config.getInt("deathmatch.points.${target.name}") to target.name)
-                            points += Pair(config.getInt("deathmatch.points.${target.name}") , target.name)
+                            points += Pair(config.getInt("deathmatch.score.${target.name}") , target.name)
                             target.gameMode = GameMode.SPECTATOR
                             target.inventory.clear()
                         }

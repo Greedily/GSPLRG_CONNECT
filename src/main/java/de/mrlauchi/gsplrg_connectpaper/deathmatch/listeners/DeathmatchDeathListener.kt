@@ -14,7 +14,7 @@ class DeathmatchDeathListener : Listener {
         if (killer !is Player) return
         val config = Main.instance!!.config
         if (config.getInt("deathmatch.gamemodeactive") == 1) {
-            val score = "deathmatch.score.${killer.name}"
+            val score = "deathmatch.score.${killer.name}" // it sets *score* as the points thing but uses *points* to get the score in the gametime
             config.set(score, config.getInt(score) + 1)
             Main.instance!!.saveConfig()
             //killer.sendMessage("You killed a player! +" + config.getInt("deathmatch.score.$killer").toString()) // i dont remember what that was for alr look at dc nothing there
