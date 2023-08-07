@@ -2,6 +2,8 @@ package de.mrlauchi.gsplrg_connectpaper.rocketspleef.commands
 
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefCountdown
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
+import org.bukkit.Bukkit
+import org.bukkit.GameMode
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -29,6 +31,10 @@ class RocketSpleefCommand : CommandExecutor, TabCompleter {
         if (args[0] == "stop") {
             RocketSpleefEssentials.setGameActive(false)
             RocketSpleefEssentials.setCountdownActive(false)
+            for (target in Bukkit.getOnlinePlayers()) {
+                target.gameMode = GameMode.SPECTATOR
+                target.inventory.clear()
+            }
         }
         return false
     }

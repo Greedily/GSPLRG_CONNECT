@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -23,8 +24,11 @@ object RocketSpleefCountdown {
             val meta = Bow.itemMeta
             meta.setCustomModelData(1234)
             meta.displayName(Component.text("Rocket Launcher"))
+            meta.isUnbreakable = false
+            meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
             Bow.setItemMeta(meta)
             target.inventory.addItem(Bow)
+            target.inventory.addItem(ItemStack(Material.ARROW))
         }
 
         RocketSpleefEssentials.setGameActive(true)
