@@ -1,9 +1,12 @@
 package de.mrlauchi.gsplrg_connectpaper.rocketspleef.commands
 
+import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefCountdown
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
+import org.bukkit.Location
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -34,7 +37,10 @@ class RocketSpleefCommand : CommandExecutor, TabCompleter {
             for (target in Bukkit.getOnlinePlayers()) {
                 target.gameMode = GameMode.SPECTATOR
                 target.inventory.clear()
+                target.isInvisible = false
             }
+            val map = Main.instance!!.config.getString("rocketspleef.currentmap")
+            PasteSchem.paste(Location(Bukkit.getWorld("world"),-385.508, 109.0, -2055.485), map)
         }
         return false
     }

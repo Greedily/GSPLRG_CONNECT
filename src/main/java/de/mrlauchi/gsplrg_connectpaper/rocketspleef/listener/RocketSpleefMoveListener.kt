@@ -1,9 +1,12 @@
 package de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener
 
 
+import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
+import org.bukkit.Location
 import org.bukkit.entity.Creeper
 import org.bukkit.entity.Item
 import org.bukkit.event.EventHandler
@@ -20,7 +23,7 @@ class RocketSpleefMoveListener : Listener {
             }
         }
         if (RocketSpleefEssentials.getGameActive() == 1 && RocketSpleefEssentials.getCountdownActive() == 0) {
-            if (event.to.y <= -5) {
+            if (event.to.y <= -30) {
                 var aliveteams: MutableList<String> = ArrayList()
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
@@ -40,6 +43,9 @@ class RocketSpleefMoveListener : Listener {
                                 entity.remove()
                             }
                         }
+
+                        val map = Main.instance!!.config.getString("rocketspleef.currentmap")
+                        PasteSchem.paste(Location(Bukkit.getWorld("world"),-385.508, 109.0, -2055.485), map)
 
                         player.gameMode = GameMode.SPECTATOR
                         player.inventory.clear()

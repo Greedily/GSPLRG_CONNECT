@@ -19,22 +19,27 @@ object RocketSpleefCountdown {
 
         for (target in Bukkit.getOnlinePlayers()) {
             target.inventory.clear()
+
             target.teleport(RocketSpleefEssentials.getMapSpawn(map))
             val Bow = ItemStack(Material.BOW)
             val meta = Bow.itemMeta
             meta.setCustomModelData(1234)
             meta.displayName(Component.text("Rocket Launcher"))
-            meta.isUnbreakable = false
+            meta.isUnbreakable = true
             meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
             Bow.setItemMeta(meta)
+            val ELYTRA = ItemStack(Material.ELYTRA)
+            val emeta = ELYTRA.itemMeta
+            emeta.isUnbreakable = true
+            ELYTRA.setItemMeta(emeta)
             target.inventory.addItem(Bow)
+            target.inventory.chestplate = ItemStack(ELYTRA)
             target.inventory.addItem(ItemStack(Material.ARROW))
         }
-
         RocketSpleefEssentials.setGameActive(true)
 
         RocketSpleefEssentials.setCountdownActive(true)
-
+        config.set("rocketspleef.currentmap", map)
         var time = 10
         player.sendMessage("§bCountdown has been started!")
 
