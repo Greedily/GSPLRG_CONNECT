@@ -25,11 +25,11 @@ class RocketSpleefMoveListener : Listener {
         if (RocketSpleefEssentials.getGameActive() == 1 && RocketSpleefEssentials.getCountdownActive() == 0) {
             if (event.to.y <= -30) {
                 Bukkit.broadcastMessage("$player Died!")
-                var aliveteams: MutableList<String> = ArrayList()
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
                 for (player in Bukkit.getOnlinePlayers()) {
                     if (player.gameMode == GameMode.SPECTATOR) return
+                    var aliveteams: MutableList<String> = ArrayList()
                     val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
                     if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
                         aliveteams += targetteam
@@ -59,7 +59,6 @@ class RocketSpleefMoveListener : Listener {
                             }  // the winner
                             if (target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name == aliveteams[0]) {
                                 target.sendTitle("§6Your Team Won!", "")
-                                target.gameMode = GameMode.SPECTATOR
                             }
                         }
                     }
