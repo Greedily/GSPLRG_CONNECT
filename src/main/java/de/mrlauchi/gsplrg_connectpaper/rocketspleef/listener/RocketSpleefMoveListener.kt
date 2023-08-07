@@ -58,7 +58,7 @@ class RocketSpleefMoveListener : Listener {
                                 target.sendTitle("§6${aliveteams[0]} Won The Game!", "")
                             }  // the winner
                             if (target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name == aliveteams[0]) {
-                                target.sendTitle("§6Your Team Won!", "")
+                                target.sendTitle("§6Your Team Won!", "")//e
                             }
                         }
                     }
