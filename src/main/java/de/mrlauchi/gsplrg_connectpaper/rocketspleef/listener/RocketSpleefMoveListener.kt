@@ -24,6 +24,7 @@ class RocketSpleefMoveListener : Listener {
         }
         if (RocketSpleefEssentials.getGameActive() == 1 && RocketSpleefEssentials.getCountdownActive() == 0) {
             if (event.to.y <= -30) {
+                Bukkit.broadcastMessage("$player Died!")
                 var aliveteams: MutableList<String> = ArrayList()
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
@@ -33,6 +34,7 @@ class RocketSpleefMoveListener : Listener {
                     if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
                         aliveteams += targetteam
                     }
+
 
                     if (aliveteams.size == 1) {
                         for (entity in Bukkit.getWorld("world")!!.entities) {
