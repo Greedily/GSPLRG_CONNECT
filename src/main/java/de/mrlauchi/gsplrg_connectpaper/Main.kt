@@ -22,6 +22,9 @@ import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDamageListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDeathListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourMoveListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourRespawnListener
+import de.mrlauchi.gsplrg_connectpaper.rocketspleef.commands.RocketSpleefCommand
+import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefFireBowListener
+import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefMoveListener
 import de.mrlauchi.gsplrg_connectpaper.skywars.commands.SkywarsCommand
 import de.mrlauchi.gsplrg_connectpaper.skywars.listeners.SkywarsMoveListener
 import de.mrlauchi.gsplrg_connectpaper.skywars.listeners.SkywarsRespawnListener
@@ -65,6 +68,9 @@ class Main : JavaPlugin() {
         getCommand("acerace")?.setExecutor(AceRaceCommand())
         getCommand("acerace")?.tabCompleter = AceRaceCommand()
 
+        getCommand("rocketspleef")?.setExecutor(RocketSpleefCommand())
+        getCommand("rocketspleef")?.tabCompleter = RocketSpleefCommand()
+
         val pluginManager = server.pluginManager
 
         // TGTTOS Listeners
@@ -101,6 +107,10 @@ class Main : JavaPlugin() {
         pluginManager.registerEvents(AceRaceDeathListener(), this)
         pluginManager.registerEvents(AceRaceRespawnListener(), this)
         //pluginManager.registerEvents(AceRaceJumpListener(), this)
+
+        //RocketSpleef Listeners
+        pluginManager.registerEvents(RocketSpleefMoveListener(), this)
+        pluginManager.registerEvents(RocketSpleefFireBowListener(), this)
     }
 
     override fun onDisable() {

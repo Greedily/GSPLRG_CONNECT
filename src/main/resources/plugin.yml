@@ -18,3 +18,5 @@ commands:
     description: everything having to do with deathmatch.
   acerace:
     description: everything having to do with acerace.
+  rocketspleef:
+    description: everything having to do with rocketspleef.
