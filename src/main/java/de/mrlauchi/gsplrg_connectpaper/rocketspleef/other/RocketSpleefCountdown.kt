@@ -65,6 +65,10 @@ object RocketSpleefCountdown {
                         Bow.setItemMeta(meta)
                         target.inventory.addItem(Bow)
 
+                        target.isInvisible = false
+
+                        RocketSpleefEssentials.rocketReload()
+
                         config.set("rocketspleef.rocketslots.${player.name}", 3)
                         config.set("rocketspleef.timer.${player.name}", -1)
 

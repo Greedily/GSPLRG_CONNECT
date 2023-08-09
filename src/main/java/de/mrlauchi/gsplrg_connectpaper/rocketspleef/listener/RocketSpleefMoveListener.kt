@@ -50,6 +50,7 @@ class RocketSpleefMoveListener : Listener {
                             }
                         }
 
+
                         val map = Main.instance!!.config.getString("rocketspleef.currentmap")
                         PasteSchem.paste(Location(Bukkit.getWorld("world"),-385.508, 109.0, -2055.485), map)
 

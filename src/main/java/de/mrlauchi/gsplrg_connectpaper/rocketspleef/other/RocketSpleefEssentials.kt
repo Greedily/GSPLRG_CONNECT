@@ -70,6 +70,16 @@ object RocketSpleefEssentials {
         Main.instance!!.saveConfig()
     }
 
+    fun removeRocket(player: Player) {
+        val config = Main.instance!!.config
+
+        var old_value = config.getInt("rocketspleef.rocketslots.${player.name}")
+        val new_value = old_value - 1
+        config.set("rocketspleef.rocketslots.${player.name}", new_value)
+
+        Main.instance!!.saveConfig()
+    }
+
     fun getRocket(player: Player): Int {
         val config = Main.instance!!.config
 
@@ -97,8 +107,28 @@ object RocketSpleefEssentials {
         // everu second give players one slot if its not fillled
         val bukkitRunnable = object: BukkitRunnable(){
             override fun run() {
-                if (getGameActive() == 0) return
+                if (getGameActive() == 0) {
+                    this.cancel()
+
+                    return
+                }
                 for (target in Bukkit.getOnlinePlayers()){
+                    val config = Main.instance!!.config
+                    val rockets = config.getInt("rocketspleef.rocketslots.${target.name}")
+
+                    if(rockets == 0) {
+                        target.sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§c⬤§c⬤§c⬤")) // how make red
+                    }
+                    if(rockets == 1) {
+                        target.sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b⬤§c⬤§c⬤")) // how make red
+                    }
+                    if(rockets == 2){
+                        target.sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b⬤§b⬤§c⬤")) // it does.
+                    }
+                    if(rockets == 3){
+                        target.sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b⬤§b⬤§b⬤"))
+                    }
+
                     //give them a point
                     if(getRocket(target) != 3) {
                         if(getTime(target) > 0 && getTime(target) < 6) {
