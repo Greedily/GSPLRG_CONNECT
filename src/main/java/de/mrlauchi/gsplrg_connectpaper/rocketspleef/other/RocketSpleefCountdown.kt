@@ -42,7 +42,7 @@ object RocketSpleefCountdown {
                     emeta.isUnbreakable = true
                     ELYTRA.setItemMeta(emeta)
                     target.inventory.chestplate = ItemStack(ELYTRA)
-                    val Bow = ItemStack(Material.BOW)
+                    val Bow = ItemStack(Material.DIAMOND_SHOVEL)
                     val meta = Bow.itemMeta
                     meta.setCustomModelData(1234)
                     meta.displayName(Component.text("Rocket Launcher"))

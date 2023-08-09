@@ -4,19 +4,22 @@ import org.bukkit.entity.Fireball
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityInteractEvent
 import org.bukkit.event.entity.EntityShootBowEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.ItemStack
 
 class RocketSpleefFireBowListener : Listener {
     @EventHandler
-    fun onfire(event: EntityShootBowEvent){
-        val bow = event.bow ?: return
-        if (event.entity !is Player) return
+    fun onfire(event: PlayerInteractEvent){
+        val bow : ItemStack = event.player.itemInHand ?: return
+
         if (bow.itemMeta?.hasCustomModelData() == false) return
         if (bow.itemMeta.customModelData != 1234) return
-        val player = event.entity
+        val player = event.player
         event.isCancelled = true
 
-        val fireball = player.launchProjectile(Fireball::class.java, event.projectile.velocity)
+        val fireball = player.launchProjectile(Fireball::class.java, player.location.direction.multiply(5))
         fireball.shooter = player
     }
 }
