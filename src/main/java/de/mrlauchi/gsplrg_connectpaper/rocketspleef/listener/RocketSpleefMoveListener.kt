@@ -8,6 +8,7 @@ import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.entity.Creeper
+import org.bukkit.entity.Fireball
 import org.bukkit.entity.Item
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -24,11 +25,11 @@ class RocketSpleefMoveListener : Listener {
         }
         if (RocketSpleefEssentials.getGameActive() == 1 && RocketSpleefEssentials.getCountdownActive() == 0) {
             if (event.to.y <= -30) {
-                Bukkit.broadcastMessage("$player Died!")
+                if (player.gameMode == GameMode.SPECTATOR) return
+                Bukkit.broadcastMessage("${player.name} Died!")
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
-                for (player in Bukkit.getOnlinePlayers()) {
-                    if (player.gameMode == GameMode.SPECTATOR) return
+                for (target in Bukkit.getOnlinePlayers()) {
                     var aliveteams: MutableList<String> = ArrayList()
                     val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
                     if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
@@ -44,6 +45,9 @@ class RocketSpleefMoveListener : Listener {
                             if(entity is Creeper) {
                                 entity.remove()
                             }
+                            if(entity is Fireball) {
+                                entity.remove()
+                            }
                         }
 
                         val map = Main.instance!!.config.getString("rocketspleef.currentmap")
@@ -51,6 +55,9 @@ class RocketSpleefMoveListener : Listener {
 
                         player.gameMode = GameMode.SPECTATOR
                         player.inventory.clear()
+                        player.isInvisible = false
+
+                        RocketSpleefEssentials.setGameActive(false)
 
                         for (target in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
                             target.inventory.clear()

@@ -37,20 +37,6 @@ object RocketSpleefCountdown {
                     target.foodLevel = 20
                     target.inventory.boots = ItemStack(Material.LEATHER_BOOTS)
                     //giving items
-                    val ELYTRA = ItemStack(Material.ELYTRA)
-                    val emeta = ELYTRA.itemMeta
-                    emeta.isUnbreakable = true
-                    ELYTRA.setItemMeta(emeta)
-                    target.inventory.chestplate = ItemStack(ELYTRA)
-                    val Bow = ItemStack(Material.DIAMOND_SHOVEL)
-                    val meta = Bow.itemMeta
-                    meta.setCustomModelData(1234)
-                    meta.displayName(Component.text("Rocket Launcher"))
-                    meta.isUnbreakable = true
-                    meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
-                    Bow.setItemMeta(meta)
-                    target.inventory.addItem(Bow)
-                    target.inventory.addItem(ItemStack(Material.ARROW))
 
                     target.sendTitle("§b$time", "")
 
@@ -64,6 +50,21 @@ object RocketSpleefCountdown {
                         //target.isInvisible = false
 
                         //target.isInvulnerable = false
+
+                        val ELYTRA = ItemStack(Material.ELYTRA)
+                        val emeta = ELYTRA.itemMeta
+                        emeta.isUnbreakable = true
+                        ELYTRA.setItemMeta(emeta)
+                        target.inventory.chestplate = ItemStack(ELYTRA)
+                        val Bow = ItemStack(Material.DIAMOND_SHOVEL)
+                        val meta = Bow.itemMeta
+                        meta.setCustomModelData(1234)
+                        meta.displayName(Component.text("Rocket Launcher"))
+                        meta.isUnbreakable = true
+                        meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
+                        Bow.setItemMeta(meta)
+                        target.inventory.addItem(Bow)
+                        target.inventory.addItem(ItemStack(Material.ARROW))
 
                         RocketSpleefEssentials.setCountdownActive(false)
 
