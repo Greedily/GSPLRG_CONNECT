@@ -59,18 +59,19 @@ object RocketSpleefCountdown {
                         val Bow = ItemStack(Material.DIAMOND_SHOVEL)
                         val meta = Bow.itemMeta
                         meta.setCustomModelData(1234)
-                        meta.displayName(Component.text("Rocket Launcher"))
+                        meta.displayName(Component.text("NUKE"))
                         meta.isUnbreakable = true
                         meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
                         Bow.setItemMeta(meta)
                         target.inventory.addItem(Bow)
-                        target.inventory.addItem(ItemStack(Material.ARROW))
+
+                        config.set("rocketspleef.rocketslots.${player.name}", 3)
 
                         RocketSpleefEssentials.setCountdownActive(false)
 
                         ParkourStartCommand.start(player)
 
-
+                        Main.instance!!.saveConfig()
                         this.cancel()
                     }
                 }

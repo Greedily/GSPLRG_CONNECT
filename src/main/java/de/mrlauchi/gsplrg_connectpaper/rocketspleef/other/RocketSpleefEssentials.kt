@@ -61,16 +61,14 @@ object RocketSpleefEssentials {
         val config = Main.instance!!.config
 
         var old_value = config.getInt("rocketspleef.rocketslots.${player.name}")
-        if (old_value != 0 && old_value != 3) {
+        if (old_value != 3) {
             config.set("rocketspleef.rocketslots.${player.name}", old_value + 1)
-        }else{
-            old_value = 3
         }
 
         Main.instance!!.saveConfig()
     }
 
-    fun HandlePlayersSlots(){
+    fun HandlePlayersSlots(){// whengame starsts every second we set their config
         // if the slots arent filled (isnt 3) refill it with a timer,
         var timer = 1
 
