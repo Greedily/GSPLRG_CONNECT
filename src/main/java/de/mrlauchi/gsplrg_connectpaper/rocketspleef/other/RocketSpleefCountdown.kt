@@ -59,13 +59,14 @@ object RocketSpleefCountdown {
                         val Bow = ItemStack(Material.DIAMOND_SHOVEL)
                         val meta = Bow.itemMeta
                         meta.setCustomModelData(1234)
-                        meta.displayName(Component.text("NUKE"))
+                        meta.displayName(Component.text("NUKE (leftclick only)"))
                         meta.isUnbreakable = true
                         meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
                         Bow.setItemMeta(meta)
                         target.inventory.addItem(Bow)
 
                         config.set("rocketspleef.rocketslots.${player.name}", 3)
+                        config.set("rocketspleef.timer.${player.name}", -1)
 
                         RocketSpleefEssentials.setCountdownActive(false)
 
