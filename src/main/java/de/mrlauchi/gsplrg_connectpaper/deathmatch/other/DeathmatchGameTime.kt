@@ -49,7 +49,6 @@ object DeathmatchGameTime {
                         val firstplacement = points[0]
                         val secondplacement = points[1]
                         val thirdplacement = points[2]
-                        Bukkit.broadcastMessage(points.toString())
                         Bukkit.broadcastMessage("1st.$firstplacement  2nd.$secondplacement  3rd.$thirdplacement")
                         this.cancel()
                     }

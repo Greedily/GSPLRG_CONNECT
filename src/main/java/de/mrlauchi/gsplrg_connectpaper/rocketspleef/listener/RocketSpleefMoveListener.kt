@@ -31,12 +31,13 @@ class RocketSpleefMoveListener : Listener {
                 player.inventory.clear()
                 for (target in Bukkit.getOnlinePlayers()) {
                     val aliveteams: MutableList<String> = ArrayList()
-                    val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
+                    val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
                     if(target.gameMode != GameMode.SPECTATOR) {
                         if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
                             aliveteams += targetteam
                         }
                     }
+
 
 
                     if (aliveteams.size == 1) {
