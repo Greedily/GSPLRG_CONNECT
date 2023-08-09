@@ -54,6 +54,7 @@ class ParkourMoveListener : Listener {
 
 
                         ParkourEssentials.setSection(player, i)
+                        //Bukkit.broadcastMessage(ParkourEssentials.getSection(player).toString())
 
                         if(i == 20) {
                             player.gameMode = GameMode.SPECTATOR
