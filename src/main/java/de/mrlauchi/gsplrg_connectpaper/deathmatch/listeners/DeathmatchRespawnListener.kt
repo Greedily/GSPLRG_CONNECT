@@ -17,10 +17,7 @@ class DeathmatchRespawnListener : Listener {
 
             event.respawnLocation = location
             target.isInvulnerable = true
-            target.sendMessage("cant take dmg")
-            Bukkit.broadcastMessage("${target.name} is Invulnerable")
             DeathmatchEssentials.waitTimeUntillPlayergetdmged(3, target)
-
         }
 
     }

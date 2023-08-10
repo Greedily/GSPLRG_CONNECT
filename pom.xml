@@ -25,7 +25,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <outputDirectory>C:\Users\eikeh\Downloads</outputDirectory>
+                    <outputDirectory>C:\Users\RexDe\Downloads</outputDirectory>
                 </configuration>
             </plugin>
 

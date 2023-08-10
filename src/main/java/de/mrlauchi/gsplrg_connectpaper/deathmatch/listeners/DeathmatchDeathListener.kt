@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.deathmatch.listeners
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.deathmatch.other.DeathmatchEssentials
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -17,8 +18,9 @@ class DeathmatchDeathListener : Listener {
             val score = "deathmatch.score.${killer.name}" // it sets *score* as the points thing but uses *points* to get the score in the gametime
             config.set(score, config.getInt(score) + 1)
             Main.instance!!.saveConfig()
+            event.deathMessage = null
             //killer.sendMessage("You killed a player! +" + config.getInt("deathmatch.score.$killer").toString()) // i dont remember what that was for alr look at dc nothing there
-            Bukkit.broadcastMessage("${killer.name} killed a player!")
+            //Bukkit.broadcastMessage("${killer.name} killed a player!")
         }
     }
 }

@@ -14,13 +14,13 @@ object DeathmatchGameTime {
         var minutetime = 1
         var secondtime = 0
 
-        var points = mutableMapOf<Int, String>()
 
         val bukkitRunnable = object: BukkitRunnable(){
             override fun run() {
                 for (target in Bukkit.getOnlinePlayers()) {
                     target.saturation = 20.0F
                     target.foodLevel = 20
+
                     if (config.getInt("deathmatch.gamemodeactive") == 0) {
                         this.cancel()
                     }
@@ -34,22 +34,25 @@ object DeathmatchGameTime {
                     if (minutetime <= 0 && secondtime <= 0 && config.getInt("deathmatch.gamemodeactive") == 1) {
                         DeathmatchEssentials.setGamemodeEnabled(false)
 
+                        var points = mutableMapOf<Int, String>()
+
                         target.gameMode = GameMode.SPECTATOR
                         target.inventory.clear()
                         target.sendTitle("GAME ENDS!", "")
 
                         for (countTarget in Bukkit.getOnlinePlayers()) {
                             //points.plus(config.getInt("deathmatch.points.${target.name}") to target.name)
-                            points += Pair(config.getInt("deathmatch.score.${target.name}") , target.name)
-                            target.gameMode = GameMode.SPECTATOR
-                            target.inventory.clear()
+                            points += Pair(config.getInt("deathmatch.score.${countTarget.name}") , countTarget.name)
+                            countTarget.gameMode = GameMode.SPECTATOR
+                            countTarget.inventory.clear()
                         }
-                        Bukkit.broadcastMessage(points.toString())
                         points = points.toSortedMap(Comparator.reverseOrder())
-                        val firstplacement = points[0]
-                        val secondplacement = points[1]
-                        val thirdplacement = points[2]
-                        Bukkit.broadcastMessage("1st.$firstplacement  2nd.$secondplacement  3rd.$thirdplacement")
+                        val nameslist = points.values.toList()
+                        val pointslist = points.keys.toList()
+                        val firstplacement = nameslist[0]
+                        val secondplacement = nameslist[1]
+                        val thirdplacement = nameslist[2]
+                        Bukkit.broadcastMessage("1st.$firstplacement with ${pointslist[0]} 2nd.$secondplacement with ${pointslist[1]} 3rd.$thirdplacement with ${pointslist[2]}")
                         this.cancel()
                     }
                 }
