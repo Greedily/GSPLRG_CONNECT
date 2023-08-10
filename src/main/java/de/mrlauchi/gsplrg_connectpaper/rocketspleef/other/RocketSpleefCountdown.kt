@@ -1,7 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.rocketspleef.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
-import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStartCommand
+import de.mrlauchi.gsplrg_connectpaper.parkour.other.RocketSpleefTimer
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -20,8 +20,12 @@ object RocketSpleefCountdown {
         for (target in Bukkit.getOnlinePlayers()) {
             target.inventory.clear()
             target.teleport(RocketSpleefEssentials.getMapSpawn(map))
+            config.set("rocketspleef.playertimes.${target.name}",0)
+            config.set("rocketspleef.rocketslots.${target.name}", 3)
+            config.set("rocketspleef.timer.${target.name}", 2)
+            Main.instance!!.saveConfig()
         }
-        RocketSpleefEssentials.setGameActive(true)
+        RocketSpleefEssentials.setActive(true)
 
         RocketSpleefEssentials.setCountdownActive(true)
         config.set("rocketspleef.currentmap", map)
@@ -64,19 +68,16 @@ object RocketSpleefCountdown {
                         meta.addEnchant(Enchantment.ARROW_INFINITE,1, true)
                         Bow.setItemMeta(meta)
                         target.inventory.addItem(Bow)
+                        target.inventory.addItem(ItemStack(Material.FIREWORK_ROCKET))
 
                         target.isInvisible = false
 
                         RocketSpleefEssentials.rocketReload()
-
-                        config.set("rocketspleef.rocketslots.${player.name}", 3)
-                        config.set("rocketspleef.timer.${player.name}", -1)
+                        RocketSpleefEssentials.setTimerActive(true)
+                        RocketSpleefTimer.start()
 
                         RocketSpleefEssentials.setCountdownActive(false)
 
-                        ParkourStartCommand.start(player)
-
-                        Main.instance!!.saveConfig()
                         this.cancel()
                     }
                 }

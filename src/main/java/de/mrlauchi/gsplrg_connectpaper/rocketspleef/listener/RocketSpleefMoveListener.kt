@@ -23,10 +23,11 @@ class RocketSpleefMoveListener : Listener {
                 event.isCancelled = true
             }
         }
-        if (RocketSpleefEssentials.getGameActive() == 1 && RocketSpleefEssentials.getCountdownActive() == 0) {
+        if (RocketSpleefEssentials.getActive() == 1 && RocketSpleefEssentials.getCountdownActive() == 0) {
             if (event.to.y <= -30) {
                 if (player.gameMode == GameMode.SPECTATOR) return
-                Bukkit.broadcastMessage("${player.name} Died!")
+                val time = Main.instance!!.config.getString("rocketspleef.playertimes.${player.name}")
+                Bukkit.broadcastMessage("${player.name} Died! and was alive for §c$time")
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
                 for (target in Bukkit.getOnlinePlayers()) {
@@ -61,7 +62,7 @@ class RocketSpleefMoveListener : Listener {
                         player.inventory.clear()
                         player.isInvisible = false
 
-                        RocketSpleefEssentials.setGameActive(false)
+                        RocketSpleefEssentials.setActive(false)
 
                         for (target in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
                             target.inventory.clear()
