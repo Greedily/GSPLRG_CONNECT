@@ -11,7 +11,7 @@ object DeathmatchGameTime {
     fun startGameTime() {
         val config = Main.instance!!.config
 
-        var minutetime = 1
+        var minutetime = 10
         var secondtime = 0
 
 
@@ -52,7 +52,33 @@ object DeathmatchGameTime {
                         val firstplacement = nameslist[0]
                         val secondplacement = nameslist[1]
                         val thirdplacement = nameslist[2]
-                        Bukkit.broadcastMessage("1st.$firstplacement with ${pointslist[0]} 2nd.$secondplacement with ${pointslist[1]} 3rd.$thirdplacement with ${pointslist[2]}")
+                        Bukkit.broadcastMessage("-------------------------------------------"+
+                                "§61st.$firstplacement §fwith §6${pointslist[0]} kills." +
+                                "§72nd.$secondplacement §fwith §7${pointslist[1]} kills." +
+                                "§b3rd.$thirdplacement §fwith §b${pointslist[2]} kills." +
+                                "4th.${nameslist[3]} with ${pointslist[3]} kills." +
+                                "5th.${nameslist[4]} with ${pointslist[4]} kills." +
+                                "6th.${nameslist[5]} with ${pointslist[5]} kills."+
+                                "7th.${nameslist[6]} with ${pointslist[6]} kills." +
+                                "8th.${nameslist[7]} with ${pointslist[7]} kills." +
+                                "9th.${nameslist[8]} with ${pointslist[8]} kills." +
+                                "10th.${nameslist[9]} with ${pointslist[9]} kills."+
+                                "11th.${nameslist[10]} with ${pointslist[10]} kills." +
+                                "12th.${nameslist[11]} with ${pointslist[11]} kills." +
+                                "13th.${nameslist[12]} with ${pointslist[12]} kills." +
+                                "13th.${nameslist[13]} with ${pointslist[13]} kills."+
+                                "14th.${nameslist[14]} with ${pointslist[14]} kills." +
+                                "15th.${nameslist[15]} with ${pointslist[15]} kills." +
+                                "16th.${nameslist[16]} with ${pointslist[16]} kills." +
+                                "17th.${nameslist[17]} with ${pointslist[17]} kills."+
+                                "19th.${nameslist[18]} with ${pointslist[18]} kills." +
+                                "20th.${nameslist[19]} with ${pointslist[19]} kills." +
+                                "21th.${nameslist[20]} with ${pointslist[20]} kills." +
+                                "22th.${nameslist[21]} with ${pointslist[21]} kills."+
+                                "23th.${nameslist[22]} with ${pointslist[22]} kills." +
+                                "24th.${nameslist[23]} with ${pointslist[23]} kills." +
+                                "-------------------------------------------"
+                        )
                         this.cancel()
                     }
                 }

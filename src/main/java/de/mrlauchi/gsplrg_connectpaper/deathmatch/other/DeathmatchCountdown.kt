@@ -30,13 +30,12 @@ object DeathmatchCountdown {
             itemmeta?.addEnchant(Enchantment.QUICK_CHARGE, 2, true)
             crossbow.setItemMeta(itemmeta)
 
-            player.inventory.addItem(crossbow)
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"give @a tipped_arrow{CustomPotionEffects:[{Id:7,Amplifier:100b,Duration:1}],CustomPotionColor:3538944} 200")
+            target.inventory.addItem(crossbow)
 
             //give target everything we want to give him.
            // target.inventory.addItem(GoldRushEssentials.getKitItem(Material.WOODEN_AXE, true, 1))
         }
-
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"give @a tipped_arrow{CustomPotionEffects:[{Id:7,Amplifier:100b,Duration:1}],CustomPotionColor:3538944} 200")
 
         DeathmatchEssentials.setCountDownEnabled(true)
 
