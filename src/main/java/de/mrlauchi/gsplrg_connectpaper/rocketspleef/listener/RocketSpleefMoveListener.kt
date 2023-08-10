@@ -19,7 +19,7 @@ class RocketSpleefMoveListener : Listener {
     fun onMove(event: PlayerMoveEvent){
         val player = event.player
         if(RocketSpleefEssentials.getCountdownActive() == 1) {
-            if(event.from.x != event.to.x || event.from.z != event.to.z) {
+            if(event.from.x != event.to.x || event.from.z != event.to.z) {//e
                 event.isCancelled = true
             }
         }

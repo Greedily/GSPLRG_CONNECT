@@ -18,7 +18,7 @@ object RocketSpleefTimer {
 
                 val config = Main.instance!!.config
 
-                for (player in Bukkit.getOnlinePlayers()) {
+                for (player in Bukkit.getOnlinePlayers()) {//e
                     if (player.gameMode == GameMode.ADVENTURE) {
                         //player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:$currentsecondtime"))
                         //save player time

@@ -12,7 +12,7 @@ class RocketSpleefFireBowListener : Listener {
     fun onfire(event: PlayerInteractEvent){
         val hand : ItemStack = event.player.itemInHand ?: return
 
-        if (event.action.isRightClick) return
+        if (event.action.isRightClick) return//e
         if(RocketSpleefEssentials.getRocket(event.player) <= 0) return
         if(RocketSpleefEssentials.getActive() == 0) return
         if(hand.itemMeta == null) return

@@ -133,7 +133,7 @@ object RocketSpleefEssentials {
                 if (getActive() == 0) {
                     this.cancel()
 
-                    return
+                    return//e
                 }
                 for (target in Bukkit.getOnlinePlayers()){
                     val config = Main.instance!!.config

@@ -20,7 +20,7 @@ class RocketSpleefCommand : CommandExecutor, TabCompleter {
         if (!sender.isOp()) return false
         if (args[0] == "start") {
             if (args.size > 1) {
-                RocketSpleefCountdown.countdown(sender, args[1])
+                RocketSpleefCountdown.countdown(sender, args[1])//e
             }else{
                 sender.sendMessage("you need to specify the map name you want to start the game in!")
             }
