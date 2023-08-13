@@ -69,7 +69,7 @@ object HungergamesEssentials {
 
     fun setPlacement(player : Player){
         val config = Main.instance!!.config
-
+        //24th
         currentplacement -= 1
         if (currentplacement < 10){
             if (currentplacement == 1){

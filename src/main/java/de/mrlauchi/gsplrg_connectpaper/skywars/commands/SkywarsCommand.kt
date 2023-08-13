@@ -1,8 +1,11 @@
 package de.mrlauchi.gsplrg_connectpaper.skywars.commands
 
+import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.skywars.other.SkywarsCountDown
 import de.mrlauchi.gsplrg_connectpaper.skywars.other.SkywarsEssentials
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -41,6 +44,10 @@ class SkywarsCommand : CommandExecutor, TabCompleter {
                 if (args[0] == "stop"){
                     SkywarsEssentials.setCountDownEnabled(false) // stop the countdown
                     SkywarsEssentials.setGameModeEnabled(false) // stop the death listener
+                    val x = Main.instance!!.config.getDouble("skywars.mapspawn.x")
+                    val y = Main.instance!!.config.getDouble("skywars.mapspawn.y")
+                    val z = Main.instance!!.config.getDouble("skywars.mapspawn.z")
+                    PasteSchem.paste(Location(Bukkit.getWorld("world"), x, y, z),"skywarsmap1")
                     sender.sendMessage("Game Stopped.")
                 }
             }

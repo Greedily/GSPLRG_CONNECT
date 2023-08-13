@@ -110,30 +110,13 @@ object pointsModule {
         val outlivedpoints = 20
 
         val placementlist = mapOf<Int,Int>(
-                1 to 500,
-                2 to 450,
-                3 to 420,
-                4 to 400,
-                5 to 380,
-                6 to 360,
-                7 to 340,
-                8 to 320,
-                9 to 300,
-                10 to 285,
-                11 to 280,
-                12 to 270,
-                13 to 260,
-                14 to 250,
-                15 to 240,
-                16 to 230,
-                17 to 220,
-                18 to 210,
-                19 to 200,
-                20 to 190,
-                21 to 180,
-                22 to 170,
-                23 to 160,
-                24 to 150
+                1 to 1000,
+                2 to 800,
+                3 to 600,
+                4 to 450,
+                5 to 350,
+                7 to 250,
+                8 to 0,
         )
     }
     object skywars {
