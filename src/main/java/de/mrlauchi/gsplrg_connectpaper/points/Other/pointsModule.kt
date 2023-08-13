@@ -97,7 +97,7 @@ object pointsModule {
         val nineteenth =  65
         val twentyth =  60
         val twenty1st =  55
-        val twenty2nd =  50
+        val twenty2nd =  50//e
         val twenty3rd =  45
         val twenty4th =  40
     }
