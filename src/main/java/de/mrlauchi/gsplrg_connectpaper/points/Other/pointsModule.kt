@@ -47,30 +47,32 @@ object pointsModule {
     }
 
     object tgttos {
-        val first =  500
-        val second =  400
-        val third =  380
-        val fourth =  360
-        val fifth =  340
-        val sixth =  320
-        val seventh =  300
-        val eightth =  280
-        val nineth =  260
-        val tenth =  240
-        val eleventh =  220
-        val twelveth =  200
-        val thirteenth =  190
-        val fourteenth =  180
-        val fifteenth =  170
-        val sixteenth = 160
-        val seventeenth =  150
-        val eighteenth =  140
-        val nineteenth =  130
-        val twentyth =  120
-        val twenty1st =  100
-        val twenty2nd =  90
-        val twenty3rd =  80
-        val twenty4th =  70
+        val placementlist = mapOf<Int,Int>(
+                1 to 500,
+                2 to 400,
+                3 to 380,
+                4 to 360,
+                5 to 340,
+                6 to 320,
+                7 to 300,
+                8 to 280,
+                9 to 260,
+                10 to 240,
+                11 to 220,
+                12 to 200,
+                13 to 190,
+                14 to 180,
+                15 to 170,
+                16 to 160,
+                17 to 150,
+                18 to 140,
+                19 to 130,
+                20 to 120,
+                21 to 100,
+                22 to 90,
+                23 to 80,
+                24 to 70
+        )
     }
 
     object rocketspleef {
