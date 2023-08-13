@@ -68,4 +68,13 @@ object pointsEssentials {
         return config.getInt(teampoint)
 
     }
+    fun getteamtoppoints(){
+        val config = Main.instance!!.config
+        val teams = mutableMapOf<Int?, String?>()
+        for (target in Bukkit.getOnlinePlayers()){
+
+            val teamname = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
+            teams += Pair(getteampoints(target) , teamname)
+        }
+    }
 }
