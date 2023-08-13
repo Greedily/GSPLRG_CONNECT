@@ -22,6 +22,7 @@ import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDamageListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDeathListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourMoveListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourRespawnListener
+import de.mrlauchi.gsplrg_connectpaper.points.Commands.pointsCommand
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.commands.RocketSpleefCommand
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefFireBowListener
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefMoveListener
@@ -46,6 +47,8 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         // Plugin startup logic
         instance = this
+
+        getCommand("points")?.setExecutor(pointsCommand())
 
         getCommand("tgttos")?.setExecutor(TGTTOSCommand())
         getCommand("tgttos")?.tabCompleter = TGTTOSCommand()
