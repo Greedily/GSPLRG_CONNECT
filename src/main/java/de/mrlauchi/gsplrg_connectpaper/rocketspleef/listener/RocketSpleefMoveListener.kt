@@ -32,50 +32,12 @@ class RocketSpleefMoveListener : Listener {
                 player.inventory.clear()
                 val aliveteams: MutableList<String> = ArrayList()
                 for (target in Bukkit.getOnlinePlayers()) {
-                    val aliveteams: MutableList<String> = ArrayList()
-                    val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
+                    val targetteam = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
                     if(target.gameMode != GameMode.SPECTATOR) {
                         if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
                             aliveteams += targetteam
                         }
                     }
-
-
-
-                    if (aliveteams.size == 1) {
-                        for (entity in Bukkit.getWorld("world")!!.entities) {
-                            if(entity is Item) {
-                                entity.remove()
-                            }
-                            if(entity is Creeper) {
-                                entity.remove()
-                            }
-                            if(entity is Fireball) {
-                                entity.remove()
-                            }
-                        }
-
-
-                        val map = Main.instance!!.config.getString("rocketspleef.currentmap")
-                        PasteSchem.paste(Location(Bukkit.getWorld("world"),-385.508, 109.0, -2055.485), map)
-
-                        player.gameMode = GameMode.SPECTATOR
-                        player.inventory.clear()
-                        player.isInvisible = false
-
-                        RocketSpleefEssentials.setActive(false)
-
-                        for (target in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
-                            target.inventory.clear()
-                            if (target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name != aliveteams[0]) { // all people
-                                target.sendTitle("§6${aliveteams[0]} Won The Game!", "")
-                            }  // the winner
-                            if (target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name == aliveteams[0]) {
-                                target.sendTitle("§6Your Team Won!", "")//e
-                            }
-                        }
-                    }
-
                 }
                 if (aliveteams.size == 1) {
                     for (entity in Bukkit.getWorld("world")!!.entities) {
