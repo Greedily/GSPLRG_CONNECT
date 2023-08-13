@@ -52,7 +52,9 @@ object DeathmatchGameTime {
                         val firstplacement = nameslist[0]
                         val secondplacement = nameslist[1]
                         val thirdplacement = nameslist[2]
-                        Bukkit.broadcastMessage("-------------------------------------------"+
+                        Bukkit.broadcastMessage(
+                                ""+""+""+""+""+""+""+""+""+""+""+""+""+""+""+
+                                "-------------------------------------------"+
                                 "§61st.$firstplacement §fwith §6${pointslist[0]} kills." +
                                 "§72nd.$secondplacement §fwith §7${pointslist[1]} kills." +
                                 "§b3rd.$thirdplacement §fwith §b${pointslist[2]} kills." +
