@@ -2,7 +2,6 @@ package de.mrlauchi.gsplrg_connectpaper
 
 import de.mrlauchi.gsplrg_connectpaper.acerace.Commands.AceRaceCommand
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceDeathListener
-import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceJumpListener
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceMoveListener
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.deathmatch.commands.DeathmatchCommand
@@ -32,7 +31,10 @@ import de.mrlauchi.gsplrg_connectpaper.skywars.listeners.SkywarsRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.TGTTOSCommand
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.DeathListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.MovementListener
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import sun.jvm.hotspot.HelloWorld.e
+
 
 class Main : JavaPlugin() {
     fun WW1() = "ww1"
@@ -114,6 +116,10 @@ class Main : JavaPlugin() {
         //RocketSpleef Listeners
         pluginManager.registerEvents(RocketSpleefMoveListener(), this)
         pluginManager.registerEvents(RocketSpleefFireBowListener(), this)
+
+
+
+
     }
 
     override fun onDisable() {
