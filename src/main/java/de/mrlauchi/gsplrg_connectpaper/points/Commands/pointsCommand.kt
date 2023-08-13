@@ -14,7 +14,7 @@ class pointsCommand : CommandExecutor {
                 val player = sender.player!!
 
                 if(args.isNotEmpty()) {
-                    if (args.size >= 2) {
+                    if (args.size > 2) {
                         if (args[0] == "setpoints") {
                             for (player in Bukkit.getOnlinePlayers()) {
                                 if (player.name == args[1]) {
@@ -51,11 +51,7 @@ class pointsCommand : CommandExecutor {
             }
         }else{
             if(sender is Player) {
-                if(args.isNotEmpty()) {
-                    if (args[0] == "points"){
-                        sender.sendMessage("Your Points: " + pointsEssentials.getplayerpoints(sender) + "Your Team Points: " + pointsEssentials.getteampoints(sender))
-                    }
-                }
+                sender.sendMessage("Your Points: " + pointsEssentials.getplayerpoints(sender) + "Your Team Points: " + pointsEssentials.getteampoints(sender))
             }
         }
 
