@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.parkour.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungergamesEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -9,7 +10,7 @@ import org.bukkit.entity.Player
 object ParkourEssentials {
     var currentplacement  = 0
 
-    var endmsg = ""
+    var endmsg = listOf<String?>()
     fun getCoordinate(section: Int): Location {
         val config = Main.instance!!.config
 
@@ -105,21 +106,37 @@ object ParkourEssentials {
         currentplacement += 1
         if (currentplacement < 10){
             if (currentplacement == 1){
-                endmsg += " §l${currentplacement}st:§r §6${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+                endmsg += " §l${currentplacement}st:§r §6${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
             }
             if (currentplacement == 2){
-                endmsg += " §l${currentplacement}nd:§r §9${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+                endmsg += " §l${currentplacement}nd:§r §9${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
             }
             if (currentplacement == 3){
-                endmsg += " §l${currentplacement}rd:§r §a${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+                endmsg += " §l${currentplacement}rd:§r §a${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
             }
            if (currentplacement > 3){
-               endmsg += " §l${currentplacement}th:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+               endmsg += " §l${currentplacement}th:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
            }
         }else{
-            endmsg += " §l${currentplacement}:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}"
+            if (currentplacement != 21 && currentplacement != 22 && currentplacement != 23){
+                endmsg += " §l${currentplacement}th:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 21){
+                endmsg += " §l${currentplacement}st:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 22){
+                endmsg += " §l${currentplacement}nd:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 23){
+                endmsg += " §l${currentplacement}rd:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
         }
 
+    }
+
+    fun resetplacements(){
+        endmsg = listOf<String?>()
+        currentplacement = 0
     }
 
 

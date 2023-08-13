@@ -74,8 +74,11 @@ class ParkourMoveListener : Listener {
                             }
                             Bukkit.broadcastMessage("Remaining Players: ${RemainingPlayers.size}")
                             if (RemainingPlayers.size <= 0){
-                                Bukkit.broadcastMessage(ParkourEssentials.endmsg)
+                                for (msg in ParkourEssentials.endmsg){
+                                    Bukkit.broadcastMessage(msg.toString())
+                                }
                                 ParkourEssentials.setActive(0)
+                                ParkourEssentials.resetplacements()
                             }
                             //finish timer
                             //ParkourEssentials.stopTimer()

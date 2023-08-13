@@ -3,11 +3,14 @@ package de.mrlauchi.gsplrg_connectpaper.hungergames.listeners
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungergamesEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.entity.Creeper
 import org.bukkit.entity.Item
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
@@ -32,6 +35,11 @@ class HungergamesDeathListener:Listener {
             deadplayer.gameMode = GameMode.SPECTATOR
             deadplayer.inventory.clear()
 
+            pointsEssentials.addplayerpoints(event.player.killer!!, pointsModule.hungergames.killpoints)
+            event.player.killer!!.sendMessage("+"+pointsModule.hungergames.killpoints+" for kill!")
+
+            HungergamesEssentials.setPlacement(deadplayer)
+
             config.set("hungergames.playerspawns.${deadplayer.name}.x",deadplayer.location.x)
             config.set("hungergames.playerspawns.${deadplayer.name}.y",deadplayer.location.y)
             config.set("hungergames.playerspawns.${deadplayer.name}.z",deadplayer.location.z)
@@ -44,6 +52,7 @@ class HungergamesDeathListener:Listener {
                     if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
                         aliveteams += targetteam
                     }
+                    pointsEssentials.addplayerpoints(target, pointsModule.hungergames.outlivedpoints)
                 }
             }
 
@@ -73,6 +82,7 @@ class HungergamesDeathListener:Listener {
                     val y = config.getDouble("hungergames.mapspawn.y")
                     val z = config.getDouble("hungergames.mapspawn.z")
 
+
                     //Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"execute in minecraft:overworld run fill -155 58 -1134 -356 4 -933 minecraft:air hollow")//  -1032.403t
                     PasteSchem.paste(Location(world, x, y, z),"hungergamesmap1")//-108.520, 49.0, -1780.435
                     //Bukkit.broadcastMessage("FILLED.")
@@ -87,8 +97,14 @@ class HungergamesDeathListener:Listener {
                         if (target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name == aliveteams[0]) {
                             target.sendTitle("§6Your Team Won!", "")
                             target.gameMode = GameMode.SPECTATOR
+                            pointsEssentials.addplayerpoints(target, pointsModule.hungergames.winpoints)
+                            target.sendMessage("+${pointsModule.hungergames.winpoints} Points for wining!")
                         }
                     }
+                    for (msg in HungergamesEssentials.endmsg.reversed()) {
+                        Bukkit.broadcastMessage(msg.toString())
+                    }
+                    HungergamesEssentials.resetplacements()
 
                 }
 

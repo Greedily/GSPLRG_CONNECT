@@ -76,30 +76,32 @@ object pointsModule {
     }
 
     object rocketspleef {
-        val first =  250
-        val second =  200
-        val third =  190
-        val fourth =  180
-        val fifth =  170
-        val sixth =  160
-        val seventh =  150
-        val eightth =  140
-        val nineth =  130
-        val tenth =  120
-        val eleventh =  110
-        val twelveth =  100
-        val thirteenth =  95
-        val fourteenth =  90
-        val fifteenth =  85
-        val sixteenth = 80
-        val seventeenth =  75
-        val eighteenth =  70
-        val nineteenth =  65
-        val twentyth =  60
-        val twenty1st =  55
-        val twenty2nd =  50//e
-        val twenty3rd =  45
-        val twenty4th =  40
+        val placementlist = mapOf<Int,Int>(
+                1 to 250,
+                2 to 200,
+                3 to 190,
+                4 to 180,
+                5 to 170,
+                6 to 160,
+                7 to 150,
+                8 to 140,
+                9 to 130,
+                10 to 120,
+                11 to 110,
+                12 to 100,
+                13 to 95,
+                14 to 90,
+                15 to 85,
+                16 to 80,
+                17 to 75,
+                18 to 70,
+                19 to 65,
+                20 to 60,
+                21 to 55,
+                22 to 50,
+                23 to 45,
+                24 to 40,
+        )
     }
 
     object hungergames {
@@ -107,30 +109,32 @@ object pointsModule {
         val winpoints = 200
         val outlivedpoints = 20
 
-        val first = 500
-        val second = 450
-        val third = 420
-        val fourth = 400
-        val fifth = 380
-        val sixth = 360
-        val seventh = 340
-        val eightth = 320
-        val nineth = 300
-        val tenth = 285
-        val eleventh =  280
-        val twelveth =  270
-        val thirteenth =  260
-        val fourteenth =  250
-        val fifteenth =  240
-        val sixteenth = 230
-        val seventeenth =  220
-        val eighteenth =  210
-        val nineteenth =  200
-        val twentyth =  190
-        val twenty1st =  180
-        val twenty2nd =  170
-        val twenty3rd =  160
-        val twenty4th =  150
+        val placementlist = mapOf<Int,Int>(
+                1 to 500,
+                2 to 450,
+                3 to 420,
+                4 to 400,
+                5 to 380,
+                6 to 360,
+                7 to 340,
+                8 to 320,
+                9 to 300,
+                10 to 285,
+                11 to 280,
+                12 to 270,
+                13 to 260,
+                14 to 250,
+                15 to 240,
+                16 to 230,
+                17 to 220,
+                18 to 210,
+                19 to 200,
+                20 to 190,
+                21 to 180,
+                22 to 170,
+                23 to 160,
+                24 to 150
+        )
     }
     object skywars {
         val killpoints = 50

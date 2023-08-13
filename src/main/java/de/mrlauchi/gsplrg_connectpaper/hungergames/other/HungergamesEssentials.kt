@@ -1,11 +1,17 @@
 package de.mrlauchi.gsplrg_connectpaper.hungergames.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
 object HungergamesEssentials {
+
+    var currentplacement = 24
+
+    var endmsg = listOf<String?>()
     fun setCoords(player: Player, team : String){
 
         val config = Main.instance!!.config
@@ -59,5 +65,43 @@ object HungergamesEssentials {
             config.set("hungergames.countdownactive",0)
         }
         Main.instance!!.saveConfig()
+    }
+
+    fun setPlacement(player : Player){
+        val config = Main.instance!!.config
+
+        currentplacement -= 1
+        if (currentplacement < 10){
+            if (currentplacement == 1){
+                endmsg += " §l${currentplacement}st:§r §6${player.name}§r (with ${pointsModule.hungergames.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 2){
+                endmsg += " §l${currentplacement}nd:§r §9${player.name}§r (with ${pointsModule.hungergames.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 3){
+                endmsg += " §l${currentplacement}rd:§r §a${player.name}§r (with ${pointsModule.hungergames.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement > 3){
+                endmsg += " §l${currentplacement}th:§r ${player.name} (with ${pointsModule.hungergames.placementlist[currentplacement]} extra points)"
+            }
+        }else{
+            if (currentplacement != 21 && currentplacement != 22 && currentplacement != 23){
+                endmsg += " §l${currentplacement}th:§r ${player.name} (with ${pointsModule.hungergames.placementlist[currentplacement]} extra point)"
+            }
+            if (currentplacement == 21){
+                endmsg += " §l${currentplacement}st:§r ${player.name} (with ${pointsModule.hungergames.placementlist[currentplacement]} extra point)"
+            }
+            if (currentplacement == 22){
+                endmsg += " §l${currentplacement}nd:§r ${player.name} (with ${pointsModule.hungergames.placementlist[currentplacement]} extra point)"
+            }
+            if (currentplacement == 23){
+                endmsg += " §l${currentplacement}rd:§r ${player.name} (with ${pointsModule.hungergames.placementlist[currentplacement]} extra point)"
+            }
+
+        }
+    }
+    fun resetplacements(){
+        endmsg = listOf<String?>()
+        currentplacement = 24
     }
 }

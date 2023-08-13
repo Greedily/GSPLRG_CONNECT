@@ -19,7 +19,8 @@ class ParkourCommand : CommandExecutor, TabCompleter {
                         de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourCountdown.countdown(player)
                     }
                     if(args[0] == "stop") {
-                        de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStopCommand.stop(player)
+                        ParkourStopCommand.stop(player)
+                        ParkourEssentials.resetplacements()
                         //ParkourEssentials.stopTimer()
 
                     }
