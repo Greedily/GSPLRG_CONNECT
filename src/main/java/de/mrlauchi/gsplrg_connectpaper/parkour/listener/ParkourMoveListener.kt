@@ -66,14 +66,16 @@ class ParkourMoveListener : Listener {
                             config.set("parkour.playersfinished.${player.name}", 1)
                             ParkourEssentials.setPlacement(player)
                             Main.instance!!.saveConfig()
-                            var finishedplayers = listOf<String?>()
+                            var RemainingPlayers = listOf<String?>()
                             for (player in Bukkit.getOnlinePlayers()){
-                                if (player.gameMode == GameMode.SPECTATOR){
-                                    finishedplayers += player.name
+                                if (player.gameMode == GameMode.ADVENTURE){
+                                    RemainingPlayers += player.name
                                 }
                             }
-                            if (finishedplayers.size <= 0){
+                            Bukkit.broadcastMessage("Remaining Players: ${RemainingPlayers.size}")
+                            if (RemainingPlayers.size <= 0){
                                 Bukkit.broadcastMessage(ParkourEssentials.endmsg)
+                                ParkourEssentials.setActive(0)
                             }
                             //finish timer
                             //ParkourEssentials.stopTimer()

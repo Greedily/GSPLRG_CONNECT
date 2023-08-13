@@ -104,9 +104,20 @@ object ParkourEssentials {
 
         currentplacement += 1
         if (currentplacement < 10){
-            endmsg += " ${currentplacement}: ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            if (currentplacement == 1){
+                endmsg += " §l${currentplacement}st:§r §6${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 2){
+                endmsg += " §l${currentplacement}nd:§r §9${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 3){
+                endmsg += " §l${currentplacement}rd:§r §a${player.name}§r with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+            }
+           if (currentplacement > 3){
+               endmsg += " §l${currentplacement}th:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+           }
         }else{
-            endmsg += " ${currentplacement}: ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}"
+            endmsg += " §l${currentplacement}:§r ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}"
         }
 
     }
