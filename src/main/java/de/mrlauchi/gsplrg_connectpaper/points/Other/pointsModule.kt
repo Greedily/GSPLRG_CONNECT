@@ -32,16 +32,18 @@ object pointsModule {
     object parkour {
         val perlevelpoint = 50
 
-        val first = 500
-        val second = 450
-        val third = 400
-        val fourth = 350
-        val fifth = 300
-        val sixth = 250
-        val seventh = 200
-        val eightth = 150
-        val ninth = 100
-        val tenth = 50
+        val placementlist = mapOf<Int,Int>(
+                1 to 500,
+                2 to 450,
+                3 to 400,
+                4 to 350,
+                5 to 300,
+                6 to 250,
+                7 to 200,
+                8 to 150,
+                9 to 100,
+                10 to 50
+        )
     }
 
     object tgttos {

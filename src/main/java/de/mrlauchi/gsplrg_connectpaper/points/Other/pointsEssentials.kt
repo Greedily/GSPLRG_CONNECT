@@ -41,7 +41,7 @@ object pointsEssentials {
         Main.instance!!.saveConfig()
     }
 
-    fun resetteampounts(){
+    fun resetteampoints(){
         val config = Main.instance!!.config
         for (team in pointsModule.teams){
             config.set("teampoints.${team}",0)
@@ -56,7 +56,7 @@ object pointsEssentials {
             val plrteampoints = "teampoints.${player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name}"
             val plrpoints = "playerpoints.${player.name}"
             config.set(plrteampoints, 0)
-            config.set(plrteampoints, plrteampoints + plrpoints)
+            config.set(plrteampoints, config.getInt(plrteampoints) + config.getInt(plrpoints))
         }
         Main.instance!!.saveConfig()
     }

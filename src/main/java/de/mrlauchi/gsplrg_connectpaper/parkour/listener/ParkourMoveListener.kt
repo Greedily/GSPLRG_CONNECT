@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 
 class ParkourMoveListener : Listener {
 
@@ -36,7 +38,8 @@ class ParkourMoveListener : Listener {
                             player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)
 
                             if(i + 1 != 21) {
-                                player.sendMessage("§bYou've reached stage ${i + 1}")
+                                player.sendMessage("§bYou've reached stage ${i + 1} + ${pointsModule.parkour.perlevelpoint} point!")
+                                pointsEssentials.addplayerpoints(player, pointsModule.parkour.perlevelpoint)
                             }
 
                             val location : Location = player.getLineOfSight(null, 2).last().location
@@ -61,8 +64,17 @@ class ParkourMoveListener : Listener {
                             val playertime = config.getString("parkour.playertimes.${player.name}")
                             Bukkit.broadcastMessage("§b${player.name} finished in $playertime!")
                             config.set("parkour.playersfinished.${player.name}", 1)
-
+                            ParkourEssentials.setPlacement(player)
                             Main.instance!!.saveConfig()
+                            var finishedplayers = listOf<String?>()
+                            for (player in Bukkit.getOnlinePlayers()){
+                                if (player.gameMode == GameMode.SPECTATOR){
+                                    finishedplayers += player.name
+                                }
+                            }
+                            if (finishedplayers.size <= 0){
+                                Bukkit.broadcastMessage(ParkourEssentials.endmsg)
+                            }
                             //finish timer
                             //ParkourEssentials.stopTimer()
 

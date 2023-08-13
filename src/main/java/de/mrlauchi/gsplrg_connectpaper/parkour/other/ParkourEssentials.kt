@@ -1,12 +1,15 @@
 package de.mrlauchi.gsplrg_connectpaper.parkour.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
 object ParkourEssentials {
+    var currentplacement  = 0
 
+    var endmsg = ""
     fun getCoordinate(section: Int): Location {
         val config = Main.instance!!.config
 
@@ -96,8 +99,17 @@ object ParkourEssentials {
         Main.instance!!.saveConfig()
     }
 
+    fun setPlacement(player : Player){
+        val config = Main.instance!!.config
 
+        currentplacement += 1
+        if (currentplacement < 10){
+            endmsg += " ${currentplacement}: ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}(with ${pointsModule.parkour.placementlist[currentplacement]} extra points)"
+        }else{
+            endmsg += " ${currentplacement}: ${player.name} with time ${config.getString("parkour.playertimes.${player.name}")}"
+        }
 
+    }
 
 
 }
