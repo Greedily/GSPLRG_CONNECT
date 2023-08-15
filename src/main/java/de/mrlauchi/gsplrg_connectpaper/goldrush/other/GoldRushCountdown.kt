@@ -19,13 +19,6 @@ object GoldRushCountdown {
 
         GoldRushEssentials.setActive(1)
 
-        for (team in player.scoreboard.teams) {
-            if(GoldRushEssentials.hasCoords(team.name)) {
-                PasteSchem.paste(GoldRushEssentials.getCoords(team.name), "goldrushconcrete")
-                Thread.sleep(30*1000)
-            }
-        }
-
         for (target in Bukkit.getOnlinePlayers()) {
             target.inventory.clear()
 

@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.goldrush.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -102,6 +103,13 @@ object GoldRushEssentials {
         result.itemMeta = resultMeta
 
         return result
+    }
+
+    fun resetMap(team: String) {
+        if(GoldRushEssentials.hasCoords(team)) {
+            PasteSchem.paste(GoldRushEssentials.getCoords(team), "goldrushconcrete")
+            Thread.sleep(30*1000)
+        }
     }
 
 }

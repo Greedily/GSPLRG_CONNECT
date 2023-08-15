@@ -1,9 +1,11 @@
 package de.mrlauchi.gsplrg_connectpaper.tgttos.commands
 
+import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.pz.pz
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.th.th
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.ww1.ww1
 import de.mrlauchi.gsplrg_connectpaper.tgttos.other.Countdown
+import de.mrlauchi.gsplrg_connectpaper.tgttos.other.Essentials
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -62,12 +64,15 @@ class TGTTOSCommand : CommandExecutor, TabCompleter {
                         if(args.size == 2) {
                             if(args[1] == "ww1") {
                                 ww1.stop(player)
+                                Essentials.resetplacements()
                             }
                             if(args[1] == "pz") {
                                 pz.stop(player)
+                                Essentials.resetplacements()
                             }
                             if(args[1] == "th") {
                                 th.stop(player)
+                                Essentials.resetplacements()
                             }
                         }
                     }

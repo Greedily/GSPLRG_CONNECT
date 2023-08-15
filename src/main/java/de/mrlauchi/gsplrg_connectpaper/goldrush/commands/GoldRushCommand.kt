@@ -32,6 +32,11 @@ class GoldRushCommand : CommandExecutor, TabCompleter {
                         GoldRushEssentials.setCoords(sender,args[1]) // /goldrush setspawn(args[0]) <team>(args[1])
                     }
                 }
+                if(args[0] == "reset") {
+                    if (args.size >= 2) {
+                        GoldRushEssentials.resetMap(args[1])
+                    }
+                }
             }
         }
         return false
@@ -42,6 +47,7 @@ class GoldRushCommand : CommandExecutor, TabCompleter {
         tabComplete.add("start")
         tabComplete.add("stop")
         tabComplete.add("setspawn")
+        tabComplete.add("reset")
 
         return tabComplete
     }

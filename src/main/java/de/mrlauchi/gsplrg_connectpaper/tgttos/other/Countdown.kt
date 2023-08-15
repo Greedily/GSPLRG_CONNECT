@@ -65,6 +65,9 @@ object Countdown {
                             th.start()
                         }
 
+                        TGTTOSTimer.start()
+                        Essentials.startTimer()
+
                         this.cancel()
                     }
                 }

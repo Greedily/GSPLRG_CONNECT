@@ -31,9 +31,12 @@ import de.mrlauchi.gsplrg_connectpaper.skywars.listeners.SkywarsRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.TGTTOSCommand
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.DeathListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.MovementListener
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.entity.ArmorStand
 import org.bukkit.plugin.java.JavaPlugin
-import sun.jvm.hotspot.HelloWorld.e
+import org.bukkit.scheduler.BukkitRunnable
+
 
 
 class Main : JavaPlugin() {
@@ -117,7 +120,47 @@ class Main : JavaPlugin() {
         pluginManager.registerEvents(RocketSpleefMoveListener(), this)
         pluginManager.registerEvents(RocketSpleefFireBowListener(), this)
 
+        val config = config
 
+        val bukkitRunnable = object: BukkitRunnable() {
+            override fun run() {
+                for (player in Bukkit.getOnlinePlayers()) {
+                    player.sendPlayerListHeader(net.kyori.adventure.text.Component.text("\uF31C\uF32C\uF33C")) // / n  does this work?
+                    val playerpoints = config.get("playerpoints.${player.name}")
+                    val teampoints = config.get("teampoints.${player.scoreboard.getPlayerTeam(player)?.name}")
+                    player.sendPlayerListFooter(Component.text("§b§lIndividual Points:§6 $playerpoints" +
+                                                                        "\n§b§lTeam Points:§6 $teampoints"))
+                }
+
+                var points = mutableMapOf<Int, String>()
+
+                for (countTarget in Bukkit.getOnlinePlayers()) {
+                    //points.plus(config.getInt("deathmatch.points.${target.name}") to target.name)
+                    points += Pair(config.getInt("playerpoints.${countTarget.name}") , countTarget.name)
+                }
+                points = points.toSortedMap(Comparator.reverseOrder())
+                val nameslist = points.values.toList()
+                val pointslist = points.keys.toList()
+
+                for (entity in Bukkit.getWorld("world")!!.entities) {
+                    if(entity is ArmorStand) {
+                        if(entity.scoreboardTags.contains("indivboard")) {
+
+                        }
+                        indivboardLogic(1, nameslist, pointslist, entity)
+                        indivboardLogic(2, nameslist, pointslist, entity)
+                        indivboardLogic(3, nameslist, pointslist, entity)
+                        indivboardLogic(4, nameslist, pointslist, entity)
+                        indivboardLogic(5, nameslist, pointslist, entity)
+                        indivboardLogic(6, nameslist, pointslist, entity)
+                        indivboardLogic(7, nameslist, pointslist, entity)
+                        indivboardLogic(8, nameslist, pointslist, entity)
+                        indivboardLogic(9, nameslist, pointslist, entity)
+                        indivboardLogic(10, nameslist, pointslist, entity)
+                    }
+                }
+            }
+        }.runTaskTimer(this, 1, 20)
 
 
     }
@@ -125,4 +168,30 @@ class Main : JavaPlugin() {
     override fun onDisable() {
         // Plugin shutdown logic
     }
+
+    fun indivboardLogic(placement: Int, nameslist: List<String>, pointslist: List<Int>, entity: ArmorStand) {
+        //Bukkit.broadcastMessage("debug 1")
+        if(!entity.scoreboardTags.contains("indiv$placement")) return
+        //Bukkit.broadcastMessage("debug 2")
+        if(nameslist.size < placement) {
+            entity.customName = " "
+            //Bukkit.broadcastMessage("debug 0")
+            return
+        }
+        if(placement == 1) {
+            entity.customName = "1st: ${nameslist[0]}: ${pointslist[0]}"
+            return
+        }
+        if(placement == 2) {
+            entity.customName = "2nd: ${nameslist[1]}: ${pointslist[1]}"
+            return
+        }
+        if(placement == 3) {
+            entity.customName = "3rd: ${nameslist[2]}: ${pointslist[2]}"
+            return
+        }
+        entity.customName = "${placement}th: ${nameslist[placement-1]}: ${pointslist[placement-1]}"
+        return
+    }
+
 }

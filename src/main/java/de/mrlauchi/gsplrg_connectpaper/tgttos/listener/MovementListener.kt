@@ -5,6 +5,7 @@ import de.mrlauchi.gsplrg_connectpaper.Main
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
@@ -24,12 +25,16 @@ class MovementListener : Listener {
                     if (player.location.distance(Essentials.getEndLoc(name!!)) <= 5) {
                         player.gameMode = GameMode.SPECTATOR
                         Bukkit.broadcastMessage("§b${player.name} finished!")
+
+                        playerendFun(player)
                     }
                 }
                 if (Essentials.getActive() == Main.instance!!.PZ()) {
                     if (player.location.distance(Essentials.getEndLoc(name!!)) <= 4) {
                         player.gameMode = GameMode.SPECTATOR
                         Bukkit.broadcastMessage("§b${player.name} finished!")
+
+                        playerendFun(player)
                     }
 
                     val locBelow = player.getLocation()
@@ -56,6 +61,7 @@ class MovementListener : Listener {
                         if (player.location.distance(Essentials.getEndLoc(name!!).add(0.0, 0.0, i.toDouble())) <= 7) {
                             player.gameMode = GameMode.SPECTATOR
                             Bukkit.broadcastMessage("§b${player.name} finished!")
+                            playerendFun(player)
                             event.isCancelled = true
                             return
                         }
@@ -68,6 +74,38 @@ class MovementListener : Listener {
             if(event.from.x != event.to?.x || event.from.z != event.to?.z) {
                 event.isCancelled = true
             }
+        }
+    }
+
+    fun playerendFun(player: Player) {
+        val config = Main.instance!!.config
+        val playerTime = config.getString("tgttos.playertimes.${player.name}")
+        Bukkit.broadcastMessage("§b${player.name} finished in $playerTime!")
+        config.set("tgttos.playersfinished.${player.name}", 1)
+        Essentials.setPlacement(player)
+
+        Main.instance!!.saveConfig()
+        val RemainingPlayers = mutableListOf<String?>()
+        for (target2 in Bukkit.getOnlinePlayers()){
+            if (target2.gameMode == GameMode.ADVENTURE){
+                RemainingPlayers += target2.name
+
+            }
+        }
+        pointsEssentials.addplayerpoints(player, pointsModule.tgttos.placementlist[Essentials.currentplacement]!!)
+        Bukkit.broadcastMessage("Remaining Players: ${RemainingPlayers.size}")
+        if (RemainingPlayers.isEmpty()){
+            for (target in Bukkit.getOnlinePlayers()) {
+                config.set("tgttos.playersfinished.${target.name}", 0)
+                Main.instance!!.saveConfig()
+            }
+            for (msg in Essentials.endmsg){
+                Bukkit.broadcastMessage(msg.toString())
+            }
+
+            Essentials.stopTimer()
+            Essentials.setActive(null)
+            Essentials.resetplacements()
         }
     }
 
