@@ -2,6 +2,8 @@ package de.mrlauchi.gsplrg_connectpaper.tgttos.listener
 
 import de.mrlauchi.gsplrg_connectpaper.tgttos.other.Essentials
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
