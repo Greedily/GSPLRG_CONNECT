@@ -131,7 +131,7 @@ class Main : JavaPlugin() {
         val bukkitRunnable = object: BukkitRunnable() {
             override fun run() {
                 for (player in Bukkit.getOnlinePlayers()) {
-                    player.sendPlayerListHeader(net.kyori.adventure.text.Component.text("\n\uF210\uF211\uF212\uF213\uF214\uF215\n")) // / n  does this work?
+                    player.sendPlayerListHeader(net.kyori.adventure.text.Component.text("\n\uF500\n")) // / n  does this work?
                     val playerpoints = config.get("playerpoints.${player.name}")
                     val teampoints = config.get("teampoints.${player.scoreboard.getPlayerTeam(player)?.name}")
                     player.sendPlayerListFooter(Component.text("§b§lIndividual Points:§6 $playerpoints" +
