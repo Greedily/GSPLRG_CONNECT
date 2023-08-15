@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -39,6 +40,8 @@ object DeathmatchGameTime {
                         target.gameMode = GameMode.SPECTATOR
                         target.inventory.clear()
                         target.sendTitle("GAME ENDS!", "")
+
+                        Spawn.teleport(true)
 
                         for (countTarget in Bukkit.getOnlinePlayers()) {
                             //points.plus(config.getInt("deathmatch.points.${target.name}") to target.name)

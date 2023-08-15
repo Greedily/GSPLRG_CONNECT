@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.skywars.commands
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.skywars.other.SkywarsCountDown
 import de.mrlauchi.gsplrg_connectpaper.skywars.other.SkywarsEssentials
 import org.bukkit.Bukkit
@@ -49,6 +50,7 @@ class SkywarsCommand : CommandExecutor, TabCompleter {
                     val z = Main.instance!!.config.getDouble("skywars.mapspawn.z")
                     PasteSchem.paste(Location(Bukkit.getWorld("world"), x, y, z),"skywarsmap1")
                     sender.sendMessage("Game Stopped.")
+                    Spawn.teleport(true)
                 }
             }
         }

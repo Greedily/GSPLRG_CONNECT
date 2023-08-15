@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.parkour.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitRunnable
@@ -37,6 +38,7 @@ object ParkourTimer {
 
                     currentsecondtime = 0
                     currentminutetime = 0
+                    Spawn.teleport(true)
                     this.cancel()
 
                 }

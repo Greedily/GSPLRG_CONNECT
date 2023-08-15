@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.tgttos.listener
 
 import de.mrlauchi.gsplrg_connectpaper.tgttos.other.Essentials
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
@@ -64,7 +65,6 @@ class MovementListener : Listener {
                             player.gameMode = GameMode.SPECTATOR
                             Bukkit.broadcastMessage("§b${player.name} finished!")
                             playerendFun(player)
-                            event.isCancelled = true
                             return
                         }
                     }
@@ -105,6 +105,7 @@ class MovementListener : Listener {
                 Bukkit.broadcastMessage(msg.toString())
             }
 
+            Spawn.teleport(true)
             Essentials.stopTimer()
             Essentials.setActive(null)
             Essentials.resetplacements()

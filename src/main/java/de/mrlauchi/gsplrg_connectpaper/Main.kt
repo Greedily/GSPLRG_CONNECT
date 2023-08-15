@@ -24,6 +24,7 @@ import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourMoveListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.points.Commands.pointsCommand
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.commands.RocketSpleefCommand
+import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefDropListener
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefFireBowListener
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener.RocketSpleefMoveListener
 import de.mrlauchi.gsplrg_connectpaper.skywars.commands.SkywarsCommand
@@ -33,6 +34,7 @@ import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.TGTTOSCommand
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.DeathListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.MovementListener
 import net.kyori.adventure.text.Component
+import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import org.bukkit.entity.ArmorStand
 import org.bukkit.plugin.java.JavaPlugin
@@ -122,6 +124,7 @@ class Main : JavaPlugin() {
         //RocketSpleef Listeners
         pluginManager.registerEvents(RocketSpleefMoveListener(), this)
         pluginManager.registerEvents(RocketSpleefFireBowListener(), this)
+        pluginManager.registerEvents(RocketSpleefDropListener(), this)
 
         val config = config
 
@@ -181,7 +184,7 @@ class Main : JavaPlugin() {
             //Bukkit.broadcastMessage("debug 0")
             return
         }
-        if(placement == 1) {
+        /*if(placement == 1) {
             entity.customName = "1st: ${nameslist[0]}: ${pointslist[0]}"
             return
         }
@@ -192,8 +195,8 @@ class Main : JavaPlugin() {
         if(placement == 3) {
             entity.customName = "3rd: ${nameslist[2]}: ${pointslist[2]}"
             return
-        }
-        entity.customName = "${placement}th: ${nameslist[placement-1]}: ${pointslist[placement-1]}"
+        } */
+        entity.customName = "${ChatColor.of(Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1]))?.color()!!.asHexString())}${nameslist[placement-1]}: ${pointslist[placement-1]}"
         return
     }
 

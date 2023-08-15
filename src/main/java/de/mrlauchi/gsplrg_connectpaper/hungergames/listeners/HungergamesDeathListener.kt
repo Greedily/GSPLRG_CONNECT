@@ -3,6 +3,7 @@ package de.mrlauchi.gsplrg_connectpaper.hungergames.listeners
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungergamesEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
@@ -101,10 +102,12 @@ class HungergamesDeathListener:Listener {
                             target.sendMessage("+${pointsModule.hungergames.winpoints} Points for wining!")
                         }
                     }
+
                     for (msg in HungergamesEssentials.endmsg.reversed()) {
                         Bukkit.broadcastMessage(msg.toString())
                     }
                     HungergamesEssentials.resetplacements()
+                    Spawn.teleport(true)
 
                 }
 

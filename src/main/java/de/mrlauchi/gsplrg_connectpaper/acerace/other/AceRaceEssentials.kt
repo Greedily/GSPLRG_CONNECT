@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.acerace.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
@@ -87,6 +88,8 @@ object AceRaceEssentials {
 
             Bukkit.getWorld("world")!!.setGameRuleValue("keepInventory", "true")
             Bukkit.getWorld("world")!!.setGameRuleValue("fallDamage", "false") //
+
+            Spawn.teleport(true)
         }
         Main.instance!!.saveConfig()
     }

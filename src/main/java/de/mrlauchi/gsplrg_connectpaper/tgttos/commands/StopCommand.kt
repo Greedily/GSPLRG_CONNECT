@@ -1,5 +1,6 @@
 package de.mrlauchi.gsplrg_connectpaper.tgttos.commands
 
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.pz.pz
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.ww1.ww1
 import org.bukkit.command.Command

@@ -5,6 +5,7 @@ import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungerGamesTime
 import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungergamesEssentials
 import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungergamesCountdown
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.command.Command
@@ -55,6 +56,8 @@ class HungergamesCommand: CommandExecutor, TabCompleter {
                     PasteSchem.paste(Location(Bukkit.getWorld("world"), x, y, z),"hungergamesmap1")
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"worldborder set 1000000")
                     sender.sendMessage("Game Stopped.")
+
+                    Spawn.teleport(true)
                 }
             }
         }

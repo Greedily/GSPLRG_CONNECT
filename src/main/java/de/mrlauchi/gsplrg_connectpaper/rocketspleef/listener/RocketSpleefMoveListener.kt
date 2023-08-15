@@ -3,6 +3,7 @@ package de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -71,6 +72,7 @@ class RocketSpleefMoveListener : Listener {
                             target2.sendTitle("§6Your Team Won!", "")//e
                         }
                     }
+                    Spawn.teleport(true)
                 }
             }
         }

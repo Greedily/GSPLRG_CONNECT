@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.goldrush.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitRunnable
@@ -22,10 +23,16 @@ object StartTimer {
                 }
 
                 if(currenttime <= 0) {
+
+                    Spawn.teleport(true)
+
                     this.cancel()
                 }
 
                 if(config.getInt("goldrush.stoptimer") == 1) {
+
+                    Spawn.teleport(true)
+
                     currenttime = 0
                     this.cancel()
 

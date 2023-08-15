@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.hungergames.listeners
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import de.mrlauchi.gsplrg_connectpaper.skywars.other.SkywarsEssentials
@@ -91,6 +92,7 @@ class SkywarsDeathListener:Listener {
                             pointsEssentials.addplayerpoints(target, pointsModule.skywars.winpoints)
                         }
                     }
+                    Spawn.teleport(true)
 
                 }
 

@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
+import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStopCommand
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 
@@ -77,6 +79,9 @@ class ParkourMoveListener : Listener {
                                 for (msg in ParkourEssentials.endmsg){
                                     Bukkit.broadcastMessage(msg.toString())
                                 }
+
+                                ParkourStopCommand.stop(player)
+                                Spawn.teleport(true)
                                 ParkourEssentials.setActive(0)
                                 ParkourEssentials.resetplacements()
                             }
