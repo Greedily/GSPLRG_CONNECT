@@ -22,3 +22,5 @@ commands:
     description: everything having to do with acerace.
   rocketspleef:
     description: everything having to do with rocketspleef.
+  event:
+    description: nothing of interest to you

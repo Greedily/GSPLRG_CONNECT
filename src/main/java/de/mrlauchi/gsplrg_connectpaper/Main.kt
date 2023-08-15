@@ -16,6 +16,7 @@ import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesDeathLis
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesMoveListener
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.SkywarsDeathListener
+import de.mrlauchi.gsplrg_connectpaper.other.commands.EventCommand
 import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourCommand
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDamageListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDeathListener
@@ -79,6 +80,8 @@ class Main : JavaPlugin() {
         getCommand("rocketspleef")?.setExecutor(RocketSpleefCommand())
         getCommand("rocketspleef")?.tabCompleter = RocketSpleefCommand()
 
+        getCommand("event")?.setExecutor(EventCommand())
+
         val pluginManager = server.pluginManager
 
         // TGTTOS Listeners
@@ -125,7 +128,7 @@ class Main : JavaPlugin() {
         val bukkitRunnable = object: BukkitRunnable() {
             override fun run() {
                 for (player in Bukkit.getOnlinePlayers()) {
-                    player.sendPlayerListHeader(net.kyori.adventure.text.Component.text("\uF210\uF211\uF212\uF213\uF214\uF215")) // / n  does this work?
+                    player.sendPlayerListHeader(net.kyori.adventure.text.Component.text("\n\uF210\uF211\uF212\uF213\uF214\uF215\n")) // / n  does this work?
                     val playerpoints = config.get("playerpoints.${player.name}")
                     val teampoints = config.get("teampoints.${player.scoreboard.getPlayerTeam(player)?.name}")
                     player.sendPlayerListFooter(Component.text("§b§lIndividual Points:§6 $playerpoints" +
