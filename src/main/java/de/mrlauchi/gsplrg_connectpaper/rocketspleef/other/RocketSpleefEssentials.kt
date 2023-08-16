@@ -49,7 +49,7 @@ object RocketSpleefEssentials {
         val config = Main.instance!!.config
         return config.getInt("rocketspleef.countdownactive")
     }
-    fun  setMapSpawn(name: String, player: Player){
+    fun setMapSpawn(name: String, player: Player){
         val config = Main.instance!!.config
         config.set("rocketspleef.maps.$name.x", player.location.x)
         config.set("rocketspleef.maps.$name.y", player.location.y)
