@@ -4,6 +4,8 @@ package de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -29,6 +31,9 @@ class RocketSpleefMoveListener : Listener {
                 if (player.gameMode == GameMode.SPECTATOR) return
                 val time = Main.instance!!.config.getString("rocketspleef.playertimes.${player.name}")
                 Bukkit.broadcastMessage("${player.name} Died! and was alive for §c$time")
+                RocketSpleefEssentials.setPlacement(player)
+
+                pointsEssentials.addplayerpoints(player, pointsModule.rocketspleef.placementlist[RocketSpleefEssentials.currentplacement]!!)
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
                 val aliveteams: MutableList<String> = ArrayList()
@@ -72,6 +77,10 @@ class RocketSpleefMoveListener : Listener {
                             target2.sendTitle("§6Your Team Won!", "")//e
                         }
                     }
+                    for (msg in RocketSpleefEssentials.endmsg){
+                        Bukkit.broadcastMessage(msg.toString())
+                    }
+                    RocketSpleefEssentials.resetplacements()
                     Spawn.teleport(true)
                 }
             }

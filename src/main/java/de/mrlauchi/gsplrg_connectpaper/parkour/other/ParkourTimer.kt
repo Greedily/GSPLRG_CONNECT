@@ -19,7 +19,11 @@ object ParkourTimer {
 
                 for (player in Bukkit.getOnlinePlayers()) {
                     if (config.getInt("parkour.playersfinished.${player.name}") == 0) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:$currentsecondtime"))
+                        if (currentsecondtime < 10) {
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:0$currentsecondtime"))
+                        }else{
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:$currentsecondtime"))
+                        }
                         //save player time
                         val playertime = "$currentminutetime:$currentsecondtime"
                         config.set("parkour.playertimes.${player.name}", playertime) // we stop it in the pkmovelistener

@@ -9,14 +9,19 @@ object AceRaceTimer {
     fun start() {
         var currentsecondtime: Int = 0
         var currentminutetime: Int = 0
-        Bukkit.broadcastMessage("timer started.")
         val bukkitRunnable = object: BukkitRunnable(){
             override fun run() {
                 //idea.:
                 val config = Main.instance!!.config
                 for (player in Bukkit.getOnlinePlayers()) {
                     if (config.getInt("acerace.playersfinished.${player.name}") == 0) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:$currentsecondtime"))
+                        if (currentsecondtime < 10) {
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:0$currentsecondtime"))
+                        }else{
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentminutetime:$currentsecondtime"))
+                        }
+
+
                         //save player time
                         val playertime = "$currentminutetime:$currentsecondtime"
                         config.set("acerace.playertimes.${player.name}", playertime) // we stop it in the pkmovelistener
@@ -25,9 +30,9 @@ object AceRaceTimer {
 
                 }
 
-                if(currentsecondtime >= 60) {
+                if(currentsecondtime >= 59) {
                     currentminutetime += 1
-                    currentsecondtime = 0
+                    currentsecondtime = -1
                 }
 
                 if(config.getInt("acerace.timeractive") == 0 || AceRaceEssentials.getActive() == 0) {
