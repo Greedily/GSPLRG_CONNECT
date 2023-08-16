@@ -1,5 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper
 
+import de.mrlauchi.gsplrg_connectpaper.PublicListeners.ItemDropEvent
+import de.mrlauchi.gsplrg_connectpaper.PublicListeners.ItemMoveEvent
 import de.mrlauchi.gsplrg_connectpaper.acerace.Commands.AceRaceCommand
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceDeathListener
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceMoveListener
@@ -85,6 +87,10 @@ class Main : JavaPlugin() {
         getCommand("event")?.setExecutor(EventCommand())
 
         val pluginManager = server.pluginManager
+
+        // PUBLIC LISTENERS
+        pluginManager.registerEvents(ItemDropEvent(), this)
+        pluginManager.registerEvents(ItemMoveEvent(), this)
 
         // TGTTOS Listeners
         pluginManager.registerEvents(DeathListener(), this)
