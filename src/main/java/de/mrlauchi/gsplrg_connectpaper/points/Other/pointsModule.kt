@@ -77,30 +77,13 @@ object pointsModule {
 
     object rocketspleef {
         val placementlist = mapOf<Int,Int>(
-                1 to 250,
-                2 to 200,
-                3 to 190,
-                4 to 180,
-                5 to 170,
-                6 to 160,
-                7 to 150,
-                8 to 140,
-                9 to 130,
-                10 to 120,
-                11 to 110,
-                12 to 100,
-                13 to 95,
-                14 to 90,
-                15 to 85,
-                16 to 80,
-                17 to 75,
-                18 to 70,
-                19 to 65,
-                20 to 60,
-                21 to 55,
-                22 to 50,
-                23 to 45,
-                24 to 40,
+                1 to 1500,
+                2 to 1250,
+                3 to 1000,
+                4 to 800,
+                5 to 500,
+                7 to 200,
+                8 to 100,
         )
     }
 
@@ -110,13 +93,13 @@ object pointsModule {
         val outlivedpoints = 20
 
         val placementlist = mapOf<Int,Int>(
-                1 to 1000,
-                2 to 800,
-                3 to 600,
-                4 to 450,
-                5 to 350,
-                7 to 250,
-                8 to 0,
+                1 to 1250,
+                2 to 1100,
+                3 to 1000,
+                4 to 500,
+                5 to 300,
+                7 to 200,
+                8 to 100,
         )
     }
     object skywars {

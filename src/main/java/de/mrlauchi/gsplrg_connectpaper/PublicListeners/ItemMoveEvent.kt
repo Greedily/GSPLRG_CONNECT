@@ -17,7 +17,7 @@ class ItemMoveEvent: Listener {
     @EventHandler
     fun ondrop(event: InventoryClickEvent){
         if (AceRaceEssentials.getActive() == 1 || ParkourEssentials.getActive() == 1 || RocketSpleefEssentials.getActive() == 1){
-           // event.isCancelled = true
+           event.isCancelled = true
 
         }
     }

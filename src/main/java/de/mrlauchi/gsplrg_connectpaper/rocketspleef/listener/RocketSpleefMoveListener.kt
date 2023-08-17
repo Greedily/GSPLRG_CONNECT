@@ -31,21 +31,29 @@ class RocketSpleefMoveListener : Listener {
                 if (player.gameMode == GameMode.SPECTATOR) return
                 val time = Main.instance!!.config.getString("rocketspleef.playertimes.${player.name}")
                 Bukkit.broadcastMessage("${player.name} Died! and was alive for §c$time")
-                RocketSpleefEssentials.setPlacement(player)
+                //RocketSpleefEssentials.setPlacement(player)
 
-                pointsEssentials.addplayerpoints(player, pointsModule.rocketspleef.placementlist[RocketSpleefEssentials.currentplacement]!!)
+                pointsEssentials.addplayerpoints(player, pointsModule.rocketspleef.placementlist[RocketSpleefEssentials.currentteamplacement]!!)
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
-                val aliveteams: MutableList<String> = ArrayList()
+                val deadteams: MutableList<String> = ArrayList()
                 for (target in Bukkit.getOnlinePlayers()) {
                     val targetteam = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
-                    if(target.gameMode != GameMode.SPECTATOR) {
-                        if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
-                            aliveteams += targetteam
+                    if(target.gameMode == GameMode.SPECTATOR) {
+                        if (!deadteams.contains(targetteam)) { // add all the alive teams into the list.
+                            deadteams += targetteam
                         }
                     }
                 }
-                if (aliveteams.size == 1) {
+                for (team in deadteams){
+                    val plrteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
+                    if (team == plrteam){
+                        //player's team is dead
+                        RocketSpleefEssentials.setteamPlacement(plrteam)
+                    }
+                }
+                if (deadteams.size >= 7) {
+                    RocketSpleefEssentials.setteamPlacement(deadteams[7]) // get last team (8th most prob)
                     for (entity in Bukkit.getWorld("world")!!.entities) {
                         if(entity is Item) {
                             entity.remove()
@@ -70,13 +78,14 @@ class RocketSpleefMoveListener : Listener {
 
                     for (target2 in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
                         target2.inventory.clear()
-                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name != aliveteams[0]) { // all people
-                            target2.sendTitle("§6${aliveteams[0]} Won The Game!", "")
+                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name != deadteams[0]) { // all people
+                            target2.sendTitle("§6${deadteams[0]} Won The Game!", "")
                         }  // the winner
-                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name == aliveteams[0]) {
+                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name == deadteams[0]) {
                             target2.sendTitle("§6Your Team Won!", "")//e
                         }
                     }
+
                     for (msg in RocketSpleefEssentials.endmsg){
                         Bukkit.broadcastMessage(msg.toString())
                     }
