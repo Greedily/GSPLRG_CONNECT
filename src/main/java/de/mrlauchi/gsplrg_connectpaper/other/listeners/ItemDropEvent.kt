@@ -1,4 +1,4 @@
-package de.mrlauchi.gsplrg_connectpaper.PublicListeners
+package de.mrlauchi.gsplrg_connectpaper.other.listeners
 
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
 import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials

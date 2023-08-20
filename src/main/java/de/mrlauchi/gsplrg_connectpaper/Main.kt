@@ -1,7 +1,6 @@
 package de.mrlauchi.gsplrg_connectpaper
 
-import de.mrlauchi.gsplrg_connectpaper.PublicListeners.ItemDropEvent
-import de.mrlauchi.gsplrg_connectpaper.PublicListeners.ItemMoveEvent
+import de.mrlauchi.gsplrg_connectpaper.other.listeners.ItemDropEvent
 import de.mrlauchi.gsplrg_connectpaper.acerace.Commands.AceRaceCommand
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceDeathListener
 import de.mrlauchi.gsplrg_connectpaper.acerace.Listeners.AceRaceMoveListener
@@ -19,6 +18,8 @@ import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesMoveList
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.SkywarsDeathListener
 import de.mrlauchi.gsplrg_connectpaper.other.commands.EventCommand
+import de.mrlauchi.gsplrg_connectpaper.other.commands.VoteCommand
+import de.mrlauchi.gsplrg_connectpaper.other.listeners.InventoryClick
 import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourCommand
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDamageListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDeathListener
@@ -85,12 +86,13 @@ class Main : JavaPlugin() {
         getCommand("rocketspleef")?.tabCompleter = RocketSpleefCommand()
 
         getCommand("event")?.setExecutor(EventCommand())
+        getCommand("vote")?.setExecutor(VoteCommand())
 
         val pluginManager = server.pluginManager
 
         // PUBLIC LISTENERS
         pluginManager.registerEvents(ItemDropEvent(), this)
-        pluginManager.registerEvents(ItemMoveEvent(), this)
+        pluginManager.registerEvents(InventoryClick(), this)
 
         // TGTTOS Listeners
         pluginManager.registerEvents(DeathListener(), this)

@@ -52,7 +52,7 @@ class RocketSpleefMoveListener : Listener {
                         RocketSpleefEssentials.setteamPlacement(plrteam)
                     }
                 }
-                if (deadteams.size >= 7) {
+                if (deadteams.size >= 7 || RocketSpleefEssentials.currentteamplacement <= 1) {
                     RocketSpleefEssentials.setteamPlacement(deadteams[7]) // get last team (8th most prob)
                     for (entity in Bukkit.getWorld("world")!!.entities) {
                         if(entity is Item) {
