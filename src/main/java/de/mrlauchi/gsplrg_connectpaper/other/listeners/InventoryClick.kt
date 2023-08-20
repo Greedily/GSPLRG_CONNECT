@@ -37,7 +37,7 @@ class InventoryClick : Listener {
             }
         }
 
-        if (AceRaceEssentials.getActive() == 1 || ParkourEssentials.getActive() == 1 || RocketSpleefEssentials.getActive() == 1){
+        if (AceRaceEssentials.getActive() == 1 || ParkourEssentials.getActive() == 1){
             if (event.view.player.gameMode == GameMode.ADVENTURE){
                 event.isCancelled = true
             }

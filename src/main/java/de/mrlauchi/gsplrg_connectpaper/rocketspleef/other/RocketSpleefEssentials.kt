@@ -43,6 +43,7 @@ object RocketSpleefEssentials {
     }
     fun getActive() : Int{
         val config = Main.instance!!.config
+
         return config.getInt("rocketspleef.gamemodeactive")
     }
     fun setCountdownActive(value : Boolean){
@@ -135,9 +136,12 @@ object RocketSpleefEssentials {
     }
 
     fun getRocket(player: Player): Int {
-        //val config = Main.instance!!.config
-
-        //return config.getInt("rocketspleef.rocketslots.${player.name}")
+        var playeravailable = false
+       for (plr in slots){
+           if (plr.key == player.name){
+               playeravailable = true
+           }
+       }
         return slots[player.name]!!
     }
 
