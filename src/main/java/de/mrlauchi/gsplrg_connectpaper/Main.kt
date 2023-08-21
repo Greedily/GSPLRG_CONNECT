@@ -59,6 +59,7 @@ class Main : JavaPlugin() {
         // Plugin startup logic
         instance = this
 
+        getCommand("vote")?.setExecutor(pointsCommand())
         getCommand("points")?.setExecutor(pointsCommand())
 
         getCommand("tgttos")?.setExecutor(TGTTOSCommand())

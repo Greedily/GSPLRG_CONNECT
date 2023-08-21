@@ -35,9 +35,13 @@ class VoteCommand : CommandExecutor {
 
                 inventory.setItem(31, VOTEitem)
 
-                inventory.setItem(50, ItemStack(Material.TRIDENT))
+                inventory.setItem(44, ItemStack(Material.TRIDENT))
+                inventory.setItem(43, ItemStack(Material.CROSSBOW))
+
 
                 sender.openInventory(inventory)
+            }else{
+                sender.sendMessage("Voting isnt Enabled yet!")
             }
         }
 
