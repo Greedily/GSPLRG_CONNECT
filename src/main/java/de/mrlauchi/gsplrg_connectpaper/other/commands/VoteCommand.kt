@@ -16,7 +16,7 @@ class VoteCommand : CommandExecutor {
         val config = Main.instance!!.config
         if (args.size == 1){
             if (args[0] == "start" && sender.isOp()){
-                Bukkit.broadcastMessage("-----------------------\nVoting Started!!\n-----------------------")
+                Bukkit.broadcastMessage("-----------------------\nVoting Started!!\n Use /vote to vote!\n-----------------------")
                 config.set("voting.active",1)
             }
             if (args[0] == "stop" && sender.isOp()){

@@ -36,24 +36,37 @@ class RocketSpleefMoveListener : Listener {
                 pointsEssentials.addplayerpoints(player, pointsModule.rocketspleef.placementlist[RocketSpleefEssentials.currentteamplacement]!!)
                 player.gameMode = GameMode.SPECTATOR
                 player.inventory.clear()
+                val aliveteams: MutableList<String> = ArrayList()
                 val deadteams: MutableList<String> = ArrayList()
+                val plrteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
                 for (target in Bukkit.getOnlinePlayers()) {
                     val targetteam = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
-                    if(target.gameMode == GameMode.SPECTATOR) {
-                        if (!deadteams.contains(targetteam)) { // add all the alive teams into the list.
-                            deadteams += targetteam
+                    if(target.gameMode == GameMode.ADVENTURE) {
+                        if (!aliveteams.contains(targetteam)) { // add all the alive teams into the list.
+                            aliveteams += targetteam
                         }
                     }
-                }
-                for (team in deadteams){
-                    val plrteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
-                    if (team == plrteam){
-                        //player's team is dead
-                        RocketSpleefEssentials.setteamPlacement(plrteam)
+                    if(target.gameMode == GameMode.SPECTATOR) {
+                        RocketSpleefEssentials.deadpeeps.plus(target.name)
                     }
                 }
-                if (deadteams.size >= 7 || RocketSpleefEssentials.currentteamplacement <= 1) {
-                    RocketSpleefEssentials.setteamPlacement(deadteams[7]) // get last team (8th most prob)
+                var numbersalive = 0
+                for (target in RocketSpleefEssentials.deadpeeps){
+
+                    val targetplayer = Bukkit.getPlayer(target)
+                    val targetplrteam = targetplayer?.scoreboard?.getPlayerTeam(Bukkit.getOfflinePlayer(targetplayer.name))!!.name
+
+                    if (targetplayer.gameMode != GameMode.ADVENTURE && targetplrteam != plrteam) return
+                    numbersalive += 1
+                }
+                if (numbersalive <= 0){ // team dead
+                    RocketSpleefEssentials.setteamPlacement(plrteam)
+                    Bukkit.broadcastMessage("${plrteam} died!")
+                }
+
+                Bukkit.broadcastMessage(RocketSpleefEssentials.currentteamplacement.toString())
+                if (aliveteams.size <= 1 || RocketSpleefEssentials.currentteamplacement == 1) {
+                    RocketSpleefEssentials.setteamPlacement(aliveteams[0]) // get last team (8th most prob)
                     for (entity in Bukkit.getWorld("world")!!.entities) {
                         if(entity is Item) {
                             entity.remove()
@@ -78,15 +91,15 @@ class RocketSpleefMoveListener : Listener {
 
                     for (target2 in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
                         target2.inventory.clear()
-                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name != deadteams[0]) { // all people
-                            target2.sendTitle("§6${deadteams[0]} Won The Game!", "")
+                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name != aliveteams[0]) { // all people
+                            target2.sendTitle("§6${aliveteams[0]} Won The Game!", "")
                         }  // the winner
-                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name == deadteams[0]) {
+                        if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name == aliveteams[0]) {
                             target2.sendTitle("§6Your Team Won!", "")//e
                         }
                     }
 
-                    for (msg in RocketSpleefEssentials.endmsg){
+                    for (msg in RocketSpleefEssentials.endmsg.reversed()){
                         Bukkit.broadcastMessage(msg.toString())
                     }
                     RocketSpleefEssentials.resetplacements()

@@ -19,15 +19,13 @@ object RocketSpleefEssentials {
     val times = mutableMapOf<String, Int>()
 
     var teams = listOf<String>()
+
+    var deadpeeps = listOf<String>()
     fun setActive(value : Boolean){
         val config = Main.instance!!.config
         if (value) {
             config.set("rocketspleef.gamemodeactive",1)
-            for (player in Bukkit.getOnlinePlayers()){
-                slots.put(player.name, 3)
-                times.put(player.name, 4)
-                //what time do we give to the palyer
-            }
+
             for (target in Bukkit.getOnlinePlayers()) {
                 val targetteam = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
                 if (!teams.contains(targetteam)) { // add all the alive teams into the list.
@@ -35,6 +33,14 @@ object RocketSpleefEssentials {
                     teams += targetteam
                 }
             }
+
+            for (player in Bukkit.getOnlinePlayers()){
+                val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
+                slots.put(player.name, 3)
+                times.put(player.name, 4)
+                //what time do we give to the palyer
+            }
+
         }else{
             config.set("rocketspleef.gamemodeactive",0)
             resetplacements()
@@ -246,11 +252,11 @@ object RocketSpleefEssentials {
             }
         }
         currentteamplacement -= 1
-
     }
     fun resetplacements(){
         endmsg = listOf<String?>()
         currentteamplacement = 0
         teams = listOf<String>()
+        deadpeeps = listOf<String>()
     }
 }
