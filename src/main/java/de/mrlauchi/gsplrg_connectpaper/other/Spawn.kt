@@ -16,8 +16,8 @@ object Spawn {
                 if (adventure) {
                     player.gameMode = GameMode.ADVENTURE
                 }
-                return
             }
+            return
         }
     }
 

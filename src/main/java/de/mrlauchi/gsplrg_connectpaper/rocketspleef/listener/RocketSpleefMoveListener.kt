@@ -7,6 +7,7 @@ import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
@@ -87,8 +88,6 @@ class RocketSpleefMoveListener : Listener {
                     player.inventory.clear()
                     player.isInvisible = false
 
-                    RocketSpleefEssentials.setActive(false)
-
                     for (target2 in Bukkit.getOnlinePlayers()) { // send titles to winning players and rest
                         target2.inventory.clear()
                         if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name != aliveteams[0]) { // all people
@@ -102,8 +101,10 @@ class RocketSpleefMoveListener : Listener {
                     for (msg in RocketSpleefEssentials.endmsg.reversed()){
                         Bukkit.broadcastMessage(msg.toString())
                     }
+
                     RocketSpleefEssentials.resetplacements()
                     Spawn.teleport(true)
+                    RocketSpleefEssentials.setActive(false)
                 }
             }
         }

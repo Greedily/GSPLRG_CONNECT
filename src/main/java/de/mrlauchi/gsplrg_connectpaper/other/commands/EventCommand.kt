@@ -19,7 +19,7 @@ class EventCommand : CommandExecutor {
                     sender.sendMessage("Set the event status to: ${args[1]}")
 
                     config.set("event.status", args[1].toInt())
-                    Main.instance!!.config
+                    Main.instance!!.saveConfig()
                 }
             }
             if(args[0] == "status") {

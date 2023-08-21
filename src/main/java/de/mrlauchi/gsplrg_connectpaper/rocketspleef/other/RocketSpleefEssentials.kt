@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.rocketspleef.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
+import net.kyori.adventure.text.Component
 import net.md_5.bungee.api.ChatMessageType
 import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.Bukkit
@@ -11,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable
 
 object RocketSpleefEssentials {
 
-    var currentteamplacement  = 0
+    var currentteamplacement = 0
 
     var endmsg = listOf<String?>()
 
@@ -224,6 +225,7 @@ object RocketSpleefEssentials {
                 totalteamminutetimes += minutetime
             }
         }
+
         if (currentteamplacement < 10){
             if (currentteamplacement == 1){
                 endmsg += " §l${currentteamplacement}st:§r §6${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
@@ -251,6 +253,7 @@ object RocketSpleefEssentials {
                 endmsg += " §l${currentteamplacement}rd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
         }
+
         currentteamplacement -= 1
     }
     fun resetplacements(){
