@@ -4,30 +4,32 @@ object pointsModule {
 
     val teams = listOf<String>("orange","red","pink","green","blue","lime","yellow","purple")
     object acerace {
-        val first =  1500
-        val second =  1450
-        val third =  1400
-        val fourth =  1200
-        val fifth =  1150
-        val sixth =  1100
-        val seventh =  1050
-        val eightth =  1000
-        val nineth =  950
-        val tenth =  900
-        val eleventh =  800
-        val twelveth =  700
-        val thirteenth =  600
-        val fourteenth =  500
-        val fifteenth =  400
-        val sixteenth = 300
-        val seventeenth =  275
-        val eighteenth =  250
-        val nineteenth =  225
-        val twentyth =  200
-        val twenty1st =  175
-        val twenty2nd =  150
-        val twenty3rd =  120
-        val twenty4th =  100
+        val placementlist = mapOf<Int,Int>(
+                1 to 1500,
+                2 to 1450,
+                3 to 1400,
+                4 to 1200,
+                5 to 1150,
+                6 to 1100,
+                7 to 1050,
+                8 to 1000,
+                9 to 950,
+                10 to 900,
+                11 to 800,
+                12 to 700,
+                13 to 600,
+                14 to 500,
+                15 to 400,
+                16 to 300,
+                17 to 275,
+                18 to 250,
+                19 to 225,
+                20 to 200,
+                21 to 175,
+                22 to 150,
+                23 to 125,
+                24 to 100
+        )
     }
     object parkour {
         val perlevelpoint = 50

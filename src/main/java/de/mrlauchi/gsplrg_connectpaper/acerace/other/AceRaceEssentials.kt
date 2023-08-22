@@ -2,11 +2,15 @@ package de.mrlauchi.gsplrg_connectpaper.acerace.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
 object AceRaceEssentials {
+    var currentplacement  = 0
+
+    var endmsg = listOf<String?>()
     fun setStartCoords(player: Player){
 
         val config = Main.instance!!.config
@@ -83,6 +87,7 @@ object AceRaceEssentials {
             config.set("acerace.gamemodeactive",1)
             Bukkit.getWorld("world")!!.setGameRuleValue("keepInventory", "true")
             Bukkit.getWorld("world")!!.setGameRuleValue("fallDamage", "false")
+
         }else{
             config.set("acerace.gamemodeactive",0)
 
@@ -90,6 +95,8 @@ object AceRaceEssentials {
             Bukkit.getWorld("world")!!.setGameRuleValue("fallDamage", "false") //
 
             Spawn.teleport(true)
+            Main.instance!!.saveConfig()
+            resetplacements()
         }
         Main.instance!!.saveConfig()
     }
@@ -208,6 +215,45 @@ object AceRaceEssentials {
         val world = Bukkit.getWorld("world")
 
         return Location(world, x, y, z)
+    }
+
+    fun setPlacement(player : Player){
+        val config = Main.instance!!.config
+
+        currentplacement += 1
+        if (currentplacement < 10){
+            if (currentplacement == 1){
+                endmsg += " §l${currentplacement}st:§r §6${player.name}§r with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 2){
+                endmsg += " §l${currentplacement}nd:§r §9${player.name}§r with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 3){
+                endmsg += " §l${currentplacement}rd:§r §a${player.name}§r with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement > 3){
+                endmsg += " §l${currentplacement}th:§r ${player.name} with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+        }else{
+            if (currentplacement != 21 && currentplacement != 22 && currentplacement != 23){
+                endmsg += " §l${currentplacement}th:§r ${player.name} with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 21){
+                endmsg += " §l${currentplacement}st:§r ${player.name} with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 22){
+                endmsg += " §l${currentplacement}nd:§r ${player.name} with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+            if (currentplacement == 23){
+                endmsg += " §l${currentplacement}rd:§r ${player.name} with time ${config.getString("acerace.playertimes.${player.name}")}(${pointsModule.acerace.placementlist[currentplacement]} extra points)"
+            }
+        }
+
+    }
+
+    fun resetplacements(){
+        endmsg = listOf<String?>()
+        currentplacement = 0
     }
 
 }

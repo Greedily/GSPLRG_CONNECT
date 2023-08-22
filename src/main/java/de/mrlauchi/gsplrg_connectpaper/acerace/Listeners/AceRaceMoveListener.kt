@@ -3,6 +3,7 @@ package de.mrlauchi.gsplrg_connectpaper.acerace.Listeners
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
+import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.*
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Firework
@@ -55,13 +56,15 @@ class AceRaceMoveListener : Listener {
                     }
 
                     if (i == 0) { // rotation done.
-                        ParticleEssentials.scoreparticle(player)
                         if (AceRaceEssentials.getSection(player) >= 3) {
                             if (config.getInt("acerace.playermaprotations.${player.name}") == 2) { //finish.
                                 player.gameMode = GameMode.SPECTATOR
                                 val playertime = config.getString("acerace.playertimes.${player.name}")
                                 Bukkit.broadcastMessage("§b${player.name} finished in $playertime!")
                                 config.set("acerace.playersfinished.${player.name}", 1)
+
+                                AceRaceEssentials.setPlacement(player)
+                                ParticleEssentials.scoreparticle(player)
                             }else{
                                 config.set("acerace.playermaprotations.${player.name}", config.getInt("acerace.playermaprotations.${player.name}") + 1)
                                 Bukkit.broadcastMessage("${player.name} finished a LAP!")
@@ -71,6 +74,21 @@ class AceRaceMoveListener : Listener {
                         }
                     }
                     AceRaceEssentials.setSection(player, i)
+
+                    var remainingplayers = 0
+
+                    for (plr in Bukkit.getOnlinePlayers()){
+                        if (plr.gameMode == GameMode.ADVENTURE){
+                            remainingplayers += 1
+                        }
+                    }
+                    if (remainingplayers <= 0){
+                        for (msg in AceRaceEssentials.endmsg){
+                            Bukkit.broadcastMessage(msg.toString())
+                        }
+                        AceRaceEssentials.setGameModeEnabled(false)
+                    }
+
 
 
                 }
