@@ -37,7 +37,9 @@ object ParkourTimer {
                     currentsecondtime = 0
                 }
 
-                if(config.getInt("parkour.timeractive") == 0 || ParkourEssentials.getActive() == 0) {
+
+
+                if(config.getInt("parkour.timeractive") == 0 || ParkourEssentials.getActive() == 0 || currentminutetime >= 15) {
                     //save player time.
 
                     currentsecondtime = 0

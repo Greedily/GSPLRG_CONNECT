@@ -1,9 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.hungergames.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
-import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
-import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
@@ -55,22 +53,15 @@ object HungergamesEssentials {
 
             for (target in Bukkit.getOnlinePlayers()) {
                 val targetteam = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
-                if (!RocketSpleefEssentials.teams.contains(targetteam)) { // add all the alive teams into the list.
-                    RocketSpleefEssentials.currentteamplacement +=1
-                    RocketSpleefEssentials.teams += targetteam
+                if (!teams.contains(targetteam)) { // add all the alive teams into the list.
+                   currentteamplacement +=1
+                    teams += targetteam
                 }
-            }
-
-            for (player in Bukkit.getOnlinePlayers()){
-                val targetteam = player.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(player.name))!!.name
-                RocketSpleefEssentials.slots.put(player.name, 3)
-                RocketSpleefEssentials.times.put(player.name, 4)
-                //what time do we give to the palyer
             }
 
         }else{
             config.set("hungergames.gamemodeactive",0)
-            RocketSpleefEssentials.resetplacements()
+            resetplacements()
             Bukkit.getWorld("world")!!.setGameRuleValue("keepInventory", "true")
             Bukkit.getWorld("world")!!.setGameRuleValue("fallDamage", "false") //
         }
@@ -90,42 +81,32 @@ object HungergamesEssentials {
 
     fun setteamPlacement(team : String){
         val config = Main.instance!!.config
-        var totalteamminutetimes = 0
-        for (target in Bukkit.getOnlinePlayers()){
-            val targetteam = target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name
-            if (targetteam == team){
-                val timestring = config.getString("rocketspleef.playertimes.${target.name}")
-                val minutetime : Int = timestring?.split(":")?.get(0)!!.toInt()
-
-                totalteamminutetimes += minutetime
-            }
-        }
 
         if (currentteamplacement < 10){
             if (currentteamplacement == 1){
-                endmsg += " §l${currentteamplacement}st:§r §6${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}st:§r §6${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 2){
-                endmsg += " §l${currentteamplacement}nd:§r §9${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}nd:§r §9${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 3){
-                endmsg += " §l${currentteamplacement}rd:§r §a${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}rd:§r §a${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement > 3){
-                endmsg += " §l${currentteamplacement}th:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}th:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
         }else{
             if (currentteamplacement != 21 && currentteamplacement != 22 && currentteamplacement != 23){
-                endmsg += " §l${currentteamplacement}th:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}th:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 21){
-                endmsg += " §l${currentteamplacement}st:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}st:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 22){
-                endmsg += " §l${currentteamplacement}nd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}nd:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 23){
-                endmsg += " §l${currentteamplacement}rd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}rd:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
         }
 

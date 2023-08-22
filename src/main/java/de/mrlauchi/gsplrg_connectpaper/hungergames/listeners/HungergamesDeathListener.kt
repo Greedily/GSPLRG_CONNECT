@@ -7,7 +7,6 @@ import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
-import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
@@ -39,8 +38,8 @@ class HungergamesDeathListener:Listener {
             pointsEssentials.addplayerpoints(event.player.killer!!, pointsModule.hungergames.killpoints)
             event.player.killer!!.sendMessage("+"+pointsModule.hungergames.killpoints+" for kill!")
             ParticleEssentials.scoreparticle(event.player.killer!!)
+            ParticleEssentials.spawnfirework(event.player)
 
-            //HungergamesEssentials.setPlacement(deadplayer)
 
             config.set("hungergames.playerspawns.${deadplayer.name}.x",deadplayer.location.x)
             config.set("hungergames.playerspawns.${deadplayer.name}.y",deadplayer.location.y)
@@ -59,12 +58,12 @@ class HungergamesDeathListener:Listener {
                     }
                 }
                 if(target.gameMode == GameMode.SPECTATOR) {
-                    RocketSpleefEssentials.deadpeeps.plus(target.name)
+                    HungergamesEssentials.deadpeeps.plus(target.name)
                 }
             }
 
             var numbersalive = 0
-            for (target in RocketSpleefEssentials.deadpeeps){
+            for (target in HungergamesEssentials.deadpeeps){
 
                 val targetplayer = Bukkit.getPlayer(target)
                 val targetplrteam = targetplayer?.scoreboard?.getPlayerTeam(Bukkit.getOfflinePlayer(targetplayer.name))!!.name
@@ -73,7 +72,7 @@ class HungergamesDeathListener:Listener {
                 numbersalive += 1
             }
             if (numbersalive <= 0){ // team dead
-                RocketSpleefEssentials.setteamPlacement(plrteam)
+                HungergamesEssentials.setteamPlacement(plrteam)
                 Bukkit.broadcastMessage("${plrteam} died!")
             }
 
@@ -113,6 +112,7 @@ class HungergamesDeathListener:Listener {
                         target.gameMode = GameMode.SPECTATOR
                         pointsEssentials.addplayerpoints(target, pointsModule.hungergames.winpoints)
                         target.sendMessage("+${pointsModule.hungergames.winpoints} Points for wining!")
+                        HungergamesEssentials.setteamPlacement(target.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target.name))!!.name)
                     }
                 }
 

@@ -1,5 +1,6 @@
 package de.mrlauchi.gsplrg_connectpaper.parkour.commands
 
+import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourCountdown
 import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -16,7 +17,7 @@ class ParkourCommand : CommandExecutor, TabCompleter {
 
                 if(args.isNotEmpty()) {
                     if(args[0] == "start") {
-                        de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourCountdown.countdown(player)
+                        ParkourCountdown.countdown(player)
                     }
                     if(args[0] == "stop") {
                         ParkourStopCommand.stop(player)
