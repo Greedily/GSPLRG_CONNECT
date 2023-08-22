@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.acerace.Listeners
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import org.bukkit.*
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Firework
@@ -50,18 +51,11 @@ class AceRaceMoveListener : Listener {
 
                         val location : Location = player.getLineOfSight(null, 2).last().location
 
-                        val fw = player.world.spawnEntity(
-                            player.location.add(0.0, 1.0, 0.0),
-                            EntityType.FIREWORK
-                        ) as Firework
-                        val fwm = fw.fireworkMeta
-                        fwm.addEffect(FireworkEffect.builder().withColor(Color.GREEN).flicker(false).build())
-                        fw.customName = "nodamage"
-                        fw.fireworkMeta = fwm
-                        fw.detonate()
+                        ParticleEssentials.spawnfirework(player)
                     }
 
                     if (i == 0) { // rotation done.
+                        ParticleEssentials.scoreparticle(player)
                         if (AceRaceEssentials.getSection(player) >= 3) {
                             if (config.getInt("acerace.playermaprotations.${player.name}") == 2) { //finish.
                                 player.gameMode = GameMode.SPECTATOR

@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.hungergames.listeners
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
@@ -30,7 +31,10 @@ class SkywarsDeathListener:Listener {
             val world = Bukkit.getWorld("world")
             if (event.player.killer is Player){
                 pointsEssentials.addplayerpoints(event.player.killer!!, pointsModule.skywars.killpoints)
+                ParticleEssentials.spawnfirework(event.player)
+
                 event.player.killer!!.sendMessage("+"+pointsModule.skywars.killpoints+" for kill!")
+                ParticleEssentials.scoreparticle(event.player.killer!!)
             }
           //Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"execute in minecraft:overworld run fill -106 235 114 33 181 -32 minecraft:air hollow")
           //PasteSchem.paste(Location(world, -36.898, 200.0, 41.8), "skywarsmap1")
@@ -90,6 +94,7 @@ class SkywarsDeathListener:Listener {
                             target.sendTitle("§6Your Team Won!", "")
                             target.gameMode = GameMode.SPECTATOR
                             pointsEssentials.addplayerpoints(target, pointsModule.skywars.winpoints)
+                            ParticleEssentials.scoreparticle(target)
                         }
                     }
                     Spawn.teleport(true)

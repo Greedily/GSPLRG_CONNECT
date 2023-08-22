@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.tgttos.listener
 
 import de.mrlauchi.gsplrg_connectpaper.tgttos.other.Essentials
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
@@ -95,6 +96,7 @@ class MovementListener : Listener {
             }
         }
         pointsEssentials.addplayerpoints(player, pointsModule.tgttos.placementlist[Essentials.currentplacement]!!)
+        ParticleEssentials.scoreparticle(player)
         Bukkit.broadcastMessage("Remaining Players: ${RemainingPlayers.size}")
         if (RemainingPlayers.isEmpty()){
             for (target in Bukkit.getOnlinePlayers()) {

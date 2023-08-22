@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
@@ -48,6 +49,7 @@ object DeathmatchGameTime {
                             points += Pair(config.getInt("deathmatch.score.${countTarget.name}") , countTarget.name)
                             countTarget.gameMode = GameMode.SPECTATOR
                             countTarget.inventory.clear()
+                            ParticleEssentials.scoreparticle(countTarget)
                         }
                         points = points.toSortedMap(Comparator.reverseOrder())
                         val nameslist = points.values.toList()

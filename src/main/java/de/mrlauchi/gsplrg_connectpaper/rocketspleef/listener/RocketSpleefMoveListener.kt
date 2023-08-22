@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.rocketspleef.listener
 
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.PasteSchem
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
@@ -65,7 +66,6 @@ class RocketSpleefMoveListener : Listener {
                     Bukkit.broadcastMessage("${plrteam} died!")
                 }
 
-                Bukkit.broadcastMessage(RocketSpleefEssentials.currentteamplacement.toString())
                 if (aliveteams.size <= 1 || RocketSpleefEssentials.currentteamplacement == 1) {
                     RocketSpleefEssentials.setteamPlacement(aliveteams[0]) // get last team (8th most prob)
                     for (entity in Bukkit.getWorld("world")!!.entities) {
@@ -95,6 +95,7 @@ class RocketSpleefMoveListener : Listener {
                         }  // the winner
                         if (target2.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(target2.name))!!.name == aliveteams[0]) {
                             target2.sendTitle("§6Your Team Won!", "")//e
+                            ParticleEssentials.scoreparticle(target2)
                         }
                     }
 

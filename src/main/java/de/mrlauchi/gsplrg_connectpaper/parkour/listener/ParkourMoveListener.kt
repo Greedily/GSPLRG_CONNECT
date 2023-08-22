@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
 import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStopCommand
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
@@ -45,16 +46,10 @@ class ParkourMoveListener : Listener {
                             }
 
                             val location : Location = player.getLineOfSight(null, 2).last().location
+                            if (i != 20){ // to spawn our own particle
+                                ParticleEssentials.spawnfirework(player)
+                            }
 
-                            val fw = player.world.spawnEntity(
-                                player.location.add(0.0, 1.0, 0.0),
-                                EntityType.FIREWORK
-                            ) as Firework
-                            val fwm = fw.fireworkMeta
-                            fwm.addEffect(FireworkEffect.builder().withColor(Color.GREEN).flicker(false).build())
-                            fw.customName = "nodamage"
-                            fw.fireworkMeta = fwm
-                            fw.detonate()
                         }
 
 
@@ -63,6 +58,7 @@ class ParkourMoveListener : Listener {
 
                         if(i == 20) {
                             player.gameMode = GameMode.SPECTATOR
+                            ParticleEssentials.scoreparticle(player)
                             val playertime = config.getString("parkour.playertimes.${player.name}")
                             Bukkit.broadcastMessage("§b${player.name} finished in $playertime!")
                             config.set("parkour.playersfinished.${player.name}", 1)
