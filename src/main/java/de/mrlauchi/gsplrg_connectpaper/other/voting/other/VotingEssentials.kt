@@ -12,12 +12,12 @@ object VotingEssentials {
     var votedplayers = mutableListOf<String>()
 
     var gamevotes = mutableMapOf<String, Int>("ACERACE" to 0,
-        "DEATHMATCH" to 0,
-        "HUNGERGAMES" to 0,
+        "DEATHMATCH" to 5,
+        "HUNGERGAMES" to 2,
         "ROCKETSPLEEF" to 0,
-        "PARKOUR" to 0,
-        "SKYWARS" to 0,
-        "GOLDRUSH" to 0,
+        "PARKOUR" to 5,
+        "SKYWARS" to 6,
+        "GOLDRUSH" to 7,
         "To Get To The Other Side(TGTTOS)" to 0)
 
     val allitems = mapOf<Material, String>(Material.TRIDENT to "ACERACE",
@@ -90,38 +90,45 @@ object VotingEssentials {
                 val oldvalue : Int = game.value
                 val gamevalue = game.key
                 val newvalue = oldvalue + 1
-                gamevotes.replace(game.key, oldvalue, newvalue)
+                gamevotes.replace(gamevalue, oldvalue, newvalue)
                 votedplayers += plr.name
             }
         }
     }
 
     fun returnallvotes(){
-        val gamesvotedlist = gamevotes.toSortedMap(Comparator.reverseOrder())
+        var descendingvotes = mutableMapOf<Int, String>()
+        for (element in gamevotes){
+            descendingvotes.put(element.value, element.key)
+        }
+        descendingvotes = descendingvotes.toSortedMap(Comparator.reverseOrder())
+        val games = descendingvotes.values.toList()
+        val votes = descendingvotes.keys.toList()
+        Bukkit.broadcastMessage(descendingvotes.toString())
         Bukkit.broadcastMessage("-----------------\nALL GAME VOTES:\n")
-        for(element in gamesvotedlist){
-            val votes = element.value
-            val game = element.key
-            if (votes != 0){
-                Bukkit.broadcastMessage("${game} with ${votes} Votes!")
-            }
+        Bukkit.broadcastMessage("§6CHOSEN: ${games[0]} with ${votes[0]} Votes.\n \n§r Rest of Votes:")
+        for(element in descendingvotes){
+            val votes = element.key
+            val game = element.value
+            Bukkit.broadcastMessage("\n${game} with §6${votes}§r  Votes!")
         }
         Bukkit.broadcastMessage("\n-----------------")
     }
 
 
     fun resetvotes(){
-        for (player in currenttab){
-            val plr = player.key
+        if (currenttab.isNotEmpty()){
+            for (player in currenttab){
+                val plr = player.key
 
-            currenttab.remove(plr)
-            currenttab.put(plr, "ACERACE")
+                currenttab.remove(plr)
+                currenttab.put(plr, "ACERACE")
+            }
         }
         for (game in gamevotes){
             val gameval = game.key
 
-            gamevotes.minus(game)
-            gamevotes.plus(Pair(gameval, 0))
+           gamevotes.replace(gameval, 0)
         }
         votedplayers = mutableListOf<String>()
     }
