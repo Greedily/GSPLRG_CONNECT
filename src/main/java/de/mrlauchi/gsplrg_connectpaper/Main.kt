@@ -18,8 +18,9 @@ import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesMoveList
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.HungergamesRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.hungergames.listeners.SkywarsDeathListener
 import de.mrlauchi.gsplrg_connectpaper.other.commands.EventCommand
-import de.mrlauchi.gsplrg_connectpaper.other.commands.VoteCommand
+import de.mrlauchi.gsplrg_connectpaper.other.voting.commands.VoteCommand
 import de.mrlauchi.gsplrg_connectpaper.other.listeners.InventoryClick
+import de.mrlauchi.gsplrg_connectpaper.other.voting.listeners.VotingInventoryClick
 import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourCommand
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDamageListener
 import de.mrlauchi.gsplrg_connectpaper.parkour.listener.ParkourDeathListener
@@ -94,6 +95,7 @@ class Main : JavaPlugin() {
         // PUBLIC LISTENERS
         pluginManager.registerEvents(ItemDropEvent(), this)
         pluginManager.registerEvents(InventoryClick(), this)
+        pluginManager.registerEvents(VotingInventoryClick(), this)
 
         // TGTTOS Listeners
         pluginManager.registerEvents(DeathListener(), this)
