@@ -37,6 +37,8 @@ import de.mrlauchi.gsplrg_connectpaper.skywars.listeners.SkywarsRespawnListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.commands.TGTTOSCommand
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.DeathListener
 import de.mrlauchi.gsplrg_connectpaper.tgttos.listener.MovementListener
+import me.tortel.emojis1.Commands.EmojisCommand
+import me.tortel.emojis1.Events.OnPlayerChat
 import net.kyori.adventure.text.Component
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
@@ -89,6 +91,7 @@ class Main : JavaPlugin() {
 
         getCommand("event")?.setExecutor(EventCommand())
         getCommand("vote")?.setExecutor(VoteCommand())
+        getCommand("emojis")?.setExecutor(EmojisCommand())
 
         val pluginManager = server.pluginManager
 
@@ -136,6 +139,9 @@ class Main : JavaPlugin() {
         pluginManager.registerEvents(RocketSpleefMoveListener(), this)
         pluginManager.registerEvents(RocketSpleefFireBowListener(), this)
         pluginManager.registerEvents(RocketSpleefDropListener(), this)
+
+        //Emojis
+        pluginManager.registerEvents(OnPlayerChat(), this)
 
         val config = config
 

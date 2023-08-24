@@ -8,6 +8,8 @@ commands:
     description: everything having to do with voting
   points:
     description: everything having to do with points
+  emojis:
+    description: everything with emojis
   tgttos:
     description: everything having to do with tgttos
   parkour:

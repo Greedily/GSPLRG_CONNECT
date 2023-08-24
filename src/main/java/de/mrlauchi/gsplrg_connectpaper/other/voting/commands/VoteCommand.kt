@@ -8,7 +8,6 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 
 class VoteCommand : CommandExecutor {
 
@@ -19,6 +18,7 @@ class VoteCommand : CommandExecutor {
             if (args[0] == "start" && sender.isOp()){
                 Bukkit.broadcastMessage("-----------------------\nVoting Started!!\n Use /vote to vote!\n-----------------------")
                 config.set("voting.active",1)
+                Bukkit.broadcastMessage("${VotingEssentials.currenttab} ${VotingEssentials.playersvoted}")
                 for (plr in Bukkit.getOnlinePlayers()){
                     VotingEssentials.currenttab.plus(Pair(plr.name, "ACERACE"))
                 }
@@ -35,7 +35,7 @@ class VoteCommand : CommandExecutor {
                 val inventory = Bukkit.createInventory(sender, 54, "§f七七七七七七七七\uEA00") //§f
 
 
-                if (VotingEssentials.votedplayers.contains(sender.name)){
+                if (VotingEssentials.playersvoted.contains(sender.name)){
                     inventory.setItem(31, VotingEssentials.returnitem(Material.MAP, 1010, "ALREADY VOTED"))
                 }else{
                     inventory.setItem(31, VotingEssentials.returnitem(Material.MAP, 1010, "VOTE!"))

@@ -9,15 +9,15 @@ import org.bukkit.inventory.ItemStack
 object VotingEssentials {
     var currenttab = mutableMapOf<String, String>()
 
-    var votedplayers = mutableListOf<String>()
+    var playersvoted = mutableListOf<String>()
 
     var gamevotes = mutableMapOf<String, Int>("ACERACE" to 0,
-        "DEATHMATCH" to 5,
-        "HUNGERGAMES" to 2,
+        "DEATHMATCH" to 0,
+        "HUNGERGAMES" to 0,
         "ROCKETSPLEEF" to 0,
-        "PARKOUR" to 5,
-        "SKYWARS" to 6,
-        "GOLDRUSH" to 7,
+        "PARKOUR" to 0,
+        "SKYWARS" to 0,
+        "GOLDRUSH" to 0,
         "To Get To The Other Side(TGTTOS)" to 0)
 
     val allitems = mapOf<Material, String>(Material.TRIDENT to "ACERACE",
@@ -67,7 +67,7 @@ object VotingEssentials {
     }
 
     fun onitemclick(clickeditem : Material, inventory : Inventory, player : Player){
-        if (votedplayers.contains(player.name)) return
+        if (playersvoted.contains(player.name)) return
         inventory.clear()
         for (item in allitems){
             if (item.key != clickeditem){
@@ -91,7 +91,7 @@ object VotingEssentials {
                 val gamevalue = game.key
                 val newvalue = oldvalue + 1
                 gamevotes.replace(gamevalue, oldvalue, newvalue)
-                votedplayers += plr.name
+                playersvoted += plr.name
             }
         }
     }
@@ -110,27 +110,22 @@ object VotingEssentials {
         for(element in descendingvotes){
             val votes = element.key
             val game = element.value
-            Bukkit.broadcastMessage("\n${game} with §6${votes}§r  Votes!")
+            if (element.value != games[0]){
+                Bukkit.broadcastMessage("\n${game} with §6${votes}§r Votes!")
+            }
         }
         Bukkit.broadcastMessage("\n-----------------")
     }
 
 
     fun resetvotes(){
-        if (currenttab.isNotEmpty()){
-            for (player in currenttab){
-                val plr = player.key
-
-                currenttab.remove(plr)
-                currenttab.put(plr, "ACERACE")
-            }
-        }
+        currenttab = mutableMapOf()
         for (game in gamevotes){
             val gameval = game.key
 
            gamevotes.replace(gameval, 0)
         }
-        votedplayers = mutableListOf<String>()
+        playersvoted = mutableListOf<String>()
     }
 
 

@@ -81,32 +81,32 @@ object HungergamesEssentials {
 
     fun setteamPlacement(team : String){
         val config = Main.instance!!.config
-
+        var tem = team.toUpperCase()
         if (currentteamplacement < 10){
             if (currentteamplacement == 1){
-                endmsg += " §l${currentteamplacement}st:§r §6${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}st:§r §6${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 2){
-                endmsg += " §l${currentteamplacement}nd:§r §9${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}nd:§r §9${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 3){
-                endmsg += " §l${currentteamplacement}rd:§r §a${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}rd:§r §a${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement > 3){
-                endmsg += " §l${currentteamplacement}th:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}th:§r ${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
         }else{
             if (currentteamplacement != 21 && currentteamplacement != 22 && currentteamplacement != 23){
-                endmsg += " §l${currentteamplacement}th:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}th:§r ${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 21){
-                endmsg += " §l${currentteamplacement}st:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}st:§r ${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 22){
-                endmsg += " §l${currentteamplacement}nd:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}nd:§r ${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
             if (currentteamplacement == 23){
-                endmsg += " §l${currentteamplacement}rd:§r ${team}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}rd:§r ${tem}§r (${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
             }
         }
 

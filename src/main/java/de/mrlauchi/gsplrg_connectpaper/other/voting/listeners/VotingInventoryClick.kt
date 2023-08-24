@@ -1,18 +1,12 @@
 package de.mrlauchi.gsplrg_connectpaper.other.voting.listeners
 
-import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.voting.other.VotingEssentials
-import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials
-import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
-import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
-import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.inventory.ItemStack
 
 class VotingInventoryClick : Listener {
 
@@ -27,7 +21,7 @@ class VotingInventoryClick : Listener {
             val inventory = event.view.topInventory
             if (event.currentItem?.type == Material.MAP && hasCustomModelData == true && customModelData == 1010){ // voted
 
-                if(VotingEssentials.votedplayers.contains(player.name)){
+                if(VotingEssentials.playersvoted.contains(player.name)){
                     player.sendMessage("You Already Voted!")
                 }else{
                     VotingEssentials.votefunction(player)
