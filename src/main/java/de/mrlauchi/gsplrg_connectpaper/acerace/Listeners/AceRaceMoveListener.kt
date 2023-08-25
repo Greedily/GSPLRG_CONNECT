@@ -3,6 +3,8 @@ package de.mrlauchi.gsplrg_connectpaper.acerace.Listeners
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
 import org.bukkit.*
 import org.bukkit.entity.EntityType
@@ -62,6 +64,8 @@ class AceRaceMoveListener : Listener {
                                 val playertime = config.getString("acerace.playertimes.${player.name}")
                                 Bukkit.broadcastMessage("§b${player.name} finished in $playertime!")
                                 config.set("acerace.playersfinished.${player.name}", 1)
+
+                                pointsEssentials.addplayerpoints(player, pointsModule.acerace.placementlist[AceRaceEssentials.currentplacement] as Int)
 
                                 AceRaceEssentials.setPlacement(player)
                                 ParticleEssentials.scoreparticle(player)

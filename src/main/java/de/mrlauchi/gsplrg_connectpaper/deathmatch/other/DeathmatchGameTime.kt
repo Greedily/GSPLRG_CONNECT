@@ -27,7 +27,12 @@ object DeathmatchGameTime {
                         this.cancel()
                     }
                     target.gameMode = GameMode.ADVENTURE
-                    target.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§bKills: ${config.getInt("deathmatch.score.${target.name}")} || Time: $minutetime:$secondtime"))
+                    if (secondtime < 10) {
+                        target.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§bKills: ${config.getInt("deathmatch.score.${target.name}")} || Remaining Time: $minutetime:0$secondtime"))
+                    }else{
+                        target.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§bKills: ${config.getInt("deathmatch.score.${target.name}")} || Remaining Time: $minutetime:$secondtime"))
+                    }
+
 
                     if(secondtime <= 0 && config.getInt("deathmatch.gamemodeactive") == 1 && minutetime > 0) {
                         minutetime -= 1
@@ -58,7 +63,6 @@ object DeathmatchGameTime {
                         val secondplacement = nameslist[1]
                         val thirdplacement = nameslist[2]
                         Bukkit.broadcastMessage(
-                                ""+""+""+""+""+""+""+""+""+""+""+""+""+""+""+
                                 "-------------------------------------------"+
                                 "§61st.$firstplacement §fwith §6${pointslist[0]} kills." +
                                 "§72nd.$secondplacement §fwith §7${pointslist[1]} kills." +

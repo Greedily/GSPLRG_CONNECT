@@ -29,7 +29,7 @@ object VotingEssentials {
             Material.GOLD_INGOT to "GOLDRUSH",
             Material.IRON_BOOTS to "To Get To The Other Side(TGTTOS)")
 
-    val allitemsslots = mapOf<Material, Int>(Material.TRIDENT to 45,
+    val allitemsslots = mapOf<Material, Int>(Material.TRIDENT to 45,//e
         Material.CROSSBOW to 46,
         Material.GOLDEN_SWORD to 47,
         Material.FIRE_CHARGE to 48,

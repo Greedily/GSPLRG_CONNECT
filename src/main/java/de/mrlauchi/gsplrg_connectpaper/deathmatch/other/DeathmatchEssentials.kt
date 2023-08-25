@@ -21,6 +21,10 @@ object DeathmatchEssentials {
         Main.instance!!.saveConfig()
     }
 
+    fun getActive() : Int{
+        return config.getInt("deathmatch.gamemodeactive")
+    }
+
     fun setCountDownEnabled(value : Boolean){
         if (value == true){
             config.set("deathmatch.countdownactive",1)
@@ -60,7 +64,7 @@ object DeathmatchEssentials {
                 if (time <= 0 && config.getInt("deathmatch.gamemodeactive") == 1) {
                     target.gameMode = GameMode.SURVIVAL
                     target.isInvulnerable = false
-                    target.sendMessage("can take dmg")
+                    target.sendMessage("You are now vulnerable")
                     this.cancel()
                 }
                 time -= 1
