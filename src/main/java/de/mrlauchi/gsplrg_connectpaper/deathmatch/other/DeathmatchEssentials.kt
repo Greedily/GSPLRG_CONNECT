@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
@@ -15,7 +16,7 @@ object DeathmatchEssentials {
 
     var streaks = mutableMapOf<String , Int>()
     fun setGamemodeEnabled(value : Boolean){
-        if (value == true){
+        if (value){
             config.set("deathmatch.gamemodeactive",1)
             for (plr in Bukkit.getOnlinePlayers()){
                 streaks += Pair(plr.name, 0)
@@ -79,7 +80,6 @@ object DeathmatchEssentials {
     }
 
     fun giveplayerstreak(player : Player){
-        player.sendMessage(streaks[player.name].toString())
         val oldvalue = streaks[player.name] as Int
         streaks.replace(player.name,oldvalue, oldvalue + 1)
     }
