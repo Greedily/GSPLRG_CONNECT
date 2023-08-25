@@ -12,11 +12,17 @@ import org.bukkit.scheduler.BukkitRunnable
 
 object DeathmatchEssentials {
     val config = Main.instance!!.config
+
+    var streaks = mutableMapOf<String , Int>()
     fun setGamemodeEnabled(value : Boolean){
         if (value == true){
             config.set("deathmatch.gamemodeactive",1)
+            for (plr in Bukkit.getOnlinePlayers()){
+                streaks.plus(Pair(plr.name, 0))
+            }
         }else{
             config.set("deathmatch.gamemodeactive",0)
+            streaks.clear()
         }
         Main.instance!!.saveConfig()
     }
@@ -70,6 +76,17 @@ object DeathmatchEssentials {
                 time -= 1
             }
         }.runTaskTimer(Main.instance!!, 0, 20)
+    }
+
+    fun giveplayerstreak(player : Player){
+        player.sendMessage(streaks[player.name].toString())
+        val oldvalue = streaks[player.name] as Int
+        streaks.replace(player.name,oldvalue, oldvalue + 1)
+    }
+
+    fun resetplayerstreak(player : Player){
+        val oldvalue = streaks[player.name] as Int
+        streaks.replace(player.name, oldvalue, 0)
     }
 
 }

@@ -115,9 +115,10 @@ object pointsModule {
     }
 
     object deathmatch {
-        val kill = 20
+        val kill = 10
         val streaks = mapOf(
-                5 to 20)
+                5 to 20,
+                10 to 40)
     }
 
 }
