@@ -15,17 +15,20 @@ class DeathmatchDeathListener : Listener {
     @EventHandler
     fun onkill (event: PlayerDeathEvent){
         val killer = event.entity.killer as Player
+        val player = event.player
         if (killer !is Player) return
         val config = Main.instance!!.config
         if (config.getInt("deathmatch.gamemodeactive") == 1) {
             pointsEssentials.addplayerpoints(killer, pointsModule.deathmatch.kill)
+
             DeathmatchEssentials.giveplayerstreak(killer)
-            DeathmatchEssentials.resetplayerstreak(event.player)
+            DeathmatchEssentials.resetplayerstreak(player)
+
             val score = "deathmatch.score.${killer.name}" // it sets *score* as the points thing but uses *points* to get the score in the gametime
             config.set(score, config.getInt(score) + 1)
             Main.instance!!.saveConfig()
-            if (DeathmatchEssentials.streaks[event.player.killer?.name] == 5){
-                Bukkit.broadcastMessage("${event.player.killer} has a MAGNIFICENT 5 kill streak!")
+            if (DeathmatchEssentials.streaks[killer.name] == 5){
+                Bukkit.broadcastMessage("${killer.name} has a MAGNIFICENT 5 kill streak!")
             }
             event.deathMessage = null
             //killer.sendMessage("You killed a player! +" + config.getInt("deathmatch.score.$killer").toString()) // i dont remember what that was for alr look at dc nothing there

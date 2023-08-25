@@ -18,7 +18,7 @@ object DeathmatchEssentials {
         if (value == true){
             config.set("deathmatch.gamemodeactive",1)
             for (plr in Bukkit.getOnlinePlayers()){
-                streaks.plus(Pair(plr.name, 0))
+                streaks += Pair(plr.name, 0)
             }
         }else{
             config.set("deathmatch.gamemodeactive",0)
