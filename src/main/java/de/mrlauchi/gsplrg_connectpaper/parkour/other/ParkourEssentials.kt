@@ -1,16 +1,21 @@
 package de.mrlauchi.gsplrg_connectpaper.parkour.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
-import de.mrlauchi.gsplrg_connectpaper.hungergames.other.HungergamesEssentials
+import de.mrlauchi.gsplrg_connectpaper.other.GameUtil
+import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
+import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStopCommand
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
+import net.kyori.adventure.text.Component
+import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
+import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
 object ParkourEssentials {
-    var currentplacement  = 0
+    private var currentplacement  = 0
 
-    var endmsg = listOf<String?>()
+    private var endmsg = listOf<String?>()
     fun getCoordinate(section: Int): Location {
         val config = Main.instance!!.config
 
@@ -34,6 +39,8 @@ object ParkourEssentials {
         config.set("parkour.$section.world", player.location.world!!.name)
 
         Main.instance!!.saveConfig()
+
+        player.sendMessage("§bSection Point set for $section!")
 
         return
     }
@@ -93,6 +100,7 @@ object ParkourEssentials {
 
         Main.instance!!.saveConfig()
     }
+
     fun stopTimer(){
         val config = Main.instance!!.config
         config.set("parkour.timeractive",0)
@@ -100,7 +108,7 @@ object ParkourEssentials {
         Main.instance!!.saveConfig()
     }
 
-    fun setPlacement(player : Player){
+    private fun setPlacement(player : Player){
         val config = Main.instance!!.config
 
         currentplacement += 1
@@ -134,9 +142,60 @@ object ParkourEssentials {
 
     }
 
-    fun resetplacements(){
-        endmsg = listOf<String?>()
+    fun resetPlacements(){
+        endmsg = listOf()
         currentplacement = 0
+    }
+
+    private fun playerFinished(player: Player) {
+        val config = Main.instance!!.config
+
+        player.gameMode = GameMode.SPECTATOR
+
+        val playerTime = config.getString("parkour.playertimes.${player.name}")
+        Bukkit.broadcast(Component.text("§b${player.name} finished in $playerTime!"))
+        config.set("parkour.playersfinished.${player.name}", 1)
+        setPlacement(player)
+        Main.instance!!.saveConfig()
+    }
+
+    fun yKill(player: Player) {
+        if(player.location.y <= -5.0) {
+            player.health = 0.0
+        }
+    }
+
+    fun finishLogic(i: Int, player: Player) {
+        if(i == 20) { // If player is at finish line
+            ParticleEssentials.scoreparticle(player)
+            playerFinished(player)
+
+            val remainingPlayers = GameUtil.getRemainPlayers()
+
+            Bukkit.broadcast(Component.text("§bRemaining Players: ${remainingPlayers.size}"))
+            if (remainingPlayers.isEmpty()){
+                for (msg in endmsg){
+                    Bukkit.broadcast(Component.text(msg.toString()))
+                }
+                ParkourStopCommand.stop(player)
+            }
+        }
+    }
+
+    fun timerTitleLogic(currentSecondTime: Int, currentMinuteTime: Int, player: Player) {
+        if (currentSecondTime < 10) {
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentMinuteTime:0$currentSecondTime"))
+        }else{
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, net.md_5.bungee.api.chat.TextComponent("§b$currentMinuteTime:$currentSecondTime"))
+        }
+    }
+
+    fun savePlayerTime(currentSecondTime: Int, currentMinuteTime: Int, player: Player) {
+        val config = Main.instance!!.config
+
+        val playerTime = "$currentMinuteTime:$currentSecondTime"
+        config.set("parkour.playertimes.${player.name}", playerTime)
+        Main.instance!!.saveConfig()
     }
 
 

@@ -17,13 +17,10 @@ class ParkourCommand : CommandExecutor, TabCompleter {
 
                 if(args.isNotEmpty()) {
                     if(args[0] == "start") {
-                        ParkourCountdown.countdown(player)
+                        ParkourStartCommand.start(player)
                     }
                     if(args[0] == "stop") {
                         ParkourStopCommand.stop(player)
-                        ParkourEssentials.resetplacements()
-                        //ParkourEssentials.stopTimer()
-
                     }
                     if(args[0] == "setsection") {
                         if(args.size >= 2) {

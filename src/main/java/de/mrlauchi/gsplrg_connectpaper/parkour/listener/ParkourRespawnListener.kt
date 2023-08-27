@@ -13,7 +13,6 @@ class ParkourRespawnListener : Listener {
             val player = event.player
 
             event.respawnLocation = ParkourEssentials.getCoordinate(ParkourEssentials.getSection(player))
-
         }
     }
 

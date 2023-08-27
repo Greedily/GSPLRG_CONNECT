@@ -1,9 +1,8 @@
 package de.mrlauchi.gsplrg_connectpaper.parkour.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
-import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStartCommand
+import de.mrlauchi.gsplrg_connectpaper.other.PlayerUtil
 import org.bukkit.Bukkit
-import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -26,34 +25,22 @@ object ParkourCountdown {
         var time = 10
         player.sendMessage("§bCountdown has been started!")
 
-        val bukkitRunnable = object: BukkitRunnable(){
+        object: BukkitRunnable(){
             override fun run() {
                 for (target in Bukkit.getOnlinePlayers()) {
-                    target.gameMode = GameMode.ADVENTURE
-                    target.inventory.clear()
-                    target.health = 20.0
-                    target.saturation = 20.0F
-                    target.foodLevel = 20
+                    PlayerUtil.clear(player)
+                    PlayerUtil.heal(player)
+                    PlayerUtil.setVisVul(player)
+                    PlayerUtil.adventure(player)
+
                     target.inventory.boots = ItemStack(Material.LEATHER_BOOTS)
 
                     target.sendTitle("§b$time", "")
 
-                    target.isInvisible = true
-
-                    target.isInvulnerable = true
-
                     if(time <= 0) {
                         target.sendTitle("§bStart!!!", "")
 
-                        //target.isInvisible = false
-
-                        //target.isInvulnerable = false
-
                         ParkourEssentials.setCountdownActive(0)
-
-                        ParkourStartCommand.start(player)
-
-                        ParkourEssentials.startTimer()
                         ParkourTimer.start()
 
                         this.cancel()
