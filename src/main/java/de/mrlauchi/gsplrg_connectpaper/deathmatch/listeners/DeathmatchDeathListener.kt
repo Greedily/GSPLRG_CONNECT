@@ -14,9 +14,9 @@ import org.bukkit.event.player.PlayerRespawnEvent
 class DeathmatchDeathListener : Listener {
     @EventHandler
     fun onkill (event: PlayerDeathEvent){
+        if (event.entity.killer !is Player) return
         val killer = event.entity.killer as Player
         val player = event.player
-        if (killer !is Player) return
         val config = Main.instance!!.config
         if (config.getInt("deathmatch.gamemodeactive") == 1) {
             pointsEssentials.addplayerpoints(killer, pointsModule.deathmatch.kill)

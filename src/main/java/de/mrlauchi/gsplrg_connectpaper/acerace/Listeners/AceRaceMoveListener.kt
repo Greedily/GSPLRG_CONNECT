@@ -6,6 +6,7 @@ import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
+import net.kyori.adventure.text.Component
 import org.bukkit.*
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Firework
@@ -65,9 +66,8 @@ class AceRaceMoveListener : Listener {
                                 Bukkit.broadcastMessage("§b${player.name} finished in $playertime!")
                                 config.set("acerace.playersfinished.${player.name}", 1)
 
-                                pointsEssentials.addplayerpoints(player, pointsModule.acerace.placementlist[AceRaceEssentials.currentplacement] as Int)
-
                                 AceRaceEssentials.setPlacement(player)
+                                pointsEssentials.addplayerpoints(player, pointsModule.acerace.placementlist[AceRaceEssentials.currentplacement] as Int)
                                 ParticleEssentials.scoreparticle(player)
                             }else{
                                 config.set("acerace.playermaprotations.${player.name}", config.getInt("acerace.playermaprotations.${player.name}") + 1)
