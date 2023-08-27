@@ -2,19 +2,16 @@ package de.mrlauchi.gsplrg_connectpaper.acerace.Listeners
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.acerace.other.AceRaceEssentials
+import de.mrlauchi.gsplrg_connectpaper.other.GameUtil
 import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
+import de.mrlauchi.gsplrg_connectpaper.other.PlayerUtil
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
-import de.mrlauchi.gsplrg_connectpaper.rocketspleef.other.RocketSpleefEssentials
-import net.kyori.adventure.text.Component
 import org.bukkit.*
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.Firework
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.potion.Potion
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
@@ -39,8 +36,8 @@ class AceRaceMoveListener : Listener {
             if(player.location.y <= -5.0) {
                 player.health = 0.0
             }
-            player.saturation = 20.0F
-            player.foodLevel = 20
+
+            PlayerUtil.heal(player)
 
             val radius = 5
 
@@ -52,8 +49,6 @@ class AceRaceMoveListener : Listener {
                         if(i + 1 != 21) {
                             player.sendMessage("§bYou've reached a Checkpoint!")
                         }
-
-                        val location : Location = player.getLineOfSight(null, 2).last().location
 
                         ParticleEssentials.spawnfirework(player)
                     }
@@ -79,14 +74,9 @@ class AceRaceMoveListener : Listener {
                     }
                     AceRaceEssentials.setSection(player, i)
 
-                    var remainingplayers = 0
+                    val remainingPlayers = GameUtil.getRemainPlayersNum()
 
-                    for (plr in Bukkit.getOnlinePlayers()){
-                        if (plr.gameMode == GameMode.ADVENTURE){
-                            remainingplayers += 1
-                        }
-                    }
-                    if (remainingplayers <= 0){
+                    if (remainingPlayers <= 0){
                         for (msg in AceRaceEssentials.endmsg){
                             Bukkit.broadcastMessage(msg.toString())
                         }

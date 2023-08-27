@@ -15,4 +15,16 @@ object GameUtil {
         return remainingPlayers
     }
 
+    fun getRemainPlayersNum(): Int {
+        var remainingplayers = 0
+
+        for (plr in Bukkit.getOnlinePlayers()){
+            if (plr.gameMode == GameMode.ADVENTURE){
+                remainingplayers += 1
+            }
+        }
+
+        return remainingplayers
+    }
+
 }
