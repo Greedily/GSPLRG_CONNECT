@@ -26,22 +26,26 @@ class ParkourMoveListener : Listener {
         val radius = 5
 
         for (i in 0..20) {
-            if (player.location.distance(ParkourEssentials.getCoordinate(i)) >= radius) return
-            if(i != ParkourEssentials.getSection(player)) {
-                player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)
-                if(i + 1 != 21) {
-                    player.sendMessage("§bYou've reached stage ${i + 1} + ${pointsModule.parkour.perlevelpoint} point!")
-                    pointsEssentials.addplayerpoints(player, pointsModule.parkour.perlevelpoint)
+            if (player.location.distance(ParkourEssentials.getCoordinate(i)) <= radius) {
+                Bukkit.broadcastMessage("player is closer to a new checkpoints")
+                if(i > ParkourEssentials.getSection(player)) {
+                    Bukkit.broadcastMessage("player is at new check point!")
+                    player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)
+                    if(i + 1 != 21) {
+                        player.sendMessage("§bYou've reached stage ${i + 1} + ${pointsModule.parkour.perlevelpoint} points!")
+                        pointsEssentials.addplayerpoints(player, pointsModule.parkour.perlevelpoint)
+                    }
+
+                    if (i != 20){ // to spawn our own particle
+                        ParticleEssentials.spawnfirework(player)
+                    }
+
+                    ParkourEssentials.setSection(player, i)
+
+                    ParkourEssentials.finishLogic(i, player)
                 }
 
-                if (i != 20){ // to spawn our own particle
-                    ParticleEssentials.spawnfirework(player)
-                }
             }
-
-            ParkourEssentials.setSection(player, i)
-
-            ParkourEssentials.finishLogic(i, player)
         }
     }
 

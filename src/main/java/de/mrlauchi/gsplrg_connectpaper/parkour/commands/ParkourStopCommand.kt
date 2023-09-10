@@ -10,10 +10,11 @@ object ParkourStopCommand {
 
     fun stop(player: Player) {
         ParkourEssentials.setActive(0)
-        ParkourEssentials.resetPlacements()
+        ParkourEssentials.resetPlacementsString()
         Spawn.teleport(true)
         for (target in Bukkit.getOnlinePlayers()) {
-            PlayerUtil.resetVisVul(player)
+            PlayerUtil.resetVisVul(target)
+            PlayerUtil.clear(target)
 
             ParkourEssentials.setSection(target, 0)
         }

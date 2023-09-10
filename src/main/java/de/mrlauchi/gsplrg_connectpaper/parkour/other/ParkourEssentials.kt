@@ -142,7 +142,7 @@ object ParkourEssentials {
 
     }
 
-    fun resetPlacements(){
+    fun resetPlacementsString(){
         endmsg = listOf()
         currentplacement = 0
     }
@@ -172,7 +172,7 @@ object ParkourEssentials {
 
             val remainingPlayers = GameUtil.getRemainPlayers()
 
-            Bukkit.broadcast(Component.text("§bRemaining Players: ${remainingPlayers.size}"))
+           // Bukkit.broadcast(Component.text("§bRemaining Players: ${remainingPlayers.size}"))
             if (remainingPlayers.isEmpty()){
                 for (msg in endmsg){
                     Bukkit.broadcast(Component.text(msg.toString()))
