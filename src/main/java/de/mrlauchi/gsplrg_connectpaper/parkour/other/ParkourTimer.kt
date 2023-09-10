@@ -2,6 +2,7 @@ package de.mrlauchi.gsplrg_connectpaper.parkour.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
+import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStopCommand
 import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitRunnable
 
@@ -38,7 +39,9 @@ object ParkourTimer {
                     Spawn.teleport(true)
 
                     ParkourEssentials.stopTimer()
-
+                    for (player in Bukkit.getOnlinePlayers()){
+                        ParkourStopCommand.stop(player)
+                    }
                     this.cancel()
 
                 }

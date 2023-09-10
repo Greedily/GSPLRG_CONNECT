@@ -4,6 +4,7 @@ import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.GameUtil
 import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.parkour.commands.ParkourStopCommand
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import net.kyori.adventure.text.Component
 import net.md_5.bungee.api.ChatMessageType
@@ -167,13 +168,16 @@ object ParkourEssentials {
 
     fun finishLogic(i: Int, player: Player) {
         if(i == 20) { // If player is at finish line
+            Bukkit.broadcastMessage("${player.name} finished.")
             ParticleEssentials.scoreparticle(player)
-            playerFinished(player)
 
-            val remainingPlayers = GameUtil.getRemainPlayers()
+            playerFinished(player)
+            pointsEssentials.addplayerpoints(player, pointsModule.parkour.placementlist[currentplacement]!!)
+
+            val remainingPlayers = GameUtil.getRemainPlayersNum()
 
            // Bukkit.broadcast(Component.text("§bRemaining Players: ${remainingPlayers.size}"))
-            if (remainingPlayers.isEmpty()){
+            if (remainingPlayers <= 0){
                 for (msg in endmsg){
                     Bukkit.broadcast(Component.text(msg.toString()))
                 }

@@ -15,6 +15,12 @@ object ParkourCountdown {
 
         for (target in Bukkit.getOnlinePlayers()) {
             target.teleport(ParkourEssentials.getCoordinate(0))
+
+            PlayerUtil.clear(target)
+            PlayerUtil.heal(target)
+            PlayerUtil.setVisVul(target)
+            PlayerUtil.adventure(target)
+
             config.set("parkour.playersfinished.${target.name}", 0)
         }
 
@@ -27,18 +33,14 @@ object ParkourCountdown {
 
         object: BukkitRunnable(){
             override fun run() {
-                for (target in Bukkit.getOnlinePlayers()) {
-                    PlayerUtil.clear(player)
-                    PlayerUtil.heal(player)
-                    PlayerUtil.setVisVul(player)
-                    PlayerUtil.adventure(player)
+                for (targett in Bukkit.getOnlinePlayers()) {
 
-                    target.inventory.boots = ItemStack(Material.LEATHER_BOOTS)
+                    targett.inventory.boots = ItemStack(Material.LEATHER_BOOTS)
 
-                    target.sendTitle("§b$time", "")
+                    targett.sendTitle("§b$time", "")
 
                     if(time <= 0) {
-                        target.sendTitle("§bStart!!!", "")
+                        targett.sendTitle("§bStart!!!", "")
 
                         ParkourEssentials.setCountdownActive(0)
                         ParkourTimer.start()
