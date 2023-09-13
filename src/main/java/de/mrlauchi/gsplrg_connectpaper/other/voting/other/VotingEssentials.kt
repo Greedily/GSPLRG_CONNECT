@@ -106,7 +106,7 @@ object VotingEssentials {
         val votes = descendingvotes.keys.toList()
         Bukkit.broadcastMessage(descendingvotes.toString())
         Bukkit.broadcastMessage("-----------------\nALL GAME VOTES:\n")
-        Bukkit.broadcastMessage("§6CHOSEN: ${games[0]} with ${votes[0]} Votes.\n \n§r Rest of Votes:")
+        Bukkit.broadcastMessage("§6CHOSEN: ${games[0]} with ${votes[0]} Votes.\n \n§r Some of The Other Votes:")
         for(element in descendingvotes){
             val votes = element.key
             val game = element.value

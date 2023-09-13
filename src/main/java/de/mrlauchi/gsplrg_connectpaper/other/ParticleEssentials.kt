@@ -9,7 +9,7 @@ object ParticleEssentials {
     fun scoreparticle(player : Player){
         val ploc = player.location
 
-        ploc.world.spawnParticle(Particle.END_ROD, Location(Bukkit.getWorld("world"), ploc.x, ploc.y + 0.5,ploc.z), 50, 0.5,0.5,0.5, 0.1)
+       // ploc.world.spawnParticle(Particle.END_ROD, Location(Bukkit.getWorld("world"), ploc.x, ploc.y + 0.5,ploc.z), 50, 0.5,0.5,0.5, 0.1)
     }
 
     fun getparticlecolor(player: Player): Color{

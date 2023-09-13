@@ -38,6 +38,9 @@ object DeathmatchGameTime {
                         minutetime -= 1
                         secondtime = 60
                     }
+                    if (minutetime == 1) {
+                        Bukkit.broadcastMessage("1 MINUTE LEFT!")
+                    }
                     if (minutetime <= 0 && secondtime <= 0 && config.getInt("deathmatch.gamemodeactive") == 1) {
                         DeathmatchEssentials.setGamemodeEnabled(false)
 
@@ -55,6 +58,7 @@ object DeathmatchGameTime {
                             countTarget.gameMode = GameMode.SPECTATOR
                             countTarget.inventory.clear()
                             ParticleEssentials.scoreparticle(countTarget)
+                            DeathmatchEssentials.resetplayerstreak(countTarget)
                         }
                         points = points.toSortedMap(Comparator.reverseOrder())
                         val nameslist = points.values.toList()
@@ -90,10 +94,12 @@ object DeathmatchGameTime {
                                 "24th.${nameslist[23]} with ${pointslist[23]} kills." +
                                 "-------------------------------------------"
                         )
+                        Spawn.teleport(true)
                         this.cancel()
                     }
                 }
                 secondtime -= 1
+
             }
         }.runTaskTimer(Main.instance!!, 0, 20)
 

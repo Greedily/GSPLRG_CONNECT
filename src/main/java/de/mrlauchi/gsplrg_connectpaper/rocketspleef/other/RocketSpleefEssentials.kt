@@ -228,29 +228,29 @@ object RocketSpleefEssentials {
 
         if (currentteamplacement < 10){
             if (currentteamplacement == 1){
-                endmsg += " §l${currentteamplacement}st:§r §6${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}st:§r §6${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
             if (currentteamplacement == 2){
-                endmsg += " §l${currentteamplacement}nd:§r §9${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}nd:§r §9${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
             if (currentteamplacement == 3){
-                endmsg += " §l${currentteamplacement}rd:§r §a${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}rd:§r §a${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
             if (currentteamplacement > 3){
-                endmsg += " §l${currentteamplacement}th:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}th:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
         }else{
             if (currentteamplacement != 21 && currentteamplacement != 22 && currentteamplacement != 23){
-                endmsg += " §l${currentteamplacement}th:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}th:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
             if (currentteamplacement == 21){
-                endmsg += " §l${currentteamplacement}st:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}st:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
             if (currentteamplacement == 22){
-                endmsg += " §l${currentteamplacement}nd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}nd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
             if (currentteamplacement == 23){
-                endmsg += " §l${currentteamplacement}rd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]} extra points)"
+                endmsg += " §l${currentteamplacement}rd:§r ${team}§r with total minutes ${totalteamminutetimes}(${pointsModule.rocketspleef.placementlist[currentteamplacement]?.times(4)} extra points)"
             }
         }
 
