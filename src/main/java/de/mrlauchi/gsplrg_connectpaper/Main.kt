@@ -53,6 +53,8 @@ class Main : JavaPlugin() {
     fun PZ() = "PZ"
     fun TH() = "th"
 
+    var teams = listOf<String>()
+
     companion object {
         var instance: Main? = null
             private set;
@@ -61,6 +63,8 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         // Plugin startup logic
         instance = this
+
+        teams()
 
         getCommand("vote")?.setExecutor(pointsCommand())
         getCommand("points")?.setExecutor(pointsCommand())
@@ -156,30 +160,49 @@ class Main : JavaPlugin() {
                 }
 
                 var points = mutableMapOf<Int, String>()
+                var teamspoints = mutableMapOf<Int, String>()
 
                 for (countTarget in Bukkit.getOnlinePlayers()) {
                     //points.plus(config.getInt("deathmatch.points.${target.name}") to target.name)
                     points += Pair(config.getInt("playerpoints.${countTarget.name}") , countTarget.name)
                 }
+
+                for (team in teams) {
+                    teamspoints += Pair(config.getInt("teampoints.${team}") , team)
+                }
+
                 points = points.toSortedMap(Comparator.reverseOrder())
                 val nameslist = points.values.toList()
                 val pointslist = points.keys.toList()
 
+                teamspoints = teamspoints.toSortedMap(Comparator.reverseOrder())
+                val teamsnamelist = points.values.toList()
+                val teampointslist = points.keys.toList()
+
                 for (entity in Bukkit.getWorld("world")!!.entities) {
                     if(entity is ArmorStand) {
                         if(entity.scoreboardTags.contains("indivboard")) {
-
+                            indivboardLogic(1, nameslist, pointslist, entity)
+                            indivboardLogic(2, nameslist, pointslist, entity)
+                            indivboardLogic(3, nameslist, pointslist, entity)
+                            indivboardLogic(4, nameslist, pointslist, entity)
+                            indivboardLogic(5, nameslist, pointslist, entity)
+                            indivboardLogic(6, nameslist, pointslist, entity)
+                            indivboardLogic(7, nameslist, pointslist, entity)
+                            indivboardLogic(8, nameslist, pointslist, entity)
+                            indivboardLogic(9, nameslist, pointslist, entity)
+                            indivboardLogic(10, nameslist, pointslist, entity)
                         }
-                        indivboardLogic(1, nameslist, pointslist, entity)
-                        indivboardLogic(2, nameslist, pointslist, entity)
-                        indivboardLogic(3, nameslist, pointslist, entity)
-                        indivboardLogic(4, nameslist, pointslist, entity)
-                        indivboardLogic(5, nameslist, pointslist, entity)
-                        indivboardLogic(6, nameslist, pointslist, entity)
-                        indivboardLogic(7, nameslist, pointslist, entity)
-                        indivboardLogic(8, nameslist, pointslist, entity)
-                        indivboardLogic(9, nameslist, pointslist, entity)
-                        indivboardLogic(10, nameslist, pointslist, entity)
+                        if(entity.scoreboardTags.contains("teamboard")) {
+                            teamboardLogic(1, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(2, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(3, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(4, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(5, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(6, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(7, teamsnamelist, teampointslist, entity)
+                            teamboardLogic(8, teamsnamelist, teampointslist, entity)
+                        }
                     }
                 }
             }
@@ -193,28 +216,34 @@ class Main : JavaPlugin() {
     }
 
     fun indivboardLogic(placement: Int, nameslist: List<String>, pointslist: List<Int>, entity: ArmorStand) {
-        //Bukkit.broadcastMessage("debug 1")
         if(!entity.scoreboardTags.contains("indiv$placement")) return
-        //Bukkit.broadcastMessage("debug 2")
         if(nameslist.size < placement) {
             entity.customName = " "
-            //Bukkit.broadcastMessage("debug 0")
             return
         }
-        /*if(placement == 1) {
-            entity.customName = "1st: ${nameslist[0]}: ${pointslist[0]}"
-            return
-        }
-        if(placement == 2) {
-            entity.customName = "2nd: ${nameslist[1]}: ${pointslist[1]}"
-            return
-        }
-        if(placement == 3) {
-            entity.customName = "3rd: ${nameslist[2]}: ${pointslist[2]}"
-            return
-        } */
         entity.customName = "${ChatColor.of(Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1]))?.color()!!.asHexString())}${nameslist[placement-1]}: ${pointslist[placement-1]}"
         return
+    }
+
+    fun teamboardLogic(placement: Int, nameslist: List<String>, pointslist: List<Int>, entity: ArmorStand) {
+        if(!entity.scoreboardTags.contains("team$placement")) return
+        if(nameslist.size < placement) {
+            entity.customName = " "
+            return
+        }
+        entity.customName = "${ChatColor.of(Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1]))?.color()!!.asHexString())}${nameslist[placement-1]}: ${pointslist[placement-1]}"
+        return
+    }
+
+    fun teams() {
+        teams += "pink"
+        teams += "purple"
+        teams += "red"
+        teams += "orange"
+        teams += "green"
+        teams += "blue"
+        teams += "yellow"
+        teams += "lime"
     }
 
 }
