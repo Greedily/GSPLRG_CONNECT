@@ -38,6 +38,7 @@ object pointsEssentials {
        for (player in Bukkit.getOnlinePlayers()){
            config.set("playerpoints.${player.name}", 0)
        }
+        updateteampoints()
         Main.instance!!.saveConfig()
     }
 

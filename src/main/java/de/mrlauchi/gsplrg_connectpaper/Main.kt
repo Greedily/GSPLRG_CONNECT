@@ -42,6 +42,7 @@ import me.tortel.emojis1.Events.OnPlayerChat
 import net.kyori.adventure.text.Component
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
+import org.bukkit.Color
 import org.bukkit.entity.ArmorStand
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
@@ -172,26 +173,26 @@ class Main : JavaPlugin() {
                 }
 
                 points = points.toSortedMap(Comparator.reverseOrder())
-                val nameslist = points.values.toList()
-                val pointslist = points.keys.toList()
+                val playernameslist = points.values.toList()
+                val playerpointslist = points.keys.toList()
 
                 teamspoints = teamspoints.toSortedMap(Comparator.reverseOrder())
-                val teamsnamelist = points.values.toList()
-                val teampointslist = points.keys.toList()
+                val teamsnamelist = teamspoints.values.toList()
+                val teampointslist = teamspoints.keys.toList()
 
                 for (entity in Bukkit.getWorld("world")!!.entities) {
                     if(entity is ArmorStand) {
                         if(entity.scoreboardTags.contains("indivboard")) {
-                            indivboardLogic(1, nameslist, pointslist, entity)
-                            indivboardLogic(2, nameslist, pointslist, entity)
-                            indivboardLogic(3, nameslist, pointslist, entity)
-                            indivboardLogic(4, nameslist, pointslist, entity)
-                            indivboardLogic(5, nameslist, pointslist, entity)
-                            indivboardLogic(6, nameslist, pointslist, entity)
-                            indivboardLogic(7, nameslist, pointslist, entity)
-                            indivboardLogic(8, nameslist, pointslist, entity)
-                            indivboardLogic(9, nameslist, pointslist, entity)
-                            indivboardLogic(10, nameslist, pointslist, entity)
+                            indivboardLogic(1, playernameslist, playerpointslist, entity)
+                            indivboardLogic(2, playernameslist, playerpointslist, entity)
+                            indivboardLogic(3, playernameslist, playerpointslist, entity)
+                            indivboardLogic(4, playernameslist, playerpointslist, entity)
+                            indivboardLogic(5, playernameslist, playerpointslist, entity)
+                            indivboardLogic(6, playernameslist, playerpointslist, entity)
+                            indivboardLogic(7, playernameslist, playerpointslist, entity)
+                            indivboardLogic(8, playernameslist, playerpointslist, entity)
+                            indivboardLogic(9, playernameslist, playerpointslist, entity)
+                            indivboardLogic(10, playernameslist, playerpointslist, entity)
                         }
                         if(entity.scoreboardTags.contains("teamboard")) {
                             teamboardLogic(1, teamsnamelist, teampointslist, entity)
@@ -217,11 +218,12 @@ class Main : JavaPlugin() {
 
     fun indivboardLogic(placement: Int, nameslist: List<String>, pointslist: List<Int>, entity: ArmorStand) {
         if(!entity.scoreboardTags.contains("indiv$placement")) return
+        val teamname = Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1])).toString()
         if(nameslist.size < placement) {
             entity.customName = " "
             return
         }
-        entity.customName = "${ChatColor.of(Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1]))?.color()!!.asHexString())}${nameslist[placement-1]}: ${pointslist[placement-1]}"
+        entity.customName = "${TeamColor(teamname)}${nameslist[placement-1]}: ${pointslist[placement-1]}"
         return
     }
 
@@ -231,7 +233,8 @@ class Main : JavaPlugin() {
             entity.customName = " "
             return
         }
-        entity.customName = "${ChatColor.of(Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1]))?.color()!!.asHexString())}${nameslist[placement-1]}: ${pointslist[placement-1]}"
+       // entity.customName = "${ChatColor.of(Bukkit.getOfflinePlayer(nameslist[placement-1]).player!!.scoreboard.getPlayerTeam(Bukkit.getOfflinePlayer(nameslist[placement-1]))?.color()!!.asHexString())}${nameslist[placement-1]}: ${pointslist[placement-1]}"
+        entity.customName = "${TeamColor(nameslist[placement-1])}${nameslist[placement-1]}: ${pointslist[placement-1]}"
         return
     }
 
@@ -244,6 +247,34 @@ class Main : JavaPlugin() {
         teams += "blue"
         teams += "yellow"
         teams += "lime"
+    }
+
+    fun TeamColor(Name : String) : ChatColor {
+        if (Name == "orange"){
+            return ChatColor.GOLD
+        }
+        if (Name == "red"){
+            return ChatColor.RED
+        }
+        if (Name == "pink"){
+            return ChatColor.LIGHT_PURPLE
+        }
+        if (Name == "green"){
+            return ChatColor.DARK_GREEN
+        }
+        if (Name == "blue"){
+            return ChatColor.BLUE
+        }
+        if (Name == "lime"){
+            return ChatColor.GREEN
+        }
+        if (Name == "yellow"){
+            return ChatColor.YELLOW
+        }
+        if (Name == "purple"){
+            return ChatColor.DARK_PURPLE
+        }
+        return ChatColor.WHITE
     }
 
 }

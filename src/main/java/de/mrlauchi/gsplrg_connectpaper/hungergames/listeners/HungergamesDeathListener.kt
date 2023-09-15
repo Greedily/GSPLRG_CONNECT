@@ -121,6 +121,8 @@ class HungergamesDeathListener:Listener {
                 }
                 HungergamesEssentials.resetplacements()
                 HungergamesEssentials.setGameModeEnabled(false)
+                pointsEssentials.updateteampoints()
+
                 Spawn.teleport(true)
 
             }

@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.acerace.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitRunnable
@@ -40,6 +41,7 @@ object AceRaceTimer {
 
                     currentsecondtime = 0
                     currentminutetime = 0
+                    pointsEssentials.updateteampoints()
                     this.cancel()
 
                 }

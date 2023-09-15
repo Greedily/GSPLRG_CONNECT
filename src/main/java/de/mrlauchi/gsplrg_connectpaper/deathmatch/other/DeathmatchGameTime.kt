@@ -3,6 +3,7 @@ package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
 import de.mrlauchi.gsplrg_connectpaper.Main
 import de.mrlauchi.gsplrg_connectpaper.other.ParticleEssentials
 import de.mrlauchi.gsplrg_connectpaper.other.Spawn
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
 import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -94,7 +95,11 @@ object DeathmatchGameTime {
                                 "24th.${nameslist[23]} with ${pointslist[23]} kills." +
                                 "-------------------------------------------"
                         )
+
+                        pointsEssentials.updateteampoints()
+
                         Spawn.teleport(true)
+
                         this.cancel()
                     }
                 }

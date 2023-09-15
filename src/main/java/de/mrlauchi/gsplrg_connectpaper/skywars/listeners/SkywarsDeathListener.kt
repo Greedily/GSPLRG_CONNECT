@@ -97,6 +97,9 @@ class SkywarsDeathListener:Listener {
                             ParticleEssentials.scoreparticle(target)
                         }
                     }
+
+                    pointsEssentials.updateteampoints()
+
                     Spawn.teleport(true)
 
                 }

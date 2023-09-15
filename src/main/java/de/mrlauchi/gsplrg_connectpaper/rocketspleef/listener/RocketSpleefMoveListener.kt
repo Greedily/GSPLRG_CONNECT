@@ -104,6 +104,7 @@ class RocketSpleefMoveListener : Listener {
                     }
 
                     RocketSpleefEssentials.resetplacements()
+                    pointsEssentials.updateteampoints()
                     Spawn.teleport(true)
                     RocketSpleefEssentials.setActive(false)
                 }

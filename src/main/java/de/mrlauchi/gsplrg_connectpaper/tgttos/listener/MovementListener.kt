@@ -107,6 +107,8 @@ class MovementListener : Listener {
                 Bukkit.broadcastMessage(msg.toString())
             }
 
+            pointsEssentials.updateteampoints()
+
             Spawn.teleport(true)
             Essentials.stopTimer()
             Essentials.setActive(null)
