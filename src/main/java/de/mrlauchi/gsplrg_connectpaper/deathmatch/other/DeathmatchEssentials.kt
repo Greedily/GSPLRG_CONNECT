@@ -1,6 +1,10 @@
 package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.other.Spawn
+import de.mrlauchi.gsplrg_connectpaper.parkour.other.ParkourEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsEssentials
+import de.mrlauchi.gsplrg_connectpaper.points.Other.pointsModule
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -15,6 +19,9 @@ object DeathmatchEssentials {
     val config = Main.instance!!.config
 
     var streaks = mutableMapOf<String , Int>()
+
+    var currentplacement  = 0
+    var endmsg = listOf<String?>()
     fun setGamemodeEnabled(value : Boolean){
         if (value){
             config.set("deathmatch.gamemodeactive",1)
@@ -24,6 +31,10 @@ object DeathmatchEssentials {
         }else{
             config.set("deathmatch.gamemodeactive",0)
             streaks.clear()
+            for (plr in Bukkit.getOnlinePlayers()) {
+                plr.maxHealth = 20.0
+                plr.health = 20.0
+            }
         }
         Main.instance!!.saveConfig()
     }
@@ -87,6 +98,73 @@ object DeathmatchEssentials {
     fun resetplayerstreak(player : Player){
         val oldvalue = streaks[player.name] as Int
         streaks.replace(player.name, oldvalue, 0)
+    }
+
+    fun resetallkills(){
+        for (plr in Bukkit.getOnlinePlayers()) {
+            config.set("deathmatch.score.${plr.name}", 0)
+        }
+        Main.instance!!.saveConfig()
+    }
+
+    fun getPlacements(nameslist : List<String> , pointslist : List<Int>){
+        val config = Main.instance!!.config
+
+        for (name in nameslist) {
+            val kills = pointslist[nameslist.indexOf(name)]
+
+            currentplacement += 1
+            if (currentplacement < 10){
+                if (currentplacement == 1){
+                    endmsg += " §l${currentplacement}st:§r §6${name}§r with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+                if (currentplacement == 2){
+                    endmsg += " §l${currentplacement}nd:§r §9${name}§r with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+                if (currentplacement == 3){
+                    endmsg += " §l${currentplacement}rd:§r §a${name}§r with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+                if (currentplacement > 3){
+                    endmsg += " §l${currentplacement}th:§r ${name} with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+            }else{
+                if (currentplacement != 21 && currentplacement != 22 && currentplacement != 23){
+                    endmsg += " §l${currentplacement}th:§r ${name} with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+                if (currentplacement == 21){
+                    endmsg += " §l${currentplacement}st:§r ${name} with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+                if (currentplacement == 22){
+                    endmsg += " §l${currentplacement}nd:§r ${name} with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+                if (currentplacement == 23){
+                    endmsg += " §l${currentplacement}rd:§r ${name} with ${kills} kills(${kills * pointsModule.deathmatch.kill} points)"
+                }
+            }
+        }
+
+        for (msg in endmsg) {
+            Bukkit.broadcastMessage(msg as String)
+        }
+
+    }
+
+    fun resetPlacementsString(){
+        endmsg = listOf()
+        currentplacement = 0
+    }
+    fun Stop() {
+        for (target in Bukkit.getOnlinePlayers()) {
+            target.inventory.clear()
+            target.sendTitle("DEATHMATCH ENDS!", "")
+        }
+
+        setGamemodeEnabled(false)
+        setCountDownEnabled(false)
+        resetallkills()
+        resetPlacementsString()
+        Spawn.teleport(true)
+        pointsEssentials.updateteampoints()
     }
 
 }

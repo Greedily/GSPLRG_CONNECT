@@ -1,6 +1,7 @@
 package de.mrlauchi.gsplrg_connectpaper.deathmatch.other
 
 import de.mrlauchi.gsplrg_connectpaper.Main
+import de.mrlauchi.gsplrg_connectpaper.goldrush.other.GoldRushEssentials
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -33,9 +34,9 @@ object DeathmatchCountdown {
             target.inventory.addItem(crossbow)
 
             //give target everything we want to give him.
-           // target.inventory.addItem(GoldRushEssentials.getKitItem(Material.WOODEN_AXE, true, 1))
+            target.inventory.addItem(GoldRushEssentials.getKitItem(Material.ARROW, true, 200))
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"give @a tipped_arrow{CustomPotionEffects:[{Id:7,Amplifier:100b,Duration:1}],CustomPotionColor:3538944} 200")
+       // Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"give @a tipped_arrow{CustomPotionEffects:[{Id:7,Amplifier:100b,Duration:1}],CustomPotionColor:3538944} 200")
 
         DeathmatchEssentials.setCountDownEnabled(true)
 
@@ -46,7 +47,8 @@ object DeathmatchCountdown {
             override fun run() {
                 for (target in Bukkit.getOnlinePlayers()) {
                     target.gameMode = GameMode.ADVENTURE
-                    target.health = 20.0
+                    target.maxHealth = 1.0
+                    target.health = 1.0
                     target.saturation = 20.0F
                     target.foodLevel = 15
 

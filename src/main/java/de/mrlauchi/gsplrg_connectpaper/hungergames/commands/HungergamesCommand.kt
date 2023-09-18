@@ -29,6 +29,7 @@ class HungergamesCommand: CommandExecutor, TabCompleter {
                 }
 
                 if (args[0] == "start"){//start countdown, tp all players respectivly(in countdown func)
+                    Bukkit.broadcastMessage("yes")
                     HungergamesEssentials.setGameModeEnabled(true) // for death listeners
                     HungergamesEssentials.setCountDownEnabled(true) // for beginning countdown
                     //start the countdown

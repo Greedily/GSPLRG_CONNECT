@@ -29,6 +29,12 @@ class VoteCommand : CommandExecutor {
                 VotingEssentials.returnallvotes()
                 VotingEssentials.resetvotes()
             }
+            if (args[0] == "remove" && sender.isOp()){
+                Bukkit.broadcastMessage("-----------------------\nVoting Ended!!\n-----------------------")
+                config.set("voting.active",0)
+                VotingEssentials.returnallvotes()
+                VotingEssentials.resetvotes()
+            }
 
         }else{
             if (config.getInt("voting.active") == 1){

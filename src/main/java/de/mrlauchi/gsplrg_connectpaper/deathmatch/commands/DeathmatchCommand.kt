@@ -26,13 +26,9 @@ class DeathmatchCommand: CommandExecutor, TabCompleter {
                     Bukkit.broadcastMessage("starting deathmatch!")
                 }
                 if (args[0] == "stop"){
-                    DeathmatchEssentials.setGamemodeEnabled(false)
-                    DeathmatchEssentials.setCountDownEnabled(false)
+                    DeathmatchEssentials.Stop()
                     sender.sendMessage("Stopping deathmatch!")
-                    for (target in Bukkit.getOnlinePlayers()){
-                        target.gameMode = GameMode.SPECTATOR
-                        target.inventory.clear()
-                    }
+
                 }
             }
         }
